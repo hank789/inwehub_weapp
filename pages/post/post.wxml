@@ -1,12 +1,12 @@
 <view class="page">
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
     <form bindsubmit="formSubmit">
         <view class="weui-cells__title">标题</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入标题" bindinput="titleEventFunc" id="title" auto-focus value="{{discount.content.summary || ''}}" />
+                    <input class="weui-input" placeholder="请输入标题" bindinput="titleEventFunc" id="title" auto-focus value="" />
                 </view>
             </view>
         </view>
@@ -15,11 +15,22 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 3.3em" placeholder="请输入内容" value="{{discount.content.detail || ''}}" />
+                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 3.3em" placeholder="请输入内容" value="" />
                     <view class="weui-textarea-counter">0/200</view>
                 </view>
             </view>
         </view>
+
+        <view class="weui-cells__title">评论公开</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd"></view>
+                <view class="weui-cell__ft">
+                    <switch bindchange="isPublicEventFunc" />
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells__tips">若评论不公开，则回答者只能看到自己的回复</view>
 
         <view class="weui-cells__title">上传图片</view>
         <view class="weui-cells weui-cells_after-title">
@@ -36,22 +47,20 @@
                                 <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                             </view>
                         </block>
+                        <view class="weui-uploader__input-box" wx:if="{{pictures.length < 3}}">
+                          <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                        </view>
                     </view>
-                    <view class="weui-uploader__input-box">
-                        <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                    </view>
+                    
                 </view>
             </view>
           </view>
         </view>
-        <view class="weui-cells__tips">最多可上传3张图片,已上传{{files.length ? files.length : 0}}/3张</view>
+        <view class="weui-cells__tips">最多可上传3张图片,已上传{{pictures.length ? pictures.length : 0}}/3张</view>
 
         <view class="weui-btn-area">
-          <button formType="submit" class="weui-btn" type="primary" bindtap="showTopTips">立即发布</button>
+          <button formType="submit" class="weui-btn" type="primary">立即发布</button>
         </view>
     </form>
   </view>
 </view>
-
-<import src="../../libs/wetoast/wetoast.wxml"/>
-<template is="wetoast" data="{{...__wetoast__}}"/>
