@@ -1,0 +1,57 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    <form bindsubmit="formSubmit">
+        <view class="weui-cells__title">标题</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入标题" bindinput="titleEventFunc" id="title" auto-focus value="{{discount.content.summary || ''}}" />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">内容</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 3.3em" placeholder="请输入内容" value="{{discount.content.detail || ''}}" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">上传图片</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                    <view class="weui-uploader__title"></view>
+                    <view class="weui-uploader__info"></view>
+                </view>
+                <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderFiles">
+                        <block wx:for="{{pictures}}" wx:key="*this">
+                            <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                            </view>
+                        </block>
+                    </view>
+                    <view class="weui-uploader__input-box">
+                        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                    </view>
+                </view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__tips">最多可上传3张图片,已上传{{files.length ? files.length : 0}}/3张</view>
+
+        <view class="weui-btn-area">
+          <button formType="submit" class="weui-btn" type="primary" bindtap="showTopTips">立即发布</button>
+        </view>
+    </form>
+  </view>
+</view>
+
+<import src="../../libs/wetoast/wetoast.wxml"/>
+<template is="wetoast" data="{{...__wetoast__}}"/>

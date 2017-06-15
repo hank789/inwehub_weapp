@@ -1,0 +1,40 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/privilege-detail/privilege-detail",
+    "pages/post/post",    
+    "pages/privilege-list/privilege-list",
+    "pages/identity/identity",
+    "pages/mine/mine",
+    "pages/logs/logs",
+    "pages/res/aboutyn"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#38373d",
+    "navigationBarTitleText": "解惑助手",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#f6f6f8",
+    "selectedColor": "#e12c15",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/order.png",
+      "selectedIconPath": "images/order-active.png"
+     },
+    {
+      "pagePath": "pages/privilege-detail/privilege-detail",
+      "text": "我的",
+      "iconPath": "images/personal.png",
+      "selectedIconPath": "images/personal-active.png"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}
