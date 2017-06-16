@@ -2,16 +2,7 @@
   <view class="page__bd">
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
     <form bindsubmit="formSubmit">
-        <view class="weui-cells__title">标题</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入标题" bindinput="titleEventFunc" id="title" auto-focus value="" />
-                </view>
-            </view>
-        </view>
-
-        <view class="weui-cells__title">内容</view>
+        
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
@@ -21,10 +12,9 @@
             </view>
         </view>
 
-        <view class="weui-cells__title">评论公开</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_switch">
-                <view class="weui-cell__bd"></view>
+                <view class="weui-cell__bd">评论公开</view>
                 <view class="weui-cell__ft">
                     <switch bindchange="isPublicEventFunc" />
                 </view>

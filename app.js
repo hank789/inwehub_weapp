@@ -1,10 +1,9 @@
 //app.js
 //初始化leancloud服务
 const AV = require('libs/av-weapp.js');
-let {WeToast} = require('libs/wetoast/wetoast.js')
+var request = require("utils/request.js");
 
 App({
-  WeToast,
   onLaunch: function () {
     AV.init({ 
       appId: 'cd8pCmtptSQrz4jK4tDKLqlU-gzGzoHsz', 
@@ -15,6 +14,14 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    this.getUserInfo(
+      function (userInfo) {
+        //更新数据
+        this.setData({
+          userInfo: userInfo
+        });
+      }
+    )
   },
   getUserInfo:function(cb){
     var that = this
@@ -23,10 +30,33 @@ App({
     }else{
       //调用登录接口
       wx.login({
-        success: function () {
+        success: function (res_login) {
+          console.log(res_login);
           wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
+            withCredentials: true,
+            success: function (res_user) {
+              console.log(res_user);
+              var requestUrl = "/weapp/user/info";
+              var jsonData = {
+                code: res_login.code,
+                encryptedData: res_user.encryptedData,
+                iv: res_user.iv
+              };
+              wx.request({
+                url: that.globalData.host + requestUrl,
+                method: 'POST',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: jsonData,
+                success: function (res) {    // 保存3rdSession到storage中
+                  console.log(res);
+                },
+                fail: function (res) {
+                  console.log(res);
+                }
+              })
+              that.globalData.userInfo = res_user.userInfo
               typeof cb == "function" && cb(that.globalData.userInfo)
             }
           })
@@ -35,6 +65,7 @@ App({
     }
   },
   globalData:{
-    userInfo:null
+    userInfo:null,
+    host: 'http://api.ywhub.com/api'
   }
 })

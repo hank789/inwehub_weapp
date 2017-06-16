@@ -11,9 +11,7 @@ Page({
     errorMsg: '',
     pictures: [],
     author: {},
-    title: '',
     content: '',
-    description: '',
     isPublic: false
   },
   onLoad:function(options){
@@ -65,19 +63,9 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
-  titleEventFunc: function(e) {
-    if(e.detail && e.detail.value) {
-        this.data.title = e.detail.value;
-    }
-  },
   contentEventFunc: function(e) {
     if(e.detail && e.detail.value) {
         this.data.content = e.detail.value;
-    }
-  },
-  descriptionEventFunc: function(e) {
-    if(e.detail && e.detail.value) {
-        this.data.description = e.detail.value;
     }
   },
   isPublicEventFunc: function (e) {
@@ -98,10 +86,7 @@ Page({
     }, 3000);
   },
   formSubmit: function(e) {
-    if (this.data.title === '') {
-      this.showTopTips('标题不能为空');
-      return false;
-    } else if (this.data.content === '') {
+    if (this.data.content === '') {
       this.showTopTips('内容不能为空');
       return false;
     } else if (this.data.pictures.length === 0) {
