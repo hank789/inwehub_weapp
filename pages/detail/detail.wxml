@@ -2,47 +2,36 @@
     <image bindload="imageEvent" src="{{ url }}"></image>
 </scroll-view>-->
 <view class="container">
-    <view bindtap="" class="order-detail" data-id="{{ order.id }}">
+    <view bindtap="" class="order-detail" data-id="{{ question.id }}">
         <view class="author">
-            <image class="author-avatar" src="{{ order.author.avatarUrl}}" background-size="cover"></image>
+            <image class="author-avatar" src="{{ question.user_avatar_url}}" background-size="cover"></image>
             <view class="author-info">
-                <view class="author-name">{{ order.author.nickName}}</view>
-                <view class="post-time">{{ order.formatDate}}</view>
+                <view class="author-name">{{ question.user_name}}</view>
+                <view class="post-time">{{ question.created_at}}</view>
             </view>
         </view>
         <view class="order-container">
-            <view class="order-title">
-                {{ order.title }}
-            </view>
-            <view class="order-content">
-                 活动内容：
-                {{ order.content }}
-            </view>
             <view class="order-description">
-                费用说明：
-                {{ order.description }}
+                {{ question.description }}
             </view>
+            
             <view class="piuctures-container">
-            <image class="content-picture" wx:for="{{ order.pictures }}" wx:key="{{ index }}" src="{{ item }}" background-size="cover"></image>            
-            </view>
-            <view class="order-description" wx:if="{{order.url != ''}}">
-                活动页面链接
-                <view>{{ order.url }}</view>
+            <image class="content-picture" wx:for="{{ question.pictures }}" wx:key="{{ index }}" src="{{ item }}" background-size="cover"></image>            
             </view>
         </view>
         
-        <view class="order-comments" wx:if="{{ order.comments && order.comments.length > 0 }}">
+        <view class="order-comments" wx:if="{{ comments && comments.length > 0 }}">
             评论
-            <view class="order-comment" wx:for="{{ order.comments }}" wx:key="{{ index }}">
+            <view class="order-comment" wx:for="{{ comments }}" wx:key="{{ index }}">
                 <view class="author">
-                    <image class="author-avatar" src="{{ item.author.avatarUrl}}" background-size="cover"></image>
+                    <image class="author-avatar" src="{{ item.user_avatar_url}}" background-size="cover"></image>
                     <view class="author-info">
-                        <view class="author-name">{{ item.author.nickName}}</view>
-                        <view class="post-time">{{ item.formatDate }}</view>
+                        <view class="author-name">{{ item.user_name}}</view>
+                        <view class="post-time">{{ item.created_at }}</view>
                     </view>
                 </view>
                 <view class="comment-str">
-                    {{ item.commentStr }}
+                    {{ item.content }}
                 </view>
             </view>
         </view>
@@ -52,13 +41,5 @@
             <input bindinput="commentInput" placeholder="输入评论" class="comment-input" />
             <button type="primary" form-type="submit" class="comment-submit"> 评论 </button>
         </form>
-        <view class="join-tool" bindtap="showQRCode" data-qrcode = "{{ order.QRCode }}">立即加入</view>
-    </view>
-
-    <view wx-if="{{ QRCodeShowFlag }}" class="QRCode-container" id="QRCode-container" catchtap="hideQRCode">
-        <view class="QRCode-box" id="QRCode-box">
-        长按识别二维码：
-        <image src="{{ QRCodeShow }}" class="QRCde-show"></image>
-        </view>
     </view>
 </view>

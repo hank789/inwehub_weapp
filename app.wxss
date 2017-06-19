@@ -3,3 +3,19 @@
 .page, body {
     background-color: #f8f8f8;
 }
+
+.post-button {
+  position: fixed;
+  bottom: 88rpx;
+  right: 50rpx;
+  width:300rpx;
+  line-height:88rpx;
+  text-align:center;
+  background:#1AAD19;
+  color:#fff;
+  -webkit-border-radius:100rpx;
+  border-radisu:100rpx;
+  left:50%;
+  margin-left:-150rpx;
+  z-index:5;
+}

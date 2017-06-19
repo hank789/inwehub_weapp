@@ -1,49 +1,16 @@
-//index.js
 //获取应用实例
 var app = getApp();
-//查询用户信息
-const AV = require('../../libs/av-weapp.js');
-var orderFormat = require('../../utils/orderFormat.js');
-
-function orderRefresh(e, that) {
-//查询多个数据，即首页数据列表查询
-  var orders = new AV.Query('orders');
-    if(e.hasOwnProperty('user')){
-      orders.equalTo('author.nickName', e.user);
-      that.setData({
-        manage: {
-          user:e.user,
-          display:false
-          }
-      });
-    }
-    orders.descending('createdAt').find().then(function (results) {
-      results = results.map((curvalue) => {
-        return orderFormat.orderFormat(curvalue);
-      });
-      that.setData({
-        orders: results
-      });
-    }, function (error) {
-      
-    });
-}
+var request = require("../../utils/request.js");
 
 Page({
-  data: {
+  data:{
     userInfo: {},
-    orders: [],
-    manage:{},
-    QRCodeShow: '',
-    QRCodeShowFlag: false
+    bottomId: 0,
+    topId: 0,
+    questions: []
   },
-  //事件处理函数
-  navToPost: function() {
-    wx.navigateTo({
-      url: '../post/post'
-    });
-  },
-  onLoad: function (e) {
+  onLoad:function(options){
+    // 页面初始化 options为页面跳转所带来的参数
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
@@ -51,89 +18,57 @@ Page({
       that.setData({
         userInfo:userInfo
       });
+      that.loadQuestionList(that.data.bottomId);
     });
-    orderRefresh(e, that);
   },
-  onShow: function(){
-    orderRefresh({}, this);
+  onReady:function(){
+    // 页面渲染完成
   },
-  navToDetail: function(event) {
+  onShow:function(){
+    // 页面显示
+  },
+  onHide:function(){
+    // 页面隐藏
+  },
+  onUnload:function(){
+    // 页面关闭
+  },
+  navToPost: function () {
+    wx.navigateTo({
+      url: '../post/post'
+    });
+  },
+  onPullDownRefresh: function () {
+    // 下拉刷新
+    this.loadQuestionList(this.data.topId);
+    wx.stopPullDownRefresh();
+  },
+  navToDetail: function (event) {
     var objId = event.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '../detail/detail?objId=' + objId 
+      url: '../detail/detail?objId=' + objId
     });
   },
-  manageOrder:function(e){
-    var that =this
-    that.data.manage.display = !that.data.manage.display;
-    that.data.manage.orderId = e.currentTarget.id;
-    if(that.data.manage.display){
-      that.data.manage.do = ['删除','分享']
-    }else{
-      delete that.data.manage.do
-    }   
-    that.setData({
-      manage:that.data.manage
-    });
-  },
-  deleteOrder:function(e){
-  // var order = AV.Object.createWithoutData('orders', e.id)
-  // order.destroy().then(function (success) {
-  //   cossole.log(success)
-  //   // 删除成功
-  // }, function (error) {
-  //   cossole.log(error)
-  //   // 删除失败
-  // });
-  },
-  QRCodeTap: function(e) {
-    this.setData({
-      QRCodeShow: e.target.dataset.qrcode,
-      QRCodeShowFlag: true
-    });
-  },
-  hideQRCode: function(e){
-    if(e.target.id === 'QRCode-container') {
-      this.setData({
-        QRCodeShow: '',
-        QRCodeShowFlag: false
-      });
-    }
-  },
-  chooseCircle: function(){
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success: function(res) {
-        var latitude = res.latitude
-        var longitude = res.longitude
-        wx.openLocation({
-          latitude: latitude,
-          longitude: longitude,
-          scale: 28
+  loadQuestionList: function (bottomId) {
+    var that = this;
+    request.httpsPostRequest('/weapp/question/myList', { bottom_id: bottomId }, function(res_data) {
+      console.log(res_data);
+      wx.hideLoading();
+      if (res_data.code === 1000) {
+        that.data.questions = that.data.questions.concat(res_data.data);
+        var length = that.data.questions.length;
+        that.setData({
+          questions: that.data.questions,
+          bottomId: that.data.questions[length-1].id,
+          topId: that.data.questions[0].id
         });
-      },
-      fail: function(e) {
-        console.log(e);
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'loading',
+          duration: 2000
+        });
       }
     });
-  },
-  scanqr:function(){
-    wx.scanCode({
-      success: function(res){
-        // success
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
-  },
-  onShareAppMessage:function(){
-    return{
-      title:"解惑助手",
-      path:"./page/user?id=123"
-    }
   }
 })

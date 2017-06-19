@@ -1,7 +1,6 @@
 //app.js
 //初始化leancloud服务
 const AV = require('libs/av-weapp.js');
-var request = require("utils/request.js");
 
 App({
   onLaunch: function () {
@@ -16,10 +15,7 @@ App({
     wx.setStorageSync('logs', logs)
     this.getUserInfo(
       function (userInfo) {
-        //更新数据
-        this.setData({
-          userInfo: userInfo
-        });
+        
       }
     )
   },
@@ -31,11 +27,9 @@ App({
       //调用登录接口
       wx.login({
         success: function (res_login) {
-          console.log(res_login);
           wx.getUserInfo({
             withCredentials: true,
             success: function (res_user) {
-              console.log(res_user);
               var requestUrl = "/weapp/user/info";
               var jsonData = {
                 code: res_login.code,
@@ -50,14 +44,22 @@ App({
                 },
                 data: jsonData,
                 success: function (res) {    // 保存3rdSession到storage中
-                  console.log(res);
+                  if (res.data.code === 1000) {
+                    that.globalData.appAccessToken = res.data.data.token;
+                    that.globalData.userInfo = res_user.userInfo
+                    typeof cb == "function" && cb(that.globalData.userInfo)
+                  } else {
+                    wx.showToast({
+                      title: res.data.message,
+                      icon: 'loading',
+                      duration: 2000
+                    });
+                  }
                 },
                 fail: function (res) {
                   console.log(res);
                 }
               })
-              that.globalData.userInfo = res_user.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
             }
           })
         }
@@ -65,7 +67,8 @@ App({
     }
   },
   globalData:{
-    userInfo:null,
+    userInfo: null,
+    appAccessToken: null,
     host: 'http://api.ywhub.com/api'
   }
 })

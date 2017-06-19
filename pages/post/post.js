@@ -3,11 +3,12 @@
 var app = getApp();
 
 //查询用户信息
-const AV = require('../../libs/av-weapp.js');
+var request = require("../../utils/request.js");
 var pictures = [];
 Page({
   data:{
     showTopTips: false,
+    author: null,
     errorMsg: '',
     pictures: [],
     author: {},
@@ -24,31 +25,6 @@ Page({
     app.getUserInfo(function(userInfo){
       //更新数据
       that.data.author = userInfo;
-      that.data.discountId = options.disId;
-      
-      if (options.disId){
-        
-        let detail = {};
-        let discount = new AV.Query('discount');   
-        discount.equalTo('objectId', that.data.discountId);
-        discount.find().then(function (results) {
-            
-            detail.content = results[0].attributes.content;
-            detail.disForm = results[0].attributes.disForm;
-            // detail.img = results[0].attributes.background_url;
-            pictures.push(results[0].get('background_url'));
-            
-            that.data.title = detail.content.summary;
-            that.data.content = detail.content.detail.join('');
-            that.data.description = detail.disForm;
-            // that.data.contentpictures = [detail.img];
-            that.setData({
-                discount: detail,
-                pictures: pictures
-            });
-            
-        });
-      }
     });
   },
   onReady:function(){
@@ -89,29 +65,79 @@ Page({
     if (this.data.content === '') {
       this.showTopTips('内容不能为空');
       return false;
-    } else if (this.data.pictures.length === 0) {
-      this.showTopTips('至少上传一张图片');
-      return false;
     } else {
-        var orderObj = AV.Object.extend('orders'),
-          order = new orderObj();
-        order.set('title', this.data.title);
-        order.set('content', this.data.content);
-        order.set('description', this.data.description);
-        order.set('author', this.data.author);
-        order.set('pictures', this.data.pictures);
-
-        order.save().then(function (order) {
-          // 成功保存之后，执行其他逻辑.
-          // wx.navigateTo({
-          //     url: '../index/index'
-          // })
-          wx.navigateBack();
-        }, function (error) {
-          // 异常处理
-          console.log(error);
-        });
+        var jsonData = {
+          description: this.data.content,
+          is_public: this.data.isPublic,
+          images: this.data.pictures
+        };
+        var requestUrl = '/weapp/question/store';
+        var that = this;
+        var doResponse = function (res_data) {
+          wx.hideLoading();
+          if (res_data.data.code === 1000) {
+          
+          } else {
+            wx.showToast({
+              title: res_data.message,
+              icon: 'success',
+              duration: 2000
+            });
+          }
+        };
+        if (this.data.pictures.length >=1){
+          request.httpsUpload(requestUrl, jsonData, 'image_file' , this.data.pictures[0], function (res_data) {
+            console.log(res_data);
+            wx.hideLoading();
+            if (res_data.data.code === 1000){
+              if (isset(that.data.pictures[1])) {
+                addQuestionImage(res_data.data.data.id, that.data.pictures[1], doResponse);
+              }
+              if (isset(that.data.pictures[2])) {
+                addQuestionImage(res_data.data.data.id, that.data.pictures[2], doResponse);
+              }
+              wx.switchTab({
+                url: '/pages/mine/mine'
+              });
+            } else {
+              wx.showToast({
+                title: res_data.message,
+                icon: 'success', 
+                duration: 2000 
+                }); 
+            }
+          });
+        } else {
+          request.httpsPostRequest(requestUrl, jsonData, function (res_data) {
+            console.log(res_data);
+            wx.hideLoading();
+            if (res_data.code === 1000) {
+              // 成功保存之后，执行其他逻辑.
+              wx.showToast({
+                title: "提问成功",
+                icon: 'success',
+                duration: 2000
+              });
+              wx.switchTab({
+                url: '/pages/mine/mine'
+              });
+            } else {
+              wx.showToast({
+                title: res_data.message,
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          });
+        }
+        
     }
+  },
+  addQuestionImage: function (id, imagePath, res_func) {
+    request.httpsUpload('/weapp/question/add_image', { id: id }, 'image_file', imagePath, function (res_data) {
+      console.log(res_data);
+      typeof res_func == "function" && res_func(res_data);
+    });
   },
   previewImage: function (e) {
     wx.previewImage({
@@ -138,24 +164,11 @@ Page({
                 let strRegex = "(.jpg|.png|.gif|.jpeg)$"; //用于验证图片扩展名的正则表达式
                 let re=new RegExp(strRegex);
                 if (re.test(url.toLowerCase())){
-                    let name = '' + index + '.' + url.split('.')[url.split('.').length - 1],
-                        localFile = url,
-                        image = new AV.File(name, {
-                            blob: {  
-                                uri: localFile,  
-                            }
-                        });
-                        image.save().then(function(file) {
-                            // 文件保存成功
-                            
-                            pictures.push(file.url());
-                            that.setData({
-                                pictures: pictures
-                            });
-                        }, function(error) {
-                            // 异常处理
-                            console.error(error);
-                        }); 
+                    let name = '' + index + '.' + url.split('.')[url.split('.').length - 1],localFile = url;
+                    pictures.push(url);
+                    that.setData({
+                      pictures: pictures
+                    });
                 }else {
                     throw "选择的不是图片";
                 }

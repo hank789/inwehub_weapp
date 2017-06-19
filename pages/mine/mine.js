@@ -1,67 +1,66 @@
-//获取应用实例
-var app = getApp();
-//查询用户信息
-const AV = require('../../libs/av-weapp.js');
-
+// pages/mine/mine.js
 Page({
-  data:{
-    userInfo: {}
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+  
   },
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      });
-    });
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+  
   },
-  onReady:function(){
-    // 页面渲染完成
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
   },
-  onShow:function(){
-    // 页面显示
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
   },
-  onHide:function(){
-    // 页面隐藏
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
   },
-  onUnload:function(){
-    // 页面关闭
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
   },
-  myOrders:function(){
-    wx.navigateTo({
-      url: '../index/index?user='+this.data.userInfo.nickName
-    })    
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
   },
-  myIdenti:function(){
-    wx.showModal({
-      title: '提示',
-      content: '您还没有完成身份补全哦！',
-      cancelText: '暂时不要',
-      confirmText: '立即补全',
-      success: function(res) {
-        if (res.confirm) {
-          wx.navigateTo({
-            url: '../identity/identity'
-          })
-        }
-      }
-    });
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
   },
-  jumpToYN:function(){
-    wx.navigateTo({
-      url: '../res/aboutyn',
-      success: function(res){
-        // success
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
   }
 })

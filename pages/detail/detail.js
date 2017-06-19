@@ -2,20 +2,17 @@
 //获取应用实例
 var app = getApp();
 //查询用户信息
-const AV = require('../../libs/av-weapp.js');
-var orderFormat = require('../../utils/orderFormat.js'),
-  util = require('../../utils/util.js');
+var util = require('../../utils/util.js');
+var request = require("../../utils/request.js");
+
 Page({
   data:{
-    url: "http://wx.qlogo.cn/mmhead/kpUbvkMbNAdpQbvZBgncDWcRg7m4Dfkvy1cpIVNhdt8/132",
     scrollX: true,
     scrollY: true,
     userInfo: {},
-    order: {},
+    question: {},
     comments: [],
-    commentObj: {},
-    QRCodeShowFlag: false,
-    QRCodeShow: ''
+    commentObj: {}
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -27,16 +24,22 @@ Page({
         userInfo:userInfo
       });
       // 查询单个对象
-    var orders = new AV.Query('orders');
-    orders.get(options.objId).then(order => {
-      order = orderFormat.orderFormat(order);
-      that.setData({
-        order: order
+      request.httpsPostRequest('/weapp/question/info', { id: options.objId }, function (res_data) {
+        console.log(res_data);
+        wx.hideLoading();
+        if (res_data.code === 1000) {
+          that.setData({
+            question: res_data.data.question,
+            comments: res_data.data.comments
+          });
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'success',
+            duration: 2000
+          });
+        }
       });
-      if( that.data.order.comments && that.data.order.comments.length > 0) {
-        that.data.comments = that.data.order.comments;
-      }
-    }, error => console.log(error));
     });
   },
   onReady:function(){

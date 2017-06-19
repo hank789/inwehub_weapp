@@ -3,10 +3,16 @@ var app = getApp();
 var __httpsRequest = {
   //http 请求
   https_request: function (obj) {
+    wx.showLoading({
+      title: "请求处理中"
+    });
     wx.request(obj);
   },
   //文件上传
   upload_request: function (dataSource) {
+    wx.showLoading({
+      title: "请求处理中"
+    });
     wx.uploadFile(dataSource);
   }
 };
@@ -23,14 +29,16 @@ module.exports = {
     if (obj.data) jsonUrl.data = obj.data;
     obj.dataType ? (jsonUrl.dataType = obj.dataType) : (jsonUrl.dataType = "json");
     jsonUrl.success = obj.success;
-    jsonUrl.data.projectId = app.globalData.projectId;
     __httpsRequest.https_request(jsonUrl);
   },
   //get 请求
   httpsGetRequest: function (req_url, req_obj, res_func) {
     var jsonUrl = {
       url: app.globalData.host + req_url,
-      header: { "Content-Type": "application/json" },
+      header: {
+        'content-type': 'application/json',
+        'Authorization': 'bearer ' + app.globalData.appAccessToken
+      },
       dataType: "json",
       method: "GET",
       success: function (res) {
@@ -40,14 +48,16 @@ module.exports = {
     if (req_obj) {
       jsonUrl.data = req_obj;
     }
-    jsonUrl.data.projectId = app.globalData.projectId;
     __httpRequest.https_request(jsonUrl);
   },
   //post 请求
   httpsPostRequest: function (req_url, req_obj, res_func) {
     var jsonUrl = {
       url: app.globalData.host + req_url,
-      header: { "Content-Type": "application/json" },
+      header: {
+        'content-type': 'application/json',
+        'Authorization': 'bearer ' + app.globalData.appAccessToken
+      },
       dataType: "json",
       method: "POST",
       success: function (res) {
@@ -57,22 +67,20 @@ module.exports = {
     if (req_obj) {
       jsonUrl.data = req_obj;
     }
-    jsonUrl.data.projectId = app.globalData.projectId;
     __httpsRequest.https_request(jsonUrl);
   },
   //文件上传
-  httpsUpload: function (uid, fileDataSource, res_func) {
-    dataSource = {
+  httpsUpload: function (req_url, formData, fileFieldName, fileDataSource, res_func) {
+    var dataSource = {
       url: app.globalData.host + req_url,
       header: {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        'Authorization': 'bearer ' + app.globalData.appAccessToken
       },
       dataType: "json",
-      formData: {
-        "uid": uid
-      },
+      formData: formData,
       filePath: fileDataSource,
-      name: "fileObj",
+      name: fileFieldName,
       success: function (res) {
         typeof res_func == "function" && res_func(res);
       }

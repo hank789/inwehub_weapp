@@ -5,13 +5,10 @@
     "pages/privilege-detail/privilege-detail",
     "pages/post/post",    
     "pages/privilege-list/privilege-list",
-    "pages/identity/identity",
-    "pages/mine/mine",
-    "pages/logs/logs",
-    "pages/res/aboutyn"
+    "pages/discovery/discovery",
+    "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#38373d",
     "navigationBarTitleText": "解惑助手",
     "navigationBarTextStyle":"white"
@@ -20,18 +17,26 @@
     "borderStyle": "white",
     "backgroundColor": "#f6f6f8",
     "selectedColor": "#e12c15",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "images/order.png",
-      "selectedIconPath": "images/order-active.png"
-     },
-    {
-      "pagePath": "pages/privilege-detail/privilege-detail",
-      "text": "我的",
-      "iconPath": "images/personal.png",
-      "selectedIconPath": "images/personal-active.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "iconPath": "images/personal.png",
+        "selectedIconPath": "images/personal-active.png"
+      },
+      {
+        "pagePath": "pages/post/post",
+        "text": "提问",
+        "iconPath": "images/privilege.png",
+        "selectedIconPath": "images/privilege-active.png"
+      },
+      {
+        "pagePath": "pages/discovery/discovery",
+        "text": "发现",
+        "iconPath": "images/order.png",
+        "selectedIconPath": "images/order-active.png"
+     }
+    ]
   },
   "networkTimeout": {
     "request": 10000,
