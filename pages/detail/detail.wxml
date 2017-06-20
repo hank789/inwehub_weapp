@@ -56,9 +56,6 @@
   <block wx:if="{{isLoading}}">
     <template is="loading" />
   </block>
-  <block wx:else>
-    <template is="nodata" />
-  </block>
 
 
   <!--评论盒子-->

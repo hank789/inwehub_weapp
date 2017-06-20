@@ -68,11 +68,13 @@ Page({
         var length = res_data.data.length;
         var bottomId = that.data.bottomId;
         var isMoreComment = true;
-        if (length>0){
-          bottomId = res_data.data[length - 1].id;
-        }else {
+        if (length < 10) {
           isMoreComment = false;
         }
+        if (length>0){
+          bottomId = res_data.data[length - 1].id;
+        }
+        
         that.setData({
           comments: that.data.comments.concat(res_data.data),
           isLoading: false,
@@ -94,7 +96,11 @@ Page({
     var conArr = [], that = this;
     that.data.cfBg = false;
     console.log("onReachBottom");
+    
     if (this.data.isMoreComment){
+      this.setData({
+        isLoading: true
+      });
       this.loadComments(0, this.data.bottomId);
     }
   },

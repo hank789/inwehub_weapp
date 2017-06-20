@@ -8,6 +8,7 @@ Page({
     bottomId: 0,
     topId: 0,
     questions: [],
+    isLoading: true,//是否显示加载数据提示
     isMore: true
   },
   onLoad:function(options){
@@ -19,7 +20,7 @@ Page({
       that.setData({
         userInfo:userInfo
       });
-      that.loadQuestionList(that.data.bottomId);
+      that.loadQuestionList(0,0);
     });
   },
   onReady:function(){
@@ -47,6 +48,9 @@ Page({
   //底部更多加载
   onReachBottom: function () {
     if (this.data.isMore) {
+      this.setData({
+        isLoading: true
+      });
       this.loadQuestionList(0, this.data.bottomId);
     }
   },
@@ -62,28 +66,28 @@ Page({
       console.log(res_data);
       if (res_data.code === 1000) {
         var isMore = that.data.isMore;
-
+        
         if (topId === 0) {
           that.data.questions = that.data.questions.concat(res_data.data);
-          if (res_data.data.length <= 0){
+          if (res_data.data.length < 10){
             isMore = false;
           }
         } else {
           that.data.questions = res_data.data.concat(that.data.questions);
         }
         var length = that.data.questions.length;
-        var bottomId = 0;
-        var topId = 0;
+        var newBottomId = 0;
+        var newTopId = 0;
         if (length > 0){
-          bottomId = that.data.questions[length - 1].id;
-          topId = that.data.questions[0].id;
+          newBottomId = that.data.questions[length - 1].id;
+          newTopId = that.data.questions[0].id;
         }
-
 
         that.setData({
           questions: that.data.questions,
-          bottomId: bottomId,
-          topId: topId,
+          bottomId: newBottomId,
+          topId: newTopId,
+          isLoading: false,
           isMore: isMore
         });
       } else {
