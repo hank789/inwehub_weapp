@@ -7,11 +7,16 @@ var request = require("../../utils/request.js");
 
 Page({
   data:{
-    scrollX: true,
-    scrollY: true,
-    userInfo: {},
+    isShow: false,//控制emoji表情是否显示
+    isLoad: true,//解决初试加载时emoji动画执行一次
+    content: "",//评论框的内容
+    isLoading: true,//是否显示加载数据提示
+    disabled: true,
+    cfBg: false,
+    _index: 0,
     question: {},
     comments: [],
+    images: [],
     commentObj: {}
   },
   onLoad:function(options){
@@ -61,42 +66,48 @@ Page({
     this.data.commentObj.formatDate = util.formatTime(this.data.commentObj.createAt);
   },
   commentSubmit: function(e) {
-    if(!this.data.commentObj.commentStr || this.data.commentObj.commentStr === ''){
-      wx.showToast({
-        title: '评论为空',
-        duration: 2000
-      });
-      return false;
-    }
-    this.data.comments.unshift(this.data.commentObj);
-
-    var order = AV.Object.createWithoutData('orders', this.data.order.id);
-    order.set('comments', this.data.comments);
-    order.save().then(order => {
-      wx.redirectTo({
-        url: './detail?objId=' + this.data.order.id 
-      });
-    }, (error) => {
-        throw error;
-    });
+      var that = this, conArr = [];
+      //此处延迟的原因是 在点发送时 先执行失去文本焦点 再执行的send 事件 此时获取数据不正确 故手动延迟100毫秒
+      setTimeout(function () {
+          if (that.data.content.trim().length > 0) {
+              conArr.push({
+                  avatar: util.ossAliyuncs + "/images/banner5.jpg",
+                  uName: "雨碎江南",
+                  time: util.formatTime(new Date()),
+                  content: that.data.content
+              })
+              that.setData({
+                  comments: that.data.comments.concat(conArr),
+                  content: "",//清空文本域值
+                  isShow: false,
+                  cfBg: false
+              })
+          } else {
+              that.setData({
+                  content: ""//清空文本域值
+              })
+          }
+      }, 100)
   },
-  showQRCode: function(e) {
-    this.setData({
-      QRCodeShow: e.target.dataset.qrcode,
-      QRCodeShowFlag: true
-    });
-  },
-  hideQRCode: function(e){
-    if(e.target.id === 'QRCode-container') {
+  //文本域失去焦点时 事件处理
+  textAreaBlur: function (e) {
+      //获取此时文本域值
+      console.log(e.detail.value)
       this.setData({
-        QRCodeShow: '',
-        QRCodeShowFlag: false
-      });
-    }
+          content: e.detail.value
+      })
+
   },
-   onShareAppMessage:function(){
+  //文本域获得焦点事件处理
+  textAreaFocus: function () {
+      this.setData({
+          isShow: false,
+          cfBg: false
+      })
+  },
+  onShareAppMessage: function() {
     return{
-      title:"快来帮我拼单",
+      title:"快来帮我解决问题",
       path:"./page/user?id=123"
     }
   }
