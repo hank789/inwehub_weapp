@@ -12,7 +12,7 @@
     <!--简介-->
     <view class="t-info">
       <view class="ti-top">
-        <text>400,000次查看</text>
+        <text>400,00次查看</text>
         <text>{{ question.created_at }}</text>
       </view>
       <view class="ti-content">
@@ -46,7 +46,7 @@
 
         <!--评论内容-->
         <view class="content">
-          {{c.content}}
+          <text>{{c.content}}</text>
         </view>
       </view>
     </view>
@@ -65,9 +65,8 @@
   <view class="cf-bg" catchtap="cemojiCfBg" style="display:{{cfBg ? 'block' : 'none'}}"></view>
   <view class="comment-fixed">
     <view class="cf-box">
-      <view class="emoji iconfont icon-emoji" catchtap="emojiShowHide"></view>
-      <textarea class="cf-content" bindfocus="textAreaFocus" maxlength="200" bindblur="textAreaBlur" auto-height value="{{content}}" placeholder="我要评论" />
-      <text class="cf-send touch-active" bindtap="send">发送</text>
+      <textarea class="cf-content" cursor-spacing="15" bindfocus="textAreaFocus" bindblur="textAreaBlur" auto-height value="{{content}}" placeholder="我来回答" />
+      <text class="cf-send touch-active" bindtap="commentSubmit">发送</text>
     </view>
   </view>
 </view>

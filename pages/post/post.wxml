@@ -6,8 +6,8 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 3.3em" placeholder="请输入内容" value="" />
-                    <view class="weui-textarea-counter">0/200</view>
+                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 9.3em" placeholder="请输入内容" value="" />
+                    <view class="weui-textarea-counter"></view>
                 </view>
             </view>
         </view>

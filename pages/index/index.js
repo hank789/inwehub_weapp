@@ -7,7 +7,8 @@ Page({
     userInfo: {},
     bottomId: 0,
     topId: 0,
-    questions: []
+    questions: [],
+    isMore: true
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -40,8 +41,14 @@ Page({
   },
   onPullDownRefresh: function () {
     // 下拉刷新
-    this.loadQuestionList(this.data.topId);
+    this.loadQuestionList(this.data.topId,0);
     wx.stopPullDownRefresh();
+  },
+  //底部更多加载
+  onReachBottom: function () {
+    if (this.data.isMore) {
+      this.loadQuestionList(0, this.data.bottomId);
+    }
   },
   navToDetail: function (event) {
     var objId = event.currentTarget.dataset.id;
@@ -49,18 +56,35 @@ Page({
       url: '../detail/detail?objId=' + objId
     });
   },
-  loadQuestionList: function (bottomId) {
+  loadQuestionList: function (topId, bottomId) {
     var that = this;
-    request.httpsPostRequest('/weapp/question/myList', { bottom_id: bottomId }, function(res_data) {
+    request.httpsPostRequest('/weapp/question/myList', {top_id: topId, bottom_id: bottomId }, function(res_data) {
       console.log(res_data);
-      wx.hideLoading();
       if (res_data.code === 1000) {
-        that.data.questions = that.data.questions.concat(res_data.data);
+        var isMore = that.data.isMore;
+
+        if (topId === 0) {
+          that.data.questions = that.data.questions.concat(res_data.data);
+          if (res_data.data.length <= 0){
+            isMore = false;
+          }
+        } else {
+          that.data.questions = res_data.data.concat(that.data.questions);
+        }
         var length = that.data.questions.length;
+        var bottomId = 0;
+        var topId = 0;
+        if (length > 0){
+          bottomId = that.data.questions[length - 1].id;
+          topId = that.data.questions[0].id;
+        }
+
+
         that.setData({
           questions: that.data.questions,
-          bottomId: that.data.questions[length-1].id,
-          topId: that.data.questions[0].id
+          bottomId: bottomId,
+          topId: topId,
+          isMore: isMore
         });
       } else {
         wx.showToast({

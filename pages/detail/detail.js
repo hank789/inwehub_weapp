@@ -13,11 +13,12 @@ Page({
     isLoading: true,//是否显示加载数据提示
     disabled: true,
     cfBg: false,
-    _index: 0,
     question: {},
+    question_id: 0,
     comments: [],
     images: [],
-    commentObj: {}
+    bottomId: 0,
+    isMoreComment: true
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -26,17 +27,16 @@ Page({
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
-        userInfo:userInfo
+        userInfo:userInfo,
+        question_id: options.objId
       });
-      // 查询单个对象
+      // 查询对象
       request.httpsPostRequest('/weapp/question/info', { id: options.objId }, function (res_data) {
-        console.log(res_data);
-        wx.hideLoading();
         if (res_data.code === 1000) {
           that.setData({
-            question: res_data.data.question,
-            comments: res_data.data.comments
+            question: res_data.data.question
           });
+          
         } else {
           wx.showToast({
             title: res_data.message,
@@ -45,6 +45,8 @@ Page({
           });
         }
       });
+      //回复
+      that.loadComments(0,0);
     });
   },
   onReady:function(){
@@ -59,11 +61,42 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
-  commentInput: function(e){
-    this.data.commentObj.author = this.data.userInfo;
-    this.data.commentObj.commentStr = e.detail.value;
-    this.data.commentObj.createAt = new Date();
-    this.data.commentObj.formatDate = util.formatTime(this.data.commentObj.createAt);
+  loadComments: function(topId,bottomId) {
+    var that = this;
+    request.httpsPostRequest('/weapp/question/loadAnswer', { top_id: topId, bottom_id: bottomId, question_id: this.data.question_id }, function (res_data) {
+      if (res_data.code === 1000) {
+        var length = res_data.data.length;
+        var bottomId = that.data.bottomId;
+        var isMoreComment = true;
+        if (length>0){
+          bottomId = res_data.data[length - 1].id;
+        }else {
+          isMoreComment = false;
+        }
+        that.setData({
+          comments: that.data.comments.concat(res_data.data),
+          isLoading: false,
+          bottomId: bottomId,
+          isMoreComment: isMoreComment
+        });
+
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
+  },
+  //底部更多加载
+  onReachBottom: function () {
+    var conArr = [], that = this;
+    that.data.cfBg = false;
+    console.log("onReachBottom");
+    if (this.data.isMoreComment){
+      this.loadComments(0, this.data.bottomId);
+    }
   },
   commentSubmit: function(e) {
       var that = this, conArr = [];
@@ -71,17 +104,36 @@ Page({
       setTimeout(function () {
           if (that.data.content.trim().length > 0) {
               conArr.push({
-                  avatar: util.ossAliyuncs + "/images/banner5.jpg",
-                  uName: "雨碎江南",
-                  time: util.formatTime(new Date()),
-                  content: that.data.content
-              })
-              that.setData({
-                  comments: that.data.comments.concat(conArr),
-                  content: "",//清空文本域值
-                  isShow: false,
-                  cfBg: false
-              })
+                user_name: app.globalData.userInfo.nickName,
+                user_avatar_url: app.globalData.userInfo.avatarUrl,
+                created_at: util.formatTime(new Date()),
+                content: that.data.content
+              });
+
+              var commentData = {
+                question_id: that.data.question.id,
+                description: that.data.content
+              };
+              request.httpsPostRequest('/weapp/answer/store', commentData, function (res_data) {
+                console.log(res_data);
+                wx.hideLoading();
+                if (res_data.code === 1000) {
+                  that.setData({
+                    comments: conArr.concat(that.data.comments),
+                    content: "",//清空文本域值
+                    isShow: false,
+                    cfBg: false
+                  });
+
+                } else {
+                  wx.showToast({
+                    title: res_data.message,
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
+              });
+
           } else {
               that.setData({
                   content: ""//清空文本域值

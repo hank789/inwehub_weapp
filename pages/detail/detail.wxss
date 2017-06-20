@@ -1,4 +1,4 @@
-/* pages/details/detail.wxss */
+/* pages/detail/detail.wxss */
 
 .container {
   padding-bottom: 45px;
@@ -60,6 +60,7 @@ video {
 }
 .comments {
   margin-top: 10px;
+  width: 100%;
 }
 
 .content {

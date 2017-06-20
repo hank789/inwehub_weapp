@@ -69,6 +69,6 @@ App({
   globalData:{
     userInfo: null,
     appAccessToken: null,
-    host: 'http://api.ywhub.com/api'
+    host: 'https://api.ywhub.com/api'
   }
 })

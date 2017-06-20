@@ -86,6 +86,9 @@ Page({
           }
         };
         if (this.data.pictures.length >=1){
+          wx.showLoading({
+            title: "请求处理中"
+          });
           request.httpsUpload(requestUrl, jsonData, 'image_file' , this.data.pictures[0], function (res_data) {
             console.log(res_data);
             wx.hideLoading();

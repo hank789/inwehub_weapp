@@ -3,16 +3,10 @@ var app = getApp();
 var __httpsRequest = {
   //http 请求
   https_request: function (obj) {
-    wx.showLoading({
-      title: "请求处理中"
-    });
     wx.request(obj);
   },
   //文件上传
   upload_request: function (dataSource) {
-    wx.showLoading({
-      title: "请求处理中"
-    });
     wx.uploadFile(dataSource);
   }
 };
