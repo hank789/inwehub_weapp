@@ -59,11 +59,14 @@
 
 
   <!--评论盒子-->
-  <view class="cf-bg" catchtap="cemojiCfBg" style="display:{{cfBg ? 'block' : 'none'}}"></view>
   <view class="comment-fixed">
     <view class="cf-box">
       <textarea class="cf-content" cursor-spacing="15" bindfocus="textAreaFocus" bindblur="textAreaBlur" auto-height value="{{content}}" placeholder="我来回答" />
       <text class="cf-send touch-active" bindtap="commentSubmit">发送</text>
     </view>
   </view>
+</view>
+<!--悬浮菜单-->
+<view class="menu">
+    <text class="iconfont icon-svg35"></text>
 </view>
