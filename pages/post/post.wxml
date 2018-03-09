@@ -3,50 +3,81 @@
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
     <form bindsubmit="formSubmit">
         
+        
         <view class="weui-cells weui-cells_after-title">
+
+          <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">标题</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" id="title" placeholder=""/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">地点</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" id="address" placeholder=""/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">费率</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input type="number" class="weui-input" id='rate' placeholder="" />
+                </view>
+                <view class="weui-cell__ft">
+                    <view class="weui-vcode-btn">元/天</view>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">行业</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker id="industry" bindchange="bindIndustryChange" range-key="text" value="{{industryIndex}}" range="{{industry_select}}">
+                        <view class="weui-select weui-select_in-select-after">{{industry_select[industryIndex].text}}</view>
+                    </picker>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">项目周期</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker id="project_cycle" bindchange="bindProjectCycleChange" range-key="text" value="{{projectCycleIndex}}" range="{{project_cycle_select}}">
+                        <view class="weui-select weui-select_in-select-after">{{project_cycle_select[projectCycleIndex].text}}</view>
+                    </picker>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">开始时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker id="project_begin_time" mode="date" value="{{date}}" start="2018-01-01" end="2050-12-01" bindchange="bindProjectBeginTimeChange">
+                        <view class="weui-input">{{projectBeginTimeIndex}}</view>
+                    </picker>
+                </view>
+            </view>
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 9.3em" placeholder="请输入内容" value="" />
+                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 9.3em" placeholder="职位描述" value="" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view>
         </view>
 
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_switch">
-                <view class="weui-cell__bd">评论公开</view>
-                <view class="weui-cell__ft">
-                    <switch bindchange="isPublicEventFunc" />
-                </view>
-            </view>
-        </view>
-        <view class="weui-cells__tips">若评论不公开，则回答者只能看到自己的回复</view>
-
-        <view class="weui-cells__title">上传图片</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-uploader">
-                <view class="weui-uploader__hd">
-                    <view class="weui-uploader__title"></view>
-                    <view class="weui-uploader__info"></view>
-                </view>
-                <view class="weui-uploader__bd">
-                    <view class="weui-uploader__files" id="uploaderFiles">
-                        <block wx:for="{{pictures}}" wx:key="*this">
-                            <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                            </view>
-                        </block>
-                        <view class="weui-uploader__input-box" wx:if="{{pictures.length < 3}}">
-                          <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                        </view>
-                    </view>
-                    
-                </view>
-            </view>
-          </view>
-        </view>
-        <view class="weui-cells__tips">最多可上传3张图片,已上传{{pictures.length ? pictures.length : 0}}/3张</view>
+        
+        <view class="weui-cells__tips">简历的有效期为7天，超过7天该简历会自动关闭</view>
 
         <view class="weui-btn-area">
           <button formType="submit" class="weui-btn" type="primary">立即发布</button>

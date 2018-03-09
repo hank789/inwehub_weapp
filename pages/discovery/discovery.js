@@ -1,8 +1,6 @@
 //index.js
 //获取应用实例
 var app = getApp();
-//查询用户信息
-const AV = require('../../libs/av-weapp.js');
 var orderFormat = require('../../utils/orderFormat.js');
 
 function orderRefresh(e, that) {

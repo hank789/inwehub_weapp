@@ -62,6 +62,7 @@ Page({
   },
   loadQuestionList: function (topId, bottomId) {
     var that = this;
+    return;
     request.httpsPostRequest('/weapp/question/myList', {top_id: topId, bottom_id: bottomId }, function(res_data) {
       console.log(res_data);
       if (res_data.code === 1000) {

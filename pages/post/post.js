@@ -4,27 +4,67 @@ var app = getApp();
 
 //查询用户信息
 var request = require("../../utils/request.js");
-var pictures = [];
 Page({
   data:{
     showTopTips: false,
-    author: null,
     errorMsg: '',
-    pictures: [],
     author: {},
     content: '',
-    isPublic: false
+    title: '',
+    address: '',
+    rate: '',
+    countries: ["中国", "美国", "英国"],
+    industry_select: [],
+    project_cycle_select: [
+      {value:1,text:"小于1周"},
+      {value:2,text:"1-2周"},
+      {value:3,text:"2-4周"},
+      {value:4,text:"1-2月"},
+      {value:5,text:"2-4月"},
+      {value:6,text:"4-6月"},
+      {value:7,text:"半年以上"},
+      {value:8,text:"不确定"},
+      {value:9,text:"其他"}
+      ],
+    countryIndex: 0,
+    industryIndex: 0,
+    projectCycleIndex: 0,
+    projectBeginTimeIndex: "2018-01-01",
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    this.data.pictures = [];
-    pictures = [];//防止缓存影响
-    
     var that = this;
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
+      if (!app.globalData.appAccessToken) {
+        wx.showModal({
+          content: '您的认证信息还未完善，前往完善信息',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              wx.redirectTo({
+                url: '../register/register'
+              });
+            }
+          }
+        });
+      }
       //更新数据
       that.data.author = userInfo;
+      request.httpsPostRequest('/tags/load', {tag_type: 3 }, function(res_data) {
+        if (res_data.code === 1000) {
+          var isMore = that.data.isMore;
+          that.setData({
+            industry_select: res_data.data.tags
+          })
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'loading',
+            duration: 2000
+          });
+        }
+      });
     });
   },
   onReady:function(){
@@ -60,6 +100,31 @@ Page({
         showTopTips: false
       });
     }, 3000);
+  },
+  bindCountryChange: function (e) {
+    console.log('picker country 发生选择改变，携带值为', e.detail.value);
+
+    this.setData({
+      countryIndex: e.detail.value
+    })
+  },
+  bindIndustryChange: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      industryIndex: e.detail.value
+    })
+  },
+  bindProjectCycleChange: function (e) {
+    console.log(this.data.project_cycle_select[e.detail.value].value);
+    this.setData({
+      projectCycleIndex: e.detail.value
+    })
+  },
+  bindProjectBeginTimeChange: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      projectBeginTimeIndex: e.detail.value
+    })
   },
   formSubmit: function(e) {
     if (this.data.content === '') {
@@ -135,49 +200,5 @@ Page({
         }
         
     }
-  },
-  addQuestionImage: function (id, imagePath, res_func) {
-    request.httpsUpload('/weapp/question/add_image', { id: id }, 'image_file', imagePath, function (res_data) {
-      console.log(res_data);
-      typeof res_func == "function" && res_func(res_data);
-    });
-  },
-  previewImage: function (e) {
-    wx.previewImage({
-      current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.pictures // 需要预览的图片http链接列表
-    })
-  },
-  chooseImage: function() {
-      //上传图片相关
-      var that = this;
-      wx.chooseImage({
-          count: 1, // 默认9
-          sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-          success: function (res) {
-              // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-              let tempFilePaths = res.tempFilePaths;
-              
-              tempFilePaths.forEach(function(url, index){
-                //   pictures.push(url);
-                //   that.setData({
-                //       pictures: pictures
-                //   });
-                let strRegex = "(.jpg|.png|.gif|.jpeg)$"; //用于验证图片扩展名的正则表达式
-                let re=new RegExp(strRegex);
-                if (re.test(url.toLowerCase())){
-                    let name = '' + index + '.' + url.split('.')[url.split('.').length - 1],localFile = url;
-                    pictures.push(url);
-                    that.setData({
-                      pictures: pictures
-                    });
-                }else {
-                    throw "选择的不是图片";
-                }
-               
-              });
-          }
-      });
   }
 })

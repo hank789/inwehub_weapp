@@ -1,17 +1,8 @@
 //app.js
-//初始化leancloud服务
-const AV = require('libs/av-weapp.js');
-
 App({
   onLaunch: function () {
-    AV.init({ 
-      appId: 'cd8pCmtptSQrz4jK4tDKLqlU-gzGzoHsz', 
-      appKey: 'UBHMQf1tpcnUpSSjSB3NygkW', 
-      });
-
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     this.getUserInfo(
       function (userInfo) {
@@ -21,7 +12,7 @@ App({
   },
   getUserInfo:function(cb){
     var that = this
-    if(this.globalData.userInfo){
+    if (this.globalData.appAccessToken){
       typeof cb == "function" && cb(this.globalData.userInfo)
     }else{
       //调用登录接口
@@ -30,7 +21,7 @@ App({
           wx.getUserInfo({
             withCredentials: true,
             success: function (res_user) {
-              var requestUrl = "/weapp/user/info";
+              var requestUrl = "/weapp/user/wxinfo";
               var jsonData = {
                 code: res_login.code,
                 encryptedData: res_user.encryptedData,
@@ -47,6 +38,7 @@ App({
                   if (res.data.code === 1000) {
                     that.globalData.appAccessToken = res.data.data.token;
                     that.globalData.userInfo = res_user.userInfo
+                    that.globalData.userOpenid = res.data.data.openid
                     typeof cb == "function" && cb(that.globalData.userInfo)
                   } else {
                     wx.showToast({
@@ -68,6 +60,7 @@ App({
   },
   globalData:{
     userInfo: null,
+    userOpenid: null,
     appAccessToken: null,
     host: 'https://api.ywhub.com/api'
   }

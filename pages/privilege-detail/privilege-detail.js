@@ -1,18 +1,4 @@
 // pages/privilege-detail/privilege-detail.js
-const AV = require('../../libs/av-weapp.js');
-function ordersRefresh(that, option) {
-  let order = new AV.Query('orders');
-    order.equalTo('discountId', option.id);
-    order.find().then(function (res){ 
-      for(let i=0;i<res.length;i++){
-        res[i].attributes.id = res[i].id ;
-        res[i] = res[i].attributes;
-      }
-      that.setData({
-        orders: res
-      });  
-    }); 
-}
 Page({
   data:{
     discount:{},
@@ -36,17 +22,13 @@ Page({
       that.setData({
           discount: detail
         });
-    });
-
-    ordersRefresh(that, option);
-          
+    });          
   },
   onReady:function(){
     // 页面渲染完成
   },
   onShow:function(){
     // 页面显示
-    ordersRefresh(this, this.data.option);
   },
   onHide:function(){
     // 页面隐藏

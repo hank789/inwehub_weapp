@@ -1,18 +1,40 @@
 // pages/mine/mine.js
-Page({
+var app = getApp();
 
+//查询用户信息
+var request = require("../../utils/request.js");
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-  
+    userInfo: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    // 页面初始化 options为页面跳转所带来的参数
+    var that = this;
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function(userInfo){
+      //更新数据
+      request.httpsPostRequest('/weapp/user/info', {openid: app.globalData.userOpenid }, function(res_data) {
+        if (res_data.code === 1000) {
+          that.setData({
+            userInfo: res_data.data
+          })
+          app.globalData.userInfo = res_data.data
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'loading',
+            duration: 2000
+          });
+        }
+      });
+    });
   },
 
   /**
@@ -62,5 +84,16 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  tapViewInfo: function (e) {
+    if (this.data.userInfo.status === 1) {
+      wx.navigateTo({
+        url: '../identity/identity'
+      })
+    } else {
+      wx.navigateTo({
+        url: '../register/register'
+      })
+    }
   }
 })
