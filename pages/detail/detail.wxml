@@ -1,72 +1,77 @@
-
-<!--引入加载更多模版-->
-<import src="../../template/loading" />
-
-<!--详情页-->
+<!--logs.wxml-->
 <view class="container">
-  <view class="c-top">
-    <view class="c-video-img">
+	<view class="container-body space-content">
+	  <view class="space-top">
+  	  <view class="space-info">
+  	  	<view class="space-title">{{demand.title}}</view>
 
-    </view>
+  	  	<view class="space-list">
+  	  		<view class="space-item">
+  	  			<text class="text-left">薪资：</text>
+  	  			<text class="text-right">
+  	  				<text class="text-orange">{{demand.salary}}</text> 元/天
+  	  			</text>
+  	  		</view>
+  	  		<view class="space-item">
+  	  			<text class="text-left">行业：</text>
+  	  			<text class="text-right">{{demand.industry.text}}</text>
+  	  		</view>
+  	  		<view class="space-item">
+  	  			<text class="text-left">地点：</text>
+  	  			<text class="text-right">{{demand.address}}</text>
+  	  		</view>
+            <view class="space-item">
+                <text class="text-left">项目周期：</text>
+                <text class="text-right">{{demand.project_cycle.text}}</text>
+            </view>
+            <view class="space-item">
+                <text class="text-left">项目开始日期：</text>
+                <text class="text-right">{{demand.project_begin_time}}</text>
+            </view>
+  	  	</view>
+  	  </view>
+	  </view>
 
-    <!--简介-->
-    <view class="t-info">
-      <view class="ti-top">
-        <text>400,00次查看</text>
-        <text>{{ question.created_at }}</text>
-      </view>
-      <view class="ti-content">
-      {{ question.description }}
-      </view>
-      <view class="ti-bottom">
-        <view>
-          <text class="iconfont icon-my"></text><text>牧民新歌</text>
+      <view class="space-block">
+        <view class="space-block-title">发布者</view>
+        <view class="space-block-content">
+            <view class="space-list">
+                <view class="space-item">
+                    <text class="text-left">姓名：</text>
+                    <text class="text-right">{{ demand.publisher_name }}</text>
+                </view>
+                <view class="space-item">
+                    <text class="text-left">职位：</text>
+                    <text class="text-right">{{ demand.publisher_title }}</text>
+                </view>
+                <view class="space-item">
+                    <text class="text-left">公司：</text>
+                    <text class="text-right">{{ demand.publisher_company }}</text>
+                </view>
+                <view class="space-item">
+                    <text class="text-left">邮箱：</text>
+                    <text class="text-right">{{ demand.publisher_email }}</text>
+                </view>
+            </view>
+            <view class="space-passage"></view>
         </view>
-        <view>
-          <text class="iconfont icon-xihuan"></text><text>50,000喜欢</text>
-        </view>
-        <view>
-          <text class="iconfont icon-pinglun1"></text><text>{{ comments.length }}评论</text>
-        </view>
       </view>
-    </view>
-  </view>
 
-  <!--评论列表-->
-  <view class="comments">
-    <view class="item touch-active" wx:for="{{ comments }}" wx:key="" wx:for-item="c">
-      <view class="i-left">
-        <image class="c-u-img" src="{{c.user_avatar_url}}"></image>
-      </view>
-      <view class="i-right">
-        <view class="top">
-          <text class="u-name">{{c.user_name}}</text>
-          <text class="time">{{c.created_at}}</text>
-        </view>
-
-        <!--评论内容-->
-        <view class="content">
-          <text>{{c.content}}</text>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <!--加载更多模版-->
-  <block wx:if="{{isLoading}}">
-    <template is="loading" />
-  </block>
-
-
-  <!--评论盒子-->
-  <view class="comment-fixed">
-    <view class="cf-box">
-      <textarea class="cf-content" cursor-spacing="15" bindfocus="textAreaFocus" bindblur="textAreaBlur" auto-height value="{{content}}" placeholder="我来回答" />
-      <text class="cf-send touch-active" bindtap="commentSubmit">发送</text>
-    </view>
-  </view>
-</view>
-<!--悬浮菜单-->
-<view class="menu">
-    <text class="iconfont icon-svg35"></text>
+	  <view class="space-block">
+	  	<view class="space-block-title">需求描述</view>
+	  	<view class="space-block-content">
+	  		<text class="space-passage">{{demand.description}}</text>
+	  	</view>
+  	</view>
+	</view>
+	<view class="container-footer">
+		<text class="share-btn" bindtap="showShareMenu">分享</text>
+		<block wx:if="{{demand.is_author}}">
+            <text bindtap="authCloseDemand">关闭</text>
+            <text bindtap="authEditDemand">修改</text>
+        </block>
+		<block wx:if="{{!demand.is_author}}">
+		    <text class="contact-btn" bindtap="goContact">电话联系</text>
+		</block>
+	</view>
 </view>

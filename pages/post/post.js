@@ -7,13 +7,18 @@ var request = require("../../utils/request.js");
 Page({
   data:{
     showTopTips: false,
+    demand: {
+      id: '',
+      title: '',
+      address: '',
+      salary: '',
+      project_begin_time: '2018-01-01',
+      description: '',
+      industry: 0,
+      project_cycle: 0
+    },
     errorMsg: '',
     author: {},
-    content: '',
-    title: '',
-    address: '',
-    rate: '',
-    countries: ["中国", "美国", "英国"],
     industry_select: [],
     project_cycle_select: [
       {value:1,text:"小于1周"},
@@ -25,15 +30,15 @@ Page({
       {value:7,text:"半年以上"},
       {value:8,text:"不确定"},
       {value:9,text:"其他"}
-      ],
-    countryIndex: 0,
-    industryIndex: 0,
-    projectCycleIndex: 0,
-    projectBeginTimeIndex: "2018-01-01",
+    ]
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
+    //更新数据
+    that.setData({
+      'demand.id': options.id
+    });
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       if (!app.globalData.appAccessToken) {
@@ -46,6 +51,30 @@ Page({
                 url: '../register/register'
               });
             }
+          }
+        });
+      }
+      if (this.data.demand.id) {
+        request.httpsPostRequest('/weapp/demand/detail', { id: this.data.demand.id }, function (res_data) {
+          if (res_data.code === 1000) {
+            that.data.demand.title = res_data.data.title;
+            that.data.demand.address = res_data.data.address;
+            that.data.demand.salary = res_data.data.salary;
+            that.data.demand.project_begin_time = res_data.data.project_begin_time;
+            that.data.demand.description = res_data.data.description;
+            that.data.demand.industry = res_data.data.industry.value;
+            that.data.demand.project_cycle = res_data.data.project_cycle.value;
+
+            that.setData({
+              demand: that.data.demand
+            });
+
+          } else {
+            wx.showToast({
+              title: res_data.message,
+              icon: 'success',
+              duration: 2000
+            });
           }
         });
       }
@@ -79,15 +108,25 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
-  contentEventFunc: function(e) {
-    if(e.detail && e.detail.value) {
-        this.data.content = e.detail.value;
-    }
+  bindDescriptionBlur: function(e) {
+    this.setData({
+      'demand.description': e.detail.value
+    })
   },
-  isPublicEventFunc: function (e) {
-    if (e.detail && e.detail.value) {
-      this.data.isPublic = e.detail.value;
-    }
+  bindTitleBlur: function (e) {
+    this.setData({
+      'demand.title': e.detail.value
+    })
+  },
+  bindAddressBlur: function (e) {
+    this.setData({
+      'demand.address': e.detail.value
+    })
+  },
+  bindSalaryBlur: function (e) {
+    this.setData({
+      'demand.salary': e.detail.value
+    })
   },
   showTopTips: function (msg) {
     var that = this;
@@ -101,104 +140,74 @@ Page({
       });
     }, 3000);
   },
-  bindCountryChange: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
-    this.setData({
-      countryIndex: e.detail.value
-    })
-  },
   bindIndustryChange: function (e) {
     console.log(e.detail.value)
     this.setData({
-      industryIndex: e.detail.value
+      'demand.industry': this.data.industry_select[e.detail.value].value
     })
   },
   bindProjectCycleChange: function (e) {
     console.log(this.data.project_cycle_select[e.detail.value].value);
     this.setData({
-      projectCycleIndex: e.detail.value
+      'demand.project_cycle':this.data.project_cycle_select[e.detail.value].value
     })
   },
   bindProjectBeginTimeChange: function (e) {
     console.log(e.detail.value)
     this.setData({
-      projectBeginTimeIndex: e.detail.value
+      'demand.project_begin_time': e.detail.value
     })
   },
   formSubmit: function(e) {
-    if (this.data.content === '') {
-      this.showTopTips('内容不能为空');
+    if (this.data.demand.title === '') {
+      this.showTopTips('标题不能为空');
       return false;
-    } else {
-        var jsonData = {
-          description: this.data.content,
-          is_public: this.data.isPublic,
-          images: this.data.pictures
-        };
-        var requestUrl = '/weapp/question/store';
-        var that = this;
-        var doResponse = function (res_data) {
-          wx.hideLoading();
-          if (res_data.data.code === 1000) {
-          
-          } else {
-            wx.showToast({
-              title: res_data.message,
-              icon: 'success',
-              duration: 2000
-            });
-          }
-        };
-        if (this.data.pictures.length >=1){
-          wx.showLoading({
-            title: "请求处理中"
-          });
-          request.httpsUpload(requestUrl, jsonData, 'image_file' , this.data.pictures[0], function (res_data) {
-            console.log(res_data);
-            wx.hideLoading();
-            if (res_data.data.code === 1000){
-              if (isset(that.data.pictures[1])) {
-                addQuestionImage(res_data.data.data.id, that.data.pictures[1], doResponse);
-              }
-              if (isset(that.data.pictures[2])) {
-                addQuestionImage(res_data.data.data.id, that.data.pictures[2], doResponse);
-              }
-              wx.switchTab({
-                url: '/pages/mine/mine'
-              });
-            } else {
-              wx.showToast({
-                title: res_data.message,
-                icon: 'success', 
-                duration: 2000 
-                }); 
-            }
-          });
-        } else {
-          request.httpsPostRequest(requestUrl, jsonData, function (res_data) {
-            console.log(res_data);
-            wx.hideLoading();
-            if (res_data.code === 1000) {
-              // 成功保存之后，执行其他逻辑.
-              wx.showToast({
-                title: "提问成功",
-                icon: 'success',
-                duration: 2000
-              });
-              wx.switchTab({
-                url: '/pages/mine/mine'
-              });
-            } else {
-              wx.showToast({
-                title: res_data.message,
-                icon: 'success',
-                duration: 2000
-              });
-            }
-          });
-        }
-        
     }
+    if (this.data.demand.address === '') {
+      this.showTopTips('地点不能为空');
+      return false;
+    }
+    if (this.data.demand.salary === '') {
+      this.showTopTips('薪资不能为空');
+      return false;
+    }
+    if (this.data.demand.description === '') {
+      this.showTopTips('描述不能为空');
+      return false;
+    }
+    wx.showLoading({
+      title: '提交中...',
+      mask: true
+    });
+
+    var requestUrl = '/weapp/demand/store';
+    var title = '发布成功';
+    if (this.data.demand.id) {
+      requestUrl = '/weapp/demand/update';
+      title = '修改成功';
+    }
+
+    var that = this;
+    request.httpsPostRequest(requestUrl, this.data.demand, function (res_data) {
+      console.log(res_data);
+      wx.hideLoading();
+      if (res_data.code === 1000) {
+        // 成功保存之后，执行其他逻辑.
+        wx.showToast({
+          title: title,
+          icon: 'success',
+          duration: 2000
+        });
+        wx.switchTab({
+          url: '/pages/myDemand/myDemand'
+        });
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   }
 })

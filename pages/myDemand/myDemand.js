@@ -60,7 +60,7 @@ Page({
   },
   loadList: function (page) {
     var that = this;
-    request.httpsPostRequest('/weapp/demand/list', { page: this.data.page, type: 'all' }, function(res_data) {
+    request.httpsPostRequest('/weapp/demand/list', { page: this.data.page, type: 'mine' }, function(res_data) {
       console.log(res_data);
       if (res_data.code === 1000) {
         var isMore = that.data.isMore;

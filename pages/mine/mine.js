@@ -95,5 +95,10 @@ Page({
         url: '../register/register'
       })
     }
+  },
+  tapMyPublish: function (e) {
+    wx.navigateTo({
+      url: '../myDemand/myDemand'
+    })
   }
 })

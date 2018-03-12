@@ -2,16 +2,13 @@
   <view class="page__bd">
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
     <form bindsubmit="formSubmit">
-        
-        
         <view class="weui-cells weui-cells_after-title">
-
           <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">标题</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" id="title" placeholder=""/>
+                    <input bindblur="bindTitleBlur" class="weui-input" placeholder=""/>
                 </view>
             </view>
 
@@ -20,16 +17,16 @@
                     <view class="weui-label">地点</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" id="address" placeholder=""/>
+                    <input bindblur="bindAddressBlur" class="weui-input" placeholder=""/>
                 </view>
             </view>
 
             <view class="weui-cell weui-cell_input weui-cell_vcode">
                 <view class="weui-cell__hd">
-                    <view class="weui-label">费率</view>
+                    <view class="weui-label">薪资</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input type="number" class="weui-input" id='rate' placeholder="" />
+                    <input bindblur="bindSalaryBlur" type="number" class="weui-input" placeholder="" />
                 </view>
                 <view class="weui-cell__ft">
                     <view class="weui-vcode-btn">元/天</view>
@@ -70,7 +67,7 @@
             </view>
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea bindblur="contentEventFunc" id="content" class="weui-textarea" style="height: 9.3em" placeholder="职位描述" value="" />
+                    <textarea auto-height="true" maxlength="2000" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 9.3em" placeholder="职位描述" value="" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view>

@@ -6,7 +6,8 @@
     "pages/post/post",
     "pages/logs/logs",
     "pages/register/register",
-    "pages/identity/identity"
+    "pages/identity/identity",
+    "pages/myDemand/myDemand"
   ],
   "window":{
     "navigationBarTextStyle": "#fff",
