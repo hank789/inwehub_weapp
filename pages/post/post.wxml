@@ -8,7 +8,7 @@
                     <view class="weui-label">标题</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindTitleBlur" class="weui-input" placeholder=""/>
+                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder=""/>
                 </view>
             </view>
 
@@ -17,7 +17,7 @@
                     <view class="weui-label">地点</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindAddressBlur" class="weui-input" placeholder=""/>
+                    <input bindblur="bindAddressBlur" value="{{ demand.address }}" class="weui-input" placeholder=""/>
                 </view>
             </view>
 
@@ -26,7 +26,7 @@
                     <view class="weui-label">薪资</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindSalaryBlur" type="number" class="weui-input" placeholder="" />
+                    <input bindblur="bindSalaryBlur" type="number" value="{{ demand.salary }}" class="weui-input" placeholder="" />
                 </view>
                 <view class="weui-cell__ft">
                     <view class="weui-vcode-btn">元/天</view>
@@ -60,14 +60,14 @@
                     <view class="weui-label">开始时间</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <picker id="project_begin_time" mode="date" value="{{date}}" start="2018-01-01" end="2050-12-01" bindchange="bindProjectBeginTimeChange">
-                        <view class="weui-input">{{projectBeginTimeIndex}}</view>
+                    <picker id="project_begin_time" mode="date" value="{{demand.project_begin_time}}" start="2018-01-01" end="2050-12-01" bindchange="bindProjectBeginTimeChange">
+                        <view class="weui-input">{{demand.project_begin_time}}</view>
                     </picker>
                 </view>
             </view>
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <textarea auto-height="true" maxlength="2000" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 9.3em" placeholder="职位描述" value="" />
+                    <textarea auto-height="true" maxlength="2000" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 9.3em" placeholder="职位描述" value="{{demand.description}}" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view>

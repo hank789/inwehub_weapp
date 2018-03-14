@@ -21,7 +21,9 @@ page {
     background-color: #f2f2f2;
     color: #333;
     font-size: 12px;
-    box-sizing: border-box
+    box-sizing: border-box;
+    font-family: "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family: "Microsoft YaHei";
 }
 .container {
   height:80%;

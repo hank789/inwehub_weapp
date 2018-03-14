@@ -37,7 +37,7 @@ App({
                 success: function (res) {    // 保存3rdSession到storage中
                   if (res.data.code === 1000) {
                     that.globalData.appAccessToken = res.data.data.token;
-                    that.globalData.userInfo = res_user.userInfo
+                    that.globalData.userInfo = res.data.data.userInfo
                     that.globalData.userOpenid = res.data.data.openid
                     typeof cb == "function" && cb(that.globalData.userInfo)
                   } else {
@@ -62,6 +62,7 @@ App({
     userInfo: null,
     userOpenid: null,
     appAccessToken: null,
-    host: 'https://api.ywhub.com/api'
+    host: 'https://api.ywhub.com/api',
+    sockHost: 'wss://read.ywhub.com'
   }
 })

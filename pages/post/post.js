@@ -30,7 +30,9 @@ Page({
       {value:7,text:"半年以上"},
       {value:8,text:"不确定"},
       {value:9,text:"其他"}
-    ]
+    ],
+    projectCycleIndex: 0,
+    industryIndex: 0
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -54,41 +56,49 @@ Page({
           }
         });
       }
-      if (this.data.demand.id) {
-        request.httpsPostRequest('/weapp/demand/detail', { id: this.data.demand.id }, function (res_data) {
-          if (res_data.code === 1000) {
-            that.data.demand.title = res_data.data.title;
-            that.data.demand.address = res_data.data.address;
-            that.data.demand.salary = res_data.data.salary;
-            that.data.demand.project_begin_time = res_data.data.project_begin_time;
-            that.data.demand.description = res_data.data.description;
-            that.data.demand.industry = res_data.data.industry.value;
-            that.data.demand.project_cycle = res_data.data.project_cycle.value;
 
-            that.setData({
-              demand: that.data.demand
-            });
-
-          } else {
-            wx.showToast({
-              title: res_data.message,
-              icon: 'success',
-              duration: 2000
-            });
-          }
-        });
-      }
       //更新数据
       that.data.author = userInfo;
-      request.httpsPostRequest('/tags/load', {tag_type: 3 }, function(res_data) {
-        if (res_data.code === 1000) {
+      request.httpsPostRequest('/tags/load', {tag_type: 3 }, function(tag_data) {
+        if (tag_data.code === 1000) {
           var isMore = that.data.isMore;
           that.setData({
-            industry_select: res_data.data.tags
+            industry_select: tag_data.data.tags
           })
+          if (that.data.demand.id) {
+            request.httpsPostRequest('/weapp/demand/detail', { id: that.data.demand.id }, function (res_data) {
+              if (res_data.code === 1000) {
+                var tagLength = tag_data.data.tags.length;
+                for (let i = 0; i<tagLength; i++) {
+                  if (tag_data.data.tags[i].value == res_data.data.industry.value) {
+                    that.data.industryIndex = i;
+                    break;
+                  }
+                }
+                that.setData({
+                  industryIndex: that.data.industryIndex,
+                  projectCycleIndex: res_data.data.project_cycle.value - 1,
+                  'demand.title': res_data.data.title,
+                  'demand.address': res_data.data.address,
+                  'demand.salary' : res_data.data.salary,
+                  'demand.project_begin_time' : res_data.data.project_begin_time,
+                  'demand.description' : res_data.data.description,
+                  'demand.industry' : res_data.data.industry.value,
+                  'demand.project_cycle' : res_data.data.project_cycle.value
+                });
+
+              } else {
+                wx.showToast({
+                  title: res_data.message,
+                  icon: 'success',
+                  duration: 2000
+                });
+              }
+            });
+          }
         } else {
           wx.showToast({
-            title: res_data.message,
+            title: tag_data.message,
             icon: 'loading',
             duration: 2000
           });
@@ -143,12 +153,14 @@ Page({
   bindIndustryChange: function (e) {
     console.log(e.detail.value)
     this.setData({
+      industryIndex: e.detail.value,
       'demand.industry': this.data.industry_select[e.detail.value].value
     })
   },
   bindProjectCycleChange: function (e) {
     console.log(this.data.project_cycle_select[e.detail.value].value);
     this.setData({
+      projectCycleIndex: e.detail.value,
       'demand.project_cycle':this.data.project_cycle_select[e.detail.value].value
     })
   },
@@ -192,14 +204,15 @@ Page({
       console.log(res_data);
       wx.hideLoading();
       if (res_data.code === 1000) {
-        // 成功保存之后，执行其他逻辑.
-        wx.showToast({
-          title: title,
-          icon: 'success',
-          duration: 2000
-        });
-        wx.switchTab({
-          url: '/pages/myDemand/myDemand'
+        wx.redirectTo({
+          url: '../myDemand/myDemand',
+          success: function (e) {
+            wx.showToast({
+              title: title,
+              icon: 'success',
+              duration: 2000
+            });
+          }
         });
       } else {
         wx.showToast({

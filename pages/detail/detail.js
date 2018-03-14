@@ -83,10 +83,11 @@ Page({
   onShareAppMessage: function() {
     return{
       title:this.data.demand.title,
-      path:"./page/detail/detail?id=" + this.data.demand_id
+      path:"/pages/detail/detail?id=" + this.data.demand_id
     }
   },
   showShareMenu: function (e) {
+    console.log(1);
     wx.showShareMenu({
       withShareTicket: true
     })

@@ -1,7 +1,6 @@
 //获取应用实例
 var app = getApp();
 var request = require("../../utils/request.js");
-
 Page({
   data:{
     userInfo: {},
@@ -36,7 +35,7 @@ Page({
   },
   navToPost: function () {
     wx.navigateTo({
-      url: '../post/post'
+      url: '../chat/chat'
     });
   },
   onPullDownRefresh: function () {

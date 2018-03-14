@@ -1,0 +1,25 @@
+<!--需求列表 模版-->
+<template name="demandList">
+    <view class="weui-panel" wx:if="{{list.length > 0}}">
+        <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }} " bindtap="navToDetail">
+              <view class="item">
+                <view class="item-img">
+                  <image class="img" src="{{item.publisher_avatar}}"></image>
+                </view>
+                <view class="item-main">
+                  <view class="job">
+                    <text class="job-position">{{item.title}}</text>
+                    <text class="job-Salary">{{item.salary}}元/天</text>
+                  </view>
+                  <view class="company">
+                    <text>{{item.industry.text}}</text>
+                  </view>
+                  <view class="secondary">
+                    <text class="secondary-list">{{item.address}}</text>
+                    <text class="date">{{item.created_time}}</text>
+                  </view>
+                </view>
+              </view>
+        </view>
+    </view>
+</template>
