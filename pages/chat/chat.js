@@ -12,7 +12,7 @@ var EchoIo = new Echo({
   }
 });
 function msgUuid() {
-  return 'msg_' + ++nextMsgUuid;
+  return ++nextMsgUuid;
 }
 
 function createSystemMessage(content) {
@@ -21,13 +21,16 @@ function createSystemMessage(content) {
 
 Page({
   data: {
+    systemMessages: [],
     messages: [],
-    inputContent: '大家好啊',
+    inputContent: '',
     lastMessageId: 'none',
     userInfo: {},
     page: 1,
     room: {},
-    room_id: 0
+    room_id: 0,
+    isLoading: true,//是否显示加载数据提示
+    isMore: true
   },
   onLoad:function(options){
     this.pushMessage(createSystemMessage('正在建立连接...'));
@@ -74,7 +77,12 @@ Page({
   onHide() {
 
   },
-
+  upper: function(e) {
+    if (this.data.isMore && !this.data.isLoading) {
+      console.log(e)
+      this.loadMessages();
+    }
+  },
   connect() {
     var that = this;
     EchoIo.options.auth.headers['Authorization'] = 'Bearer ' + app.globalData.appAccessToken
@@ -86,32 +94,29 @@ Page({
       })
   },
 
-  updateMessages(updater) {
-    var messages = this.data.messages;
-    updater(this.data.messages);
+  updateMessages(updater, messageType) {
+    if (messageType === 'system') {
+      updater(this.data.systemMessages);
+    } else {
+      updater(this.data.messages);
+    }
+    var length = this.data.messages.length;
     this.setData({
       messages: this.data.messages,
-      lastMessageId: messages.length && messages[messages.length - 1].id
+      systemMessages: this.data.systemMessages,
+      lastMessageId: length > 0 && this.data.messages[length - 1].id
     });
   },
 
   pushMessage(message) {
-    this.updateMessages(messages => messages.push(message));
+    this.updateMessages(messages => messages.push(message), message.type);
   },
 
   amendMessage(message) {
-    this.updateMessages(messages => messages.splice(-1, 1, message));
-  },
-  concatMessage(messageArr) {
-    var messages = this.data.messages;
-    messages = messages.concat(messageArr);
-    this.setData({
-      messages: messages,
-      lastMessageId: messages.length && messages[messages.length - 1].id
-    });
+    this.updateMessages(messages => messages.splice(-1, 1, message), message.type);
   },
   popMessage() {
-    this.updateMessages(messages => messages.pop());
+    this.updateMessages(messages => messages.pop(), message.type);
   },
 
   changeInputContent(e) {
@@ -119,14 +124,29 @@ Page({
   },
   loadMessages() {
     var that = this;
+    this.setData({
+      isLoading: true
+    });
     request.httpsPostRequest('/im/messages', { page:this.data.page, room_id: this.data.room_id }, function (res_data) {
       if (res_data.code === 1000) {
-        that.concatMessage(res_data.data.data)
-        that.setData({
-          page: that.data.page + 1,
-          contact: res_data.data.contact
-        });
-
+        var resLength = res_data.data.data.length;
+        if (resLength > 0) {
+          var messages = res_data.data.data.concat(that.data.messages);
+          var nextPage = that.data.page + 1;
+          that.setData({
+            contact: res_data.data.contact,
+            page: nextPage,
+            isMore: true,
+            messages: messages,
+            isLoading: false,
+            lastMessageId: that.data.page>=2 ? messages[0].id : messages[messages.length - 1].id
+          });
+        } else {
+          that.setData({
+            isMore: false,
+            isLoading: false
+          })
+        }
       } else {
         wx.showToast({
           title: res_data.message,

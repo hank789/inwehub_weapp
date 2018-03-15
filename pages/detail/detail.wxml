@@ -32,6 +32,14 @@
   	  </view>
 	  </view>
 
+	  <view class="space-block">
+	    <view class="space-block-content">
+	        <view wx:for="{{demand.candidates}}" class="space-item">
+	            <image data-id="{{item.room_id}}" bindtap="navToChat" class="avatar" src="{{item.user_avatar}}" mode="aspectFill"></image>
+	        </view>
+	    </view>
+	  </view>
+
       <view class="space-block">
         <view class="space-block-title">发布者</view>
         <view class="space-block-content">
@@ -62,7 +70,7 @@
 	  	<view class="space-block-content">
 	  		<text class="space-passage">{{demand.description}}</text>
 	  	</view>
-  	</view>
+  	  </view>
 	</view>
 	<view class="container-footer">
 		<text class="share-btn" bindtap="showShareMenu">分享</text>

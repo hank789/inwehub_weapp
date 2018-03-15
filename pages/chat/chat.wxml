@@ -1,5 +1,15 @@
-<scroll-view class="chat-container" scroll-y scroll-into-view="{{lastMessageId}}" scroll-top="9999999999">
-    <view wx:for="{{messages}}" id="{{item.id}}" class="message {{item.type}}">
+<import src="../../template/loading" />
+<scroll-view class="chat-container" scroll-y bindscrolltoupper="upper" scroll-into-view="msg_{{lastMessageId}}" scroll-top="9999999999">
+    <view wx:for="{{systemMessages}}" id="msg_{{item.id}}" class="message {{item.type}}">
+        <view wx:if="{{item.type == 'system'}}" class="system-message">
+            {{item.data.text}}
+        </view>
+    </view>
+    <!--加载更多模版-->
+    <block wx:if="{{isLoading}}">
+      <template is="loading" />
+    </block>
+    <view wx:for="{{messages}}" id="msg_{{item.id}}" class="message {{item.type}}">
         <view wx:if="{{item.type == 'system'}}" class="system-message">
             {{item.data.text}}
         </view>
@@ -13,6 +23,6 @@
     <view id="bottom-element"></view>
 </scroll-view>
 <view class="input-panel">
-    <input type="text" value="{{inputContent}}" bindchange="changeInputContent"></input>
-    <button bindtap="sendMessage">发送</button>
+    <input focus="true" type="text" value="{{inputContent}}" bindconfirm="changeInputContent" bindchange="changeInputContent"></input>
+    <button hover-stop-propagation="true" bindtap="sendMessage">发送</button>
 </view>
