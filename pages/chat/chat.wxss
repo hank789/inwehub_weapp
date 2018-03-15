@@ -1,3 +1,11 @@
+.container {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  display:-webkit-flex;
+  box-sizing: border-box;
+}
 .chat-container {
     background: #EEE;
     position: absolute;
@@ -32,23 +40,24 @@
     background: #DDD;
 }
 
+.user-message.me .text {
+    text-align: left;
+    background:#fff;
+    border-radius:10rpx;
+    padding:20rpx;
+}
+
 .user-message .text {
     text-align: left;
+    background:#d5eaf8;
+    border-radius:10rpx;
+    padding:20rpx;
 }
 
 .user-message .text .nickname {
     color: #999;
     font-size: 12px;
     margin-left: 5px;
-}
-
-.user-message .text .content {
-    display: inline-block;
-    background: white;
-    padding: 6px 8px;
-    border-radius: 5px;
-    margin-top: 5px;
-    max-width: 16rem;
 }
 
 .user-message.me {
@@ -94,3 +103,28 @@
     height: 32px;
     line-height: 32px;
 }
+
+
+
+.triangle image {
+    width:20rpx;
+    height:80rpx;
+}
+.footadd {
+  width: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addbroder {
+  padding: 10rpx;
+  border: 1px solid #ccc;
+  border-radius: 50rpx;
+}
+
+.footadd image {
+  width: 50rpx;
+  height: 50rpx;
+}
+

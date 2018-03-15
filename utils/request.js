@@ -76,7 +76,7 @@ module.exports = {
       filePath: fileDataSource,
       name: fileFieldName,
       success: function (res) {
-        typeof res_func == "function" && res_func(res);
+        typeof res_func == "function" && res_func(JSON.parse(res.data));
       }
     }
     __httpsRequest.upload_request(dataSource);

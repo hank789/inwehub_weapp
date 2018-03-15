@@ -157,23 +157,55 @@ Page({
     });
   },
   sendMessage(e) {
-    setTimeout(() => {
-      if (this.data.inputContent) {
-        var that = this
-        request.httpsPostRequest('/im/message-store', { text:this.data.inputContent,contact_id:this.data.room.contact.id, room_id: this.data.room_id }, function (res_data) {
-          if (res_data.code === 1000) {
-            that.pushMessage(res_data.data)
+    if (e.detail.value) {
+      this.setData({ inputContent: '' });
+      var that = this
+      request.httpsPostRequest('/im/message-store', { text:e.detail.value,contact_id:this.data.room.contact.id, room_id: this.data.room_id }, function (res_data) {
+        if (res_data.code === 1000) {
+          that.pushMessage(res_data.data)
 
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      });
+    }
+  },
+  chooseImage: function() {
+    //上传图片相关
+    var that = this;
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        var tempFilePaths = res.tempFilePaths
+        console.log(tempFilePaths[0])
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        request.httpsUpload('/im/message-store', { img:1,contact_id:that.data.room.contact.id, room_id: that.data.room_id },'img_file', tempFilePaths[0], function (res_data) {
+          console.log(res_data);
+          if (res_data.code === 1000) {
+            var message = res_data.data;
+            message.data.img = tempFilePaths[0]
+            that.pushMessage(message)
           } else {
             wx.showToast({
-              title: res_data.message,
+              title: res_data.data.message,
               icon: 'success',
               duration: 2000
             });
           }
         });
-        this.setData({ inputContent: '' });
       }
     });
   },
+  previewImage: function(e){
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, // 当前显示图片的http链接
+      urls: [e.currentTarget.dataset.url]
+    })
+  }
 });

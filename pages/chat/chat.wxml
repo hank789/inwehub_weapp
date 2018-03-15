@@ -14,15 +14,23 @@
             {{item.data.text}}
         </view>
         <view wx:else class="user-message {{item.user_id == userInfo.id && 'me'}}">
-            <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+            <image class="avatar" src="{{item.avatar}}" mode="scaleToFill"></image>
+            <view class="triangle">
+                <image src="{{ item.user_id == userInfo.id ? '../../images/triangleRight.png':'../../images/triangleLeft.png'}}"></image>
+            </view>
             <view class="text">
-                <view class="content">{{item.data.text}}</view>
+                <view wx:if="{{item.data.text}}" class="content">{{item.data.text}}</view>
+                <view wx:else data-url="{{item.data.img}}" bindtap="previewImage">
+                    <image mode="widthFix" style="width:300rpx;" src="{{item.data.img}}"></image>
+                </view>
             </view>
         </view>
     </view>
     <view id="bottom-element"></view>
 </scroll-view>
 <view class="input-panel">
-    <input focus="true" type="text" value="{{inputContent}}" bindconfirm="changeInputContent" bindchange="changeInputContent"></input>
-    <button hover-stop-propagation="true" bindtap="sendMessage">发送</button>
+    <input focus="true" type="text" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
+    <view class="footadd" bindtap="chooseImage">
+       <image src="../../images/plus.png"/>
+    </view>
 </view>
