@@ -49,9 +49,19 @@ Page({
     // 页面关闭
   },
   goContact: function (e) {
-    wx.makePhoneCall({
-      phoneNumber: this.data.demand.publisher_phone
-    })
+    request.httpsPostRequest('/im/createRoom', { source_id: this.data.demand_id,source_type: 2,contact_id: this.data.demand.publisher_user_id }, function (res_data) {
+      if (res_data.code === 1000) {
+        wx.navigateTo({
+          url: '../chat/chat?id=' + res_data.data.id
+        });
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
   },
   authEditDemand: function (e) {
     wx.navigateTo({

@@ -71,7 +71,7 @@
             <text bindtap="authEditDemand">修改</text>
         </block>
 		<block wx:if="{{!demand.is_author}}">
-		    <text class="contact-btn" bindtap="goContact">电话联系</text>
+		    <text class="contact-btn" bindtap="goContact">私信</text>
 		</block>
 	</view>
 </view>

@@ -35,7 +35,7 @@ Page({
   },
   navToPost: function () {
     wx.navigateTo({
-      url: '../chat/chat'
+      url: '../post/post'
     });
   },
   onPullDownRefresh: function () {
