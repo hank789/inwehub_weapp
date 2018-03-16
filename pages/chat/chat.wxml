@@ -26,10 +26,18 @@
             </view>
         </view>
     </view>
+    <view id="msg_{{lastMessageId}}" class="message typing {{!typers.length ? 'display-hidden':'' }}">
+        <i class="text" wx:if="{{typers.length === 1}}">
+             {{ typers[0] }}正在输入
+        </i>
+        <span class="dots">
+            <span>.</span><span>.</span><span>.</span>
+        </span>
+    </view>
     <view id="bottom-element"></view>
 </scroll-view>
 <view class="input-panel">
-    <input focus="true" type="text" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
+    <input type="text" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
     <view class="footadd" bindtap="chooseImage">
        <image src="../../images/plus.png"/>
     </view>

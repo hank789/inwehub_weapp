@@ -7,10 +7,9 @@
   box-sizing: border-box;
 }
 .chat-container {
-    background: #EEE;
     position: absolute;
     top: 0;
-    bottom: 40px;
+    bottom: 50px;
     right: 0;
     left: 0;
     text-align: center;
@@ -28,6 +27,9 @@
     display: inline-block;
 }
 
+.message {
+    margin-bottom: 10px;
+}
 .user-message {
     display: flex;
     margin: 10px;
@@ -52,6 +54,8 @@
     background:#d5eaf8;
     border-radius:10rpx;
     padding:20rpx;
+    max-width: 65%;
+    word-wrap: break-word;
 }
 
 .user-message .text .nickname {
@@ -104,8 +108,6 @@
     line-height: 32px;
 }
 
-
-
 .triangle image {
     width:20rpx;
     height:80rpx;
@@ -128,3 +130,54 @@
   height: 50rpx;
 }
 
+  @keyframes blink {
+    0% {
+      opacity: .2;
+    }
+
+    20% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: .2;
+    }
+  }
+
+  .display-hidden {
+    display: none;
+  }
+
+  .typing {
+    color: #717577;
+    margin-bottom: 0.5rem;
+  }
+
+  .typing a {
+    color: #717577;
+    font-weight: bold;
+  }
+
+  .typing a:hover,
+  .typing a:focus {
+    text-decoration: underline;
+  }
+
+  .dots {
+    font-size: 0.8rem;
+  }
+
+  .typing span {
+    animation-name: blink;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+
+  .typing span:nth-child(2) {
+    animation-delay: .2s;
+  }
+
+  .typing span:nth-child(3) {
+    animation-delay: .4s;
+  }

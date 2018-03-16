@@ -21,10 +21,13 @@ function createSystemMessage(content) {
 
 Page({
   data: {
+    minutes: 0,//分钟间隔
+    typers: [],
+    isTyping: false,
     systemMessages: [],
     messages: [],
     inputContent: '',
-    lastMessageId: 'none',
+    lastMessageId: 0,
     userInfo: {},
     page: 1,
     room: {},
@@ -90,10 +93,69 @@ Page({
     EchoIo.private('room.'+ this.data.room_id +'.user.' + app.globalData.userInfo.id)
       .notification(function(n) {
         console.log(n);
-        that.pushMessage({avatar: n.avatar, data: n.body, created_at: n.created_at});
+        that.pushMessage({id: n.message_id, avatar: n.avatar, data: n.body, created_at: n.created_at});
       })
+    EchoIo.private('chat.room.' + this.data.room_id)
+      .listenForWhisper('typing', (user) => {
+        this.startedTyping(user.username)
+      }).listenForWhisper('finished-typing', (user) => {
+      this.finishedTyping(user.username)
+    })
   },
+  /**
+   * Broadcast "typing".
+   *
+   * @return void
+   */
+  whisperTyping () {
+    console.log('chat.room whisperTyping() fired roomId:' + this.data.room_id);
+    var roomId = this.data.room_id;
+    if (this.data.isTyping) return
+    console.log('chat.room roomId:' + roomId)
+    EchoIo.private('chat.room.' + roomId).whisper('typing', {
+      username: this.data.userInfo.name
+    })
+    this.setData({
+      isTyping: true
+    });
+  },
+  /**
+   * Broadcast "finished-typing".
+   *
+   * @return void
+   */
+  whisperFinishedTyping () {
+    var roomId = this.data.room_id;
+    console.log('chat.room roomId:' + roomId)
+    EchoIo.private('chat.room.' + roomId).whisper('finished-typing', {
+      username: this.data.userInfo.name
+    })
+    this.setData({
+      isTyping: false
+    });
+  },
+  startedTyping (username) {
+    let index = this.data.typers.indexOf(username)
 
+    if (index === -1) {
+      this.data.typers.push(username)
+      this.setData({
+        typers: this.data.typers,
+        lastMessageId: this.data.lastMessageId + 1
+      })
+    }
+  },
+  finishedTyping (username) {
+    let index = this.data.typers.indexOf(username)
+
+    if (index !== -1) {
+      this.data.typers.splice(index, 1)
+      this.setData({
+        typers: this.data.typers,
+        lastMessageId: this.data.lastMessageId - 1
+      })
+    }
+  },
   updateMessages(updater, messageType) {
     if (messageType === 'system') {
       updater(this.data.systemMessages);
@@ -156,14 +218,30 @@ Page({
       }
     });
   },
+  sendSystemTime() {
+    //获取当前时间
+    var myDate = new Date();
+    var hours = myDate.getHours();       //获取当前小时数(0-23)
+    var minutes = myDate.getMinutes();     //获取当前分钟数(0-59)
+    var mydata = hours + ':' + minutes
+    //如果两次时间间隔大于3分钟
+    if (minutes - this.data.minutes >= 3) {
+      this.pushMessage(createSystemMessage(mydata));
+    }
+    this.setData({
+      minutes: minutes
+    })
+
+  },
   sendMessage(e) {
     if (e.detail.value) {
       this.setData({ inputContent: '' });
+      this.whisperFinishedTyping();
       var that = this
       request.httpsPostRequest('/im/message-store', { text:e.detail.value,contact_id:this.data.room.contact.id, room_id: this.data.room_id }, function (res_data) {
         if (res_data.code === 1000) {
-          that.pushMessage(res_data.data)
-
+          that.sendSystemTime();
+          that.pushMessage(res_data.data);
         } else {
           wx.showToast({
             title: res_data.message,
@@ -182,12 +260,14 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+        that.whisperFinishedTyping();
         var tempFilePaths = res.tempFilePaths
         console.log(tempFilePaths[0])
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         request.httpsUpload('/im/message-store', { img:1,contact_id:that.data.room.contact.id, room_id: that.data.room_id },'img_file', tempFilePaths[0], function (res_data) {
           console.log(res_data);
           if (res_data.code === 1000) {
+            that.sendSystemTime();
             var message = res_data.data;
             message.data.img = tempFilePaths[0]
             that.pushMessage(message)
