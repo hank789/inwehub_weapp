@@ -72,14 +72,27 @@
 	  	</view>
   	  </view>
 	</view>
-	<view class="container-footer">
-		<text class="share-btn" bindtap="showShareMenu">分享</text>
-		<block wx:if="{{demand.is_author}}">
-            <text bindtap="authCloseDemand">关闭</text>
-            <text bindtap="authEditDemand">修改</text>
-        </block>
-		<block wx:if="{{!demand.is_author}}">
-		    <text class="contact-btn" bindtap="goContact">私信</text>
-		</block>
+	<view class="detail-bottom">
+	    <view class="bottom-box">
+	        <view bindtap="navToHome" class="item">
+	            <i class="iconfont icon-home"></i>
+	            <view class="doc">首页</view>
+	        </view>
+	        <view class="item">
+	            <i class="iconfont icon-next"></i>
+	            <view class="doc">转发</view>
+	        </view>
+	        <button hover-class="none" plain="true" open-type="share" class="item docbutton">
+                <i class="iconfont icon-share"></i>
+                <view class="doc">分享</view>
+	        </button>
+	        <block wx:if="{{demand.is_author}}">
+	            <view class="sy-bottom btn_cart" bindtap="authCloseDemand">关闭</view>
+	            <view class="sy-bottom btn_order" bindtap="authEditDemand">修改</view>
+	        </block>
+	        <block wx:if="{{!demand.is_author}}">
+                <view class="sy-bottom btn_order" bindtap="goContact">和TA聊聊</view>
+            </block>
+		</view>
 	</view>
 </view>

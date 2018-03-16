@@ -53,6 +53,11 @@ Page({
       url: '../chat/chat?id=' + e.currentTarget.dataset.id
     });
   },
+  navToHome: function (e) {
+    wx.switchTab({
+      url: '../index/index'
+    });
+  },
   goContact: function (e) {
     request.httpsPostRequest('/im/createRoom', { source_id: this.data.demand_id,source_type: 2,contact_id: this.data.demand.publisher_user_id }, function (res_data) {
       if (res_data.code === 1000) {
