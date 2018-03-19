@@ -14,8 +14,8 @@
                     <view style="display: inline-block;vertical-align:middle; font-size: 17px;">{{ userInfo.status?'已认证':'审核中' }}</view>
                 </view>
             </view>
-            <view bindtap="tapMyPublish" class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">我的发布</view>
+            <view bindtap="tapMyHistory" class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">我的足迹</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
                     <view style="display: inline-block;vertical-align:middle; font-size: 17px;"></view>
                 </view>

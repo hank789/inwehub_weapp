@@ -92,7 +92,7 @@ Page({
     request.httpsPostRequest('/weapp/demand/close', { id: this.data.demand_id }, function (res_data) {
       if (res_data.code === 1000) {
         wx.navigateTo({
-          url: '../myDemand/myDemand',
+          url: '../myHistory/myHistory',
           success: function (e) {
             wx.showToast({
               title: '需求已关闭',

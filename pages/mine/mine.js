@@ -96,9 +96,9 @@ Page({
       })
     }
   },
-  tapMyPublish: function (e) {
+  tapMyHistory: function (e) {
     wx.navigateTo({
-      url: '../myDemand/myDemand'
+      url: '../myHistory/myHistory'
     })
   }
 })

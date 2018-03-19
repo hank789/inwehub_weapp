@@ -7,7 +7,7 @@
     "pages/logs/logs",
     "pages/register/register",
     "pages/identity/identity",
-    "pages/myDemand/myDemand",
+    "pages/myHistory/myHistory",
     "pages/chat/chat"
   ],
   "window":{

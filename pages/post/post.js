@@ -247,7 +247,7 @@ Page({
       wx.hideLoading();
       if (res_data.code === 1000) {
         wx.redirectTo({
-          url: '../myDemand/myDemand',
+          url: '../myHistory/myHistory',
           success: function (e) {
             wx.showToast({
               title: title,
