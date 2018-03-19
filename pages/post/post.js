@@ -102,6 +102,7 @@ Page({
                   'demand.project_cycle' : res_data.data.project_cycle.value
                 });
                 that.setDBSaveAddressId(res_data.data.address);
+                wx.setNavigationBarTitle({ title: '编辑需求' });
               } else {
                 wx.showToast({
                   title: res_data.message,
