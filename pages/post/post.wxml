@@ -12,12 +12,24 @@
                 </view>
             </view>
 
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">地点</view>
-                </view>
+            <view class="weui-cell weui-cell_input addr-details">
+                <view class="weui-cell__hd">选择地区</view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindAddressBlur" value="{{ demand.address }}" class="weui-input" placeholder=""/>
+                    <picker bindchange="bindPickerProvinceChange" range="{{provinces}}">
+                      <view class="picker {{selProvince=='请选择'?'hui':''}}">
+                        {{selProvince}}
+                      </view>
+                    </picker>
+                    <picker bindchange="bindPickerCityChange" range="{{citys}}">
+                      <view class="picker {{selCity=='请选择'?'hui':''}}">
+                        {{selCity}}
+                      </view>
+                    </picker>
+                    <picker bindchange="bindPickerChange" range="{{districts}}">
+                      <view class="picker {{selDistrict=='请选择'?'hui':''}}">
+                        {{selDistrict}}
+                      </view>
+                    </picker>
                 </view>
             </view>
 

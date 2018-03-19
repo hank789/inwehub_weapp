@@ -226,7 +226,12 @@ Page({
     var mydata = hours + ':' + minutes
     //如果两次时间间隔大于3分钟
     if (minutes - this.data.minutes >= 3) {
-      this.pushMessage(createSystemMessage(mydata));
+      var length = this.data.messages.length;
+      this.data.messages.push(createSystemMessage(mydata));
+      this.setData({
+        messages: this.data.messages,
+        lastMessageId: length > 0 && this.data.messages[length - 1].id
+      });
     }
     this.setData({
       minutes: minutes

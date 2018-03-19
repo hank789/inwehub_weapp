@@ -18,7 +18,7 @@
   	  		</view>
   	  		<view class="space-item">
   	  			<text class="text-left">地点：</text>
-  	  			<text class="text-right">{{demand.address}}</text>
+  	  			<text class="text-right">{{demand.address.selProvince+" "+demand.address.selCity+" "+demand.address.selDistrict}}</text>
   	  		</view>
             <view class="space-item">
                 <text class="text-left">项目周期：</text>
@@ -78,7 +78,7 @@
 	            <i class="iconfont icon-home"></i>
 	            <view class="doc">首页</view>
 	        </view>
-	        <view class="item">
+	        <view bindtap="saveToShare" class="item">
 	            <i class="iconfont icon-next"></i>
 	            <view class="doc">转发</view>
 	        </view>
@@ -95,4 +95,5 @@
             </block>
 		</view>
 	</view>
+	<component-share id="component-share-demand" option="{{ shareOption }}"></component-share>
 </view>

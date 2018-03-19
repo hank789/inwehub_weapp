@@ -8,7 +8,15 @@ Page({
   data:{
     isLoading: true,//是否显示加载数据提示
     demand: {},
-    demand_id: 0
+    demand_id: 0,
+    shareOption: {
+      object_id: 0,
+      object_type: 1,
+      title: "",
+      content: "",
+      from: "",
+      params: ""
+    }
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -38,6 +46,8 @@ Page({
   },
   onReady:function(){
     // 页面渲染完成
+    //获得share组件
+    this.shareView = this.selectComponent("#component-share-demand");
   },
   onShow:function(){
     // 页面显示
@@ -111,5 +121,17 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+  },
+  saveToShare: function (e) {
+    this.setData({
+      shareOption: {
+        object_id: this.data.demand_id,
+        object_type: 1,
+        title: this.data.demand.title,
+        content: this.data.demand.description,
+        from: this.data.demand.publisher_name,
+      }
+    });
+    this.shareView.show()
   }
 })

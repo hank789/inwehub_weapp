@@ -4,6 +4,8 @@ var app = getApp();
 
 //查询用户信息
 var request = require("../../utils/request.js");
+var commonCityData = require('../../utils/city.js')
+
 Page({
   data:{
     showTopTips: false,
@@ -32,9 +34,19 @@ Page({
       {value:9,text:"其他"}
     ],
     projectCycleIndex: 0,
-    industryIndex: 0
+    industryIndex: 0,
+    provinces:[],
+    citys:[],
+    districts:[],
+    selProvince:'请选择',
+    selCity:'请选择',
+    selDistrict:'请选择',
+    selProvinceIndex:0,
+    selCityIndex:0,
+    selDistrictIndex:0
   },
   onLoad:function(options){
+    this.initCityData(1);
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
     //更新数据
@@ -78,6 +90,9 @@ Page({
                 that.setData({
                   industryIndex: that.data.industryIndex,
                   projectCycleIndex: res_data.data.project_cycle.value - 1,
+                  selProvince: res_data.data.address.selProvince,
+                  selCity: res_data.data.address.selCity,
+                  selDistrict: res_data.data.address.selDistrict,
                   'demand.title': res_data.data.title,
                   'demand.address': res_data.data.address,
                   'demand.salary' : res_data.data.salary,
@@ -86,7 +101,7 @@ Page({
                   'demand.industry' : res_data.data.industry.value,
                   'demand.project_cycle' : res_data.data.project_cycle.value
                 });
-
+                that.setDBSaveAddressId(res_data.data.address);
               } else {
                 wx.showToast({
                   title: res_data.message,
@@ -175,10 +190,6 @@ Page({
       this.showTopTips('标题不能为空');
       return false;
     }
-    if (this.data.demand.address === '') {
-      this.showTopTips('地点不能为空');
-      return false;
-    }
     if (this.data.demand.salary === '') {
       this.showTopTips('薪资不能为空');
       return false;
@@ -187,10 +198,29 @@ Page({
       this.showTopTips('描述不能为空');
       return false;
     }
+
+    if (this.data.selProvince == "请选择"){
+      this.showTopTips('请选择地区');
+      return
+    }
+    if (this.data.selCity == "请选择"){
+      this.showTopTips('请选择地区');
+      return
+    }
+
     wx.showLoading({
       title: '提交中...',
       mask: true
     });
+
+    var cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
+    var provinceId = commonCityData.cityData[this.data.selProvinceIndex].id;
+    var districtId;
+    if (this.data.selDistrict == "请选择" || !this.data.selDistrict){
+      districtId = '';
+    } else {
+      districtId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[this.data.selDistrictIndex].id;
+    }
 
     var requestUrl = '/weapp/demand/store';
     var title = '发布成功';
@@ -198,6 +228,17 @@ Page({
       requestUrl = '/weapp/demand/update';
       title = '修改成功';
     }
+    this.data.demand.address = {
+      provinceId: provinceId,
+      cityId: cityId,
+      districtId: districtId,
+      selProvince: this.data.selProvince,
+      selCity: this.data.selCity,
+      selDistrict: this.data.selDistrict,
+      selProvinceIndex: this.data.selProvinceIndex,
+      selCityIndex: this.data.selCityIndex,
+      selDistrictIndex: this.data.selDistrictIndex
+    };
 
     var that = this;
     request.httpsPostRequest(requestUrl, this.data.demand, function (res_data) {
@@ -222,5 +263,84 @@ Page({
         });
       }
     });
-  }
+  },
+  initCityData:function(level, obj){
+    if(level == 1){
+      var pinkArray = [];
+      for(var i = 0;i<commonCityData.cityData.length;i++){
+        pinkArray.push(commonCityData.cityData[i].name);
+      }
+      this.setData({
+        provinces:pinkArray
+      });
+    } else if (level == 2){
+      var pinkArray = [];
+      var dataArray = obj.cityList
+      for(var i = 0;i<dataArray.length;i++){
+        pinkArray.push(dataArray[i].name);
+      }
+      this.setData({
+        citys:pinkArray
+      });
+    } else if (level == 3){
+      var pinkArray = [];
+      var dataArray = obj.districtList
+      for(var i = 0;i<dataArray.length;i++){
+        pinkArray.push(dataArray[i].name);
+      }
+      this.setData({
+        districts:pinkArray
+      });
+    }
+
+  },
+  bindPickerProvinceChange:function(event){
+    var selIterm = commonCityData.cityData[event.detail.value];
+    this.setData({
+      selProvince:selIterm.name,
+      selProvinceIndex:event.detail.value,
+      selCity:'请选择',
+      selCityIndex:0,
+      selDistrict:'请选择',
+      selDistrictIndex: 0
+    })
+    this.initCityData(2, selIterm)
+  },
+  bindPickerCityChange:function (event) {
+    var selIterm = commonCityData.cityData[this.data.selProvinceIndex].cityList[event.detail.value];
+    this.setData({
+      selCity:selIterm.name,
+      selCityIndex:event.detail.value,
+      selDistrict: '请选择',
+      selDistrictIndex: 0
+    })
+    this.initCityData(3, selIterm)
+  },
+  bindPickerChange:function (event) {
+    var selIterm = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[event.detail.value];
+    if (selIterm && selIterm.name && event.detail.value) {
+      this.setData({
+        selDistrict: selIterm.name,
+        selDistrictIndex: event.detail.value
+      })
+    }
+  },
+  setDBSaveAddressId: function(data) {
+    var retSelIdx = 0;
+    for (var i = 0; i < commonCityData.cityData.length; i++) {
+      if (data.provinceId == commonCityData.cityData[i].id) {
+        this.data.selProvinceIndex = i;
+        for (var j = 0; j < commonCityData.cityData[i].cityList.length; j++) {
+          if (data.cityId == commonCityData.cityData[i].cityList[j].id) {
+            this.data.selCityIndex = j;
+            for (var k = 0; k < commonCityData.cityData[i].cityList[j].districtList.length; k++) {
+              if (data.districtId == commonCityData.cityData[i].cityList[j].districtList[k].id) {
+                this.data.selDistrictIndex = k;
+              }
+            }
+          }
+        }
+      }
+    }
+  },
 })
