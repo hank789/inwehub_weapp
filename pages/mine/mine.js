@@ -100,5 +100,12 @@ Page({
     wx.navigateTo({
       url: '../myHistory/myHistory'
     })
+  },
+  tapMyMessages: function (e) {
+    if (this.data.userInfo.total_unread>0) {
+      wx.navigateTo({
+        url: '../messages/messages'
+      })
+    }
   }
 })
