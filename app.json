@@ -8,7 +8,8 @@
     "pages/register/register",
     "pages/identity/identity",
     "pages/myHistory/myHistory",
-    "pages/chat/chat"
+    "pages/chat/chat",
+    "pages/messages/messages"
   ],
   "window":{
     "navigationBarTextStyle": "#fff",

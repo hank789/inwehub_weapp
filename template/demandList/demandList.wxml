@@ -13,9 +13,12 @@
                   </view>
                   <view class="company">
                     <text>{{item.industry.text}}</text>
+                    <text>查看数:{{item.view_number}}</text>
+                    <text>沟通数:{{item.communicate_number}}</text>
+                    <text>未读数:{{item.unread_number}}</text>
                   </view>
                   <view class="secondary">
-                    <text class="secondary-list">{{item.address}}</text>
+                    <text class="secondary-list">{{item.address.selProvince+" "+item.address.selCity+" "+item.address.selDistrict}}</text>
                     <text class="date">{{item.created_time}}</text>
                   </view>
                 </view>

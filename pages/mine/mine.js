@@ -102,10 +102,8 @@ Page({
     })
   },
   tapMyMessages: function (e) {
-    if (this.data.userInfo.total_unread>0) {
-      wx.navigateTo({
-        url: '../messages/messages'
-      })
-    }
+    wx.navigateTo({
+      url: '../messages/messages'
+    })
   }
 })
