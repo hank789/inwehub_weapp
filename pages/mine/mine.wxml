@@ -6,7 +6,51 @@
 		    <text class="userinfo-nickname">{{ userInfo.name }}</text>
 	    </view>
 	</view>
-	<view class="page__bd">
+  <!-- 阴影列表  -->
+  <view class='mine_c'>
+     <view class='mine_list mine_border'>
+      <view class='mine_item'>
+        <image src='../../images/mine_news@3x.png'></image>
+        <view class='mine_news'>消息</view>
+      </view>
+      <view class='mine_item'>
+        <view class='mine_number'>99</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>  
+     </view>
+     <view class='mine_list'>
+      <view class='mine_item'>
+        <image src='../../images/mine_footprint@3x.png'></image>
+        <view class='mine_news'>足迹</view>
+      </view>
+      <view class='mine_item'>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>  
+     </view>
+  </view>
+
+  <view class='mine_c'>
+     <view class='mine_list mine_border'>
+      <view class='mine_item'>
+        <view class='mine_news'>我要吐槽</view>
+      </view>
+      <view class='mine_item'>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>  
+     </view>
+     <button class='mine_list'>
+      <view class='mine_item'>
+        <view class='mine_news'>联系客服</view>
+      </view>
+      <view class='mine_item'>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>  
+     </button>
+  </view>
+
+
+
+	<!-- <view class="page__bd">
         <view class="weui-cells weui-cells_after-title">
             <view bindtap="tapViewInfo" class="weui-cell weui-cell_access">
                 <view class="weui-cell__bd">认证身份</view>
@@ -34,5 +78,6 @@
                 </view>
             </button>
         </view>
-	</view>
+	</view> -->
+
 </view>
