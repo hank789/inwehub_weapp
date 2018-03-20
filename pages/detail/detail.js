@@ -68,6 +68,11 @@ Page({
       url: '../index/index'
     });
   },
+  navToMyHistory: function (e) {
+    wx.navigateTo({
+      url: '../myHistory/myHistory'
+    });
+  },
   goContact: function (e) {
     request.httpsPostRequest('/im/createRoom', { source_id: this.data.demand_id,source_type: 2,contact_id: this.data.demand.publisher_user_id }, function (res_data) {
       if (res_data.code === 1000) {
