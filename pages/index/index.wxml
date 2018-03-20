@@ -2,7 +2,6 @@
 <import src="../../template/loading" />
 <import src="../../template/demandList/demandList.wxml" />
 <template is="demandList" data="{{ list }}" />
-<view class="post-button" bindtap="navToPost">需求发布</view>
 <!--加载更多模版-->
 <block wx:if="{{isLoading}}">
   <template is="loading" />

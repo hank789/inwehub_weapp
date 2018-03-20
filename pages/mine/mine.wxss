@@ -8,55 +8,40 @@
 }
 
 .userinfo-avatar {
-    width: 128rpx;
-    height: 128rpx;
-    margin: 30rpx;
+    width: 118rpx;
+    height: 118rpx;
+    margin-top: 78rpx;
     border-radius: 50%;
 }
 
 .userinfo-nickname {
-    margin: 20rpx;
-    color: #300e0e;
+    margin-top: 14rpx;
+    color: #444444;
+    font-size: 32rpx;
+    margin-bottom: 39rpx
 }
+/* author:dr  */
+page{
+  background: #fff;
+}
+/* .weui-cells {
+  width: 84%;
+  margin-left: 8%;
+  position:inherit;
+  margin-top:1.17647059em;
+  background-color:#fff;
+  line-height:1.41176471;
+  font-size:17px;
+  border: 1px solid #000;
+}
+.weui-cell {
+  padding:10px 0px;
+  position:relative;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  align-items:center;
+} */
 
-.userinfo-dig {
-    margin: 15rpx auto;
-    padding: 20rpx 25rpx;
-    border-radius: 10rpx;
-    background-color: #f85f48;
-    color: #fff;
-    letter-spacing: 1px;
-}
-
-.userinfo-desc {
-    color: #bbb;
-    font-size: 14rpx;
-    margin-bottom: 20rpx;
-}
-
-.profile-wrapper, .account-wrapper {
-    background-color: #fff;
-    margin-bottom: 20rpx;
-}
-
-.profile, .account {
-    display: flex;
-    padding: 30rpx;
-    align-items: center;
-    flex-direction: row;
-    border-bottom: 1rpx solid #f0f0f0;
-}
-
-.profile-item, .account-item {
-    flex: 1;
-    font-size: 24rpx;
-}
-
-.profile-arrow, .account-arrow {
-    width: 32rpx;
-    height: 32rpx;
-}
-
-.btn-quit {
-    margin: 15rpx;
-}

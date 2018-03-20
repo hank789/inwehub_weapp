@@ -1,7 +1,7 @@
 <!--需求列表 模版-->
 <template name="demandList">
-    <view class="weui-panel" wx:if="{{list.length > 0}}">
-        <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }}" bindtap="navToDetail">
+    <!-- <view class="weui-panel" wx:if="{{list.length > 0}}">
+        <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }} " bindtap="navToDetail">
               <view class="item">
                 <view class="item-img">
                   <image class="img" src="{{item.publisher_avatar}}"></image>
@@ -24,5 +24,38 @@
                 </view>
               </view>
         </view>
+    </view> -->
+    <!-- 有数据的样式  -->
+    <view wx:if="{{list.length > 0}}">
+        <view class='demand'>
+         <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5 急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
+         <view class='demand_detail'>
+         <!-- 已经结束的样式加。gray  -->
+           <view class='demand_see'>查看23</view>
+           <view class='demand_Communicate'>沟通8</view>
+           <view class='demand_news'>新消息3</view>
+         </view>
+        </view>
+        <view class='demand_end'>已结束</view>
+        <view class='demand'>
+         <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
+         <view class='demand_detail'>
+         <!-- 已经结束的样式加。gray  -->
+           <view class='demand_see gray'>查看23</view>
+           <view class='demand_Communicate gray'>沟通8</view>
+           <view class='demand_news'>新消息3</view>
+         </view>
+        </view>
+     </view>
+    <!--无数据 或者 无权限时的样式  -->
+    <view class='noData' wx:else>
+        <image  src='../../images/feed_publish@3x.png'></image>
+        <!--进行切换的文字  =>  开始发布你的项目招募/成为发起者后，即可发布项目招募 -->
+        <view class='noData_text'>开始发布你的项目招募吧~</view>
+        <!-- 三角形和按钮的切换 -->
+        <view class='noData_graph'></view>
+        <view class='noData_apply'>申请成为发起者</view>
     </view>
+    <!-- 发起招募按钮  gray => 灰色按钮-->
+    <view class='start_recruit'>发起项目招募</view>
 </template>

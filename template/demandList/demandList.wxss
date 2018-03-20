@@ -1,4 +1,4 @@
-.item{
+/* .item{
   display: flex;
   width: 100%;
   background-color: #fff;
@@ -12,22 +12,22 @@
 }
 .item-main{
   flex: 1;
-  padding: 32rpx 28rpx 32rpx 0;
-  border-bottom: 1rpx solid #dcdcdc;
+  padding: 32rrpx 28rrpx 32rrpx 0;
+  border-bottom: 1rrpx solid #dcdcdc;
   line-height: 1.4;
 }
 
 .job{
-  margin-bottom: 4rpx;
-  padding-right: 80rpx;
+  margin-bottom: 4rrpx;
+  padding-right: 80rrpx;
   position: relative;
 }
 .job-position{
-  font-size: 32rpx;
+  font-size: 32rrpx;
   color: #222;
 }
 .job-Salary{
-  font-size: 30rpx;
+  font-size: 30rrpx;
   font-weight: 600;
   color: #ff9483;
   position: absolute;
@@ -37,17 +37,132 @@
 }
 .company{
   color: #666;
-  font-size: 26rpx;
-  margin-bottom: 4rpx;
+  font-size: 26rrpx;
+  margin-bottom: 4rrpx;
 }
 .secondary{
-  font-size: 24rpx;
+  font-size: 24rrpx;
   color: #999;
 }
 .secondary-list{
-  margin-right: 8rpx;
+  margin-right: 8rrpx;
 }
 .date{
-  font-size: 24rpx;
+  font-size: 24rrpx;
   float: right;
+} */
+/*有数据的样式  */
+.demand{
+  width: 84%;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 22rpx;
+  padding: 24rpx 34rpx;
+  box-shadow: 0rem 0rem 0.186rem 0.053rem #ececee;
+  border-radius: 8rpx;
+}
+.demand_title{
+  font-size: 32rpx;
+  color:#444444; 
+}
+.demand_detail{
+  width: 100%;
+  font-size: 26rpx;
+  color: #808080;
+  margin-top:18rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.demand_Communicate{
+  margin-left:18rpx;
+}
+.demand_news{
+  width: 106rpx;
+  height: 32rpx;
+  border-radius: 8rpx;
+  background: #F03C69;
+  text-align: center;
+  line-height: 32rpx;
+  font-size: 24rpx;
+  color: #fff;
+  margin-left:26rpx;
+}
+.demand_end{
+  font-size: 26rpx;
+  color: #808080;
+  margin-left: 4%;
+  margin-top: 24rpx;
+}
+.demand_title.gray{
+  color: #A1A2A1;
+}
+.demand_see.gray,.demand_Communicate.gray{
+  color: #DADBDA;
+}
+/* 当数据为空时 */
+page{
+  background: #fff;
+}
+.noData{
+  width: 420rpx;
+  /* height: 300rpx; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.noData image{
+  width: 240rpx;
+  height: 180rpx;
+  margin-left:80rpx;
+}
+.noData_text{
+  font-size: 24rpx;
+  color:#444444;
+  margin-top: 44rpx;
+  margin-bottom: 25rpx;
+}
+.noData_graph{
+  width: 0; 
+  height: 0; 
+  border-left: 18rpx solid transparent;
+  border-right: 18rpx solid transparent;
+  border-top: 14px solid #66DBF9;
+}
+.noData_apply{
+  width: 348rpx;
+  height: 88rpx;
+  background: #66DBF9;
+  border-radius: 100rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 88rpx;
+}
+/*发起招募按钮 */
+.start_recruit{
+  width: 686rpx;
+  height: 88rpx;
+  background: #66DBF9;
+  border-radius: 100rpx;
+  font-size: 32rpx;
+  color: #fff;
+  text-align: center;
+  line-height:88rpx;
+  position: fixed;
+  bottom: 22rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.start_recruit.gray{
+   background: #DCDCDC;
+   color: #B4B4B6;
 }
