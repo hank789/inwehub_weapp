@@ -57,6 +57,11 @@ Page({
       url: '../detail/detail?id=' + event.currentTarget.dataset.id
     });
   },
+  navToDemandRooms: function (event) {
+    wx.navigateTo({
+      url: '../demandRooms/demandRooms?id=' + event.currentTarget.dataset.id
+    });
+  },
   loadList: function (page) {
     var that = this;
     request.httpsPostRequest('/weapp/demand/list', { page: this.data.page, type: 'mine' }, function(res_data) {

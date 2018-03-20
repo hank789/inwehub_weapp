@@ -1,7 +1,7 @@
 <!--需求列表 模版-->
 <template name="demandList">
     <view class="weui-panel" wx:if="{{list.length > 0}}">
-        <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }} " bindtap="navToDetail">
+        <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }}" bindtap="navToDetail">
               <view class="item">
                 <view class="item-img">
                   <image class="img" src="{{item.publisher_avatar}}"></image>
@@ -14,8 +14,8 @@
                   <view class="company">
                     <text>{{item.industry.text}}</text>
                     <text>查看数:{{item.view_number}}</text>
-                    <text>沟通数:{{item.communicate_number}}</text>
-                    <text>未读数:{{item.unread_number}}</text>
+                    <view data-id="{{ item.id }}" bindtap="navToDemandRooms">沟通数:{{item.communicate_number}}</view>
+                    <view data-id="{{ item.id }}" bindtap="navToDemandRooms">未读数:{{item.unread_number}}</view>
                   </view>
                   <view class="secondary">
                     <text class="secondary-list">{{item.address.selProvince+" "+item.address.selCity+" "+item.address.selDistrict}}</text>

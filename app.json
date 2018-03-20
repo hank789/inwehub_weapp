@@ -9,7 +9,8 @@
     "pages/identity/identity",
     "pages/myHistory/myHistory",
     "pages/chat/chat",
-    "pages/messages/messages"
+    "pages/messages/messages",
+    "pages/demandRooms/demandRooms"
   ],
   "window":{
     "navigationBarTextStyle": "#fff",

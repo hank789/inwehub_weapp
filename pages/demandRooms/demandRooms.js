@@ -1,43 +1,19 @@
-//获取应用实例
-var app = getApp();
+//logs.js
 var request = require("../../utils/request.js");
-
 Page({
-  data:{
-    userInfo: {},
+  data: {
+    demand_id: 0,
+    demand: {},
     list: [],
     page: 1,
     isLoading: true,//是否显示加载数据提示
     isMore: true
   },
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      });
-      that.loadList();
-    });
-  },
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  },
-  navToPost: function () {
-    wx.navigateTo({
-      url: '../post/post'
-    });
+  onLoad: function (options) {
+    this.setData({
+      demand_id: options.id
+    })
+    this.loadList(1);
   },
   onPullDownRefresh: function () {
     // 下拉刷新
@@ -53,19 +29,14 @@ Page({
       this.loadList(this.data.page + 1);
     }
   },
-  navToDetail: function (event) {
+  navToRoom: function (e) {
     wx.navigateTo({
-      url: '../detail/detail?id=' + event.currentTarget.dataset.id
-    });
-  },
-  navToDemandRooms: function (event) {
-    wx.navigateTo({
-      url: '../demandRooms/demandRooms?id=' + event.currentTarget.dataset.id
+      url: '../chat/chat?id=' + e.currentTarget.dataset.id
     });
   },
   loadList: function (page) {
     var that = this;
-    request.httpsPostRequest('/weapp/demand/list', { page: this.data.page, type: 'all' }, function(res_data) {
+    request.httpsPostRequest('/weapp/demand/getRooms', { id: this.data.demand_id, page: this.data.page }, function(res_data) {
       console.log(res_data);
       if (res_data.code === 1000) {
         var isMore = that.data.isMore;
@@ -80,6 +51,7 @@ Page({
         }
 
         that.setData({
+          demand: res_data.data.demand,
           list: that.data.list,
           page: nextPage,
           isLoading: false,
