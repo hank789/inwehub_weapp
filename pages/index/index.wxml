@@ -19,8 +19,8 @@
 
     </view>
 </block>
-<!-- 发起招募按钮 bindtap="navToPost" gray => 灰色按钮-->
-<view wx:if="{{userInfo.id>0}}" class='start_recruit'  bindtap="navToMessages">发起项目招募</view>
+<!-- 发起招募按钮bindtap="navToMessages" bindtap="navToPost" gray => 灰色按钮-->
+<view wx:if="{{userInfo.id>0}}" class='start_recruit'   bindtap="navToPost">发起项目招募</view>
 <!--加载更多模版-->
 <block wx:if="{{isLoading}}">
   <template is="loading" />

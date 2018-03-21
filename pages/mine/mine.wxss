@@ -47,7 +47,6 @@ margin-bottom: 30px;
   align-items: center;
   background: #fff;
   border: none;
-  position: inherit;
 }
 .mine_list image{
   width: 35rpx;
