@@ -97,7 +97,6 @@ Page({
     this.setData({
       disabledSendPhoneCode: true
     })
-    util.countDown(this, total_second);
     var requestUrl = '/auth/sendPhoneCode';
     var that = this;
 
@@ -110,6 +109,8 @@ Page({
           icon: 'none',
           duration: 2000
         });
+      } else {
+        util.countDown(that, total_second);
       }
     });
   },
