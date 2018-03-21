@@ -47,15 +47,15 @@
          </view>
         </view>
      </view>
-    <!--无数据 或者 无权限时的样式  -->
-    <view class='noData' wx:else>
+    <!--无数据 或者 无权限时的样式 wx:else -->
+    <view class='noData'>
         <image  src='../../images/feed_publish@3x.png'></image>
         <!--进行切换的文字  =>  开始发布你的项目招募/成为发起者后，即可发布项目招募 -->
         <view class='noData_text'>开始发布你的项目招募吧~</view>
         <!-- 三角形和按钮的切换 -->
         <view class='noData_graph'></view>
-        <view class='noData_apply'>申请成为发起者</view>
+        <view class='noData_apply' bindtap="navTorRegister">申请成为发起者</view>
     </view>
     <!-- 发起招募按钮  gray => 灰色按钮-->
-    <view class='start_recruit'>发起项目招募</view>
+    <view class='start_recruit'   bindtap="navToPost">发起项目招募</view>
 </template>

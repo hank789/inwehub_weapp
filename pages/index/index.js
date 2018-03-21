@@ -26,6 +26,7 @@ Page({
   },
   onShow:function(){
     // 页面显示
+     console.log(this.userInfo)
   },
   onHide:function(){
     // 页面隐藏
@@ -56,6 +57,12 @@ Page({
     wx.navigateTo({
       url: '../detail/detail?id=' + event.currentTarget.dataset.id
     });
+  },
+  // 申请成为招募者
+  navTorRegister: function (event) {
+      wx.navigateTo({
+         url: '../register/register'
+      });
   },
   navToDemandRooms: function (event) {
     wx.navigateTo({
