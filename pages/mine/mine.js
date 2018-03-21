@@ -78,17 +78,17 @@ Page({
   onReachBottom: function () {
   
   },
-  navToMessages: function () {
-      console.log('navToMyHistory')
-      wx.navigateTo({
-          url: '../messages/messages'
-      });
+  navToMessages: function (e) {
+    console.log('navToMyHistory')
+    wx.navigateTo({
+        url: '../messages/messages'
+    });
   },
   navToMyHistory: function (event) {
     console.log('navToMyHistory')
-      wx.navigateTo({
-          url: '../myHistory/myHistory'
-      });
+    wx.navigateTo({
+        url: '../myHistory/myHistory'
+    });
   },
 
   /**

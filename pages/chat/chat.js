@@ -166,7 +166,7 @@ Page({
     this.setData({
       messages: this.data.messages,
       systemMessages: this.data.systemMessages,
-      lastMessageId: length > 0 && this.data.messages[length - 1].id
+      lastMessageId: length > 0 ? this.data.messages[length - 1].id : 0
     });
   },
 
