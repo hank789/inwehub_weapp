@@ -1,19 +1,19 @@
 <!--引入加载更多模版-->
 <import src="../../template/loading" />
-<view class="weui-panel" wx:if="{{list.length > 0}}">
+<view  wx:if="{{list.length > 0}}">
     <view wx:for="{{list}}" wx:key="id" data-id="{{ item.room_id }} " bindtap="navToRoom">
           <view class="item">
             <view class="item-img">
-              <image class="img" src="{{item.avatar}}"></image>
+               <image class="img" src="{{item.avatar}}"></image>
             </view>
             <view class="item-main">
               <view class="job">
                 <text class="job-position">{{item.name}}</text>
-                <text class="job-Salary">{{item.unread_count}}</text>
+                <text class="date">{{item.last_message.created_at}}</text>
               </view>
               <view class="secondary">
                 <text class="secondary-list">{{item.last_message.data.text}}</text>
-                <text class="date">{{item.last_message.created_at}}</text>
+                <text class="job-Salary">{{item.unread_count}}</text> 
               </view>
             </view>
           </view>

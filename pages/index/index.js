@@ -54,6 +54,18 @@ Page({
       this.loadList(this.data.page + 1);
     }
   },
+  navToMessages: function () {
+      console.log('navToMyHistory')
+      wx.navigateTo({
+          url: '../messages/messages'
+      });
+  },
+  navToMyHistory: function (event) {
+      console.log('navToMyHistory')
+      wx.navigateTo({
+          url: '../myHistory/myHistory'
+      });
+  },
   navToDetail: function (event) {
     wx.navigateTo({
       url: '../detail/detail?id=' + event.currentTarget.dataset.id
