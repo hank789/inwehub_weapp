@@ -3,6 +3,7 @@ var app = getApp();
 var request = require("../../utils/request.js");
 Page({
   data:{
+    closedDemandId: 0,
     userInfo: {},
     list: [],
     page: 1,
@@ -59,7 +60,7 @@ Page({
     });
   },
   // 申请成为招募者
-  navTorRegister: function (event) {
+  navToRegister: function (event) {
       wx.navigateTo({
          url: '../register/register'
       });
@@ -86,6 +87,7 @@ Page({
         }
 
         that.setData({
+          closedDemandId: that.data.closedDemandId > 0 ? that.data.closedDemandId :  res_data.data.closedDemandId,
           list: that.data.list,
           page: nextPage,
           isLoading: false,

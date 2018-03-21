@@ -4,6 +4,7 @@ var request = require("../../utils/request.js");
 
 Page({
   data:{
+    closedDemandId: 0,
     userInfo: {},
     list: [],
     page: 1,
@@ -58,6 +59,12 @@ Page({
       url: '../detail/detail?id=' + event.currentTarget.dataset.id
     });
   },
+  // 申请成为招募者
+  navToRegister: function (event) {
+    wx.navigateTo({
+      url: '../register/register'
+    });
+  },
   navToDemandRooms: function (event) {
     wx.navigateTo({
       url: '../demandRooms/demandRooms?id=' + event.currentTarget.dataset.id
@@ -80,6 +87,7 @@ Page({
         }
 
         that.setData({
+          closedDemandId: that.data.closedDemandId > 0 ? that.data.closedDemandId :  res_data.data.closedDemandId,
           list: that.data.list,
           page: nextPage,
           isLoading: false,
