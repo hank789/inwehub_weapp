@@ -4,17 +4,17 @@
     <form bindsubmit="formSubmit">
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
+                <!-- <view class="weui-cell__hd">
                     <view class="weui-label">标题</view>
-                </view>
+                </view> -->
                 <view class="weui-cell__bd">
-                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder=""/>
+                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title'   placeholder="输入标题（40字）"/>
                 </view>
             </view>
 
             <view class="weui-cell weui-cell_input addr-details">
                 <view class="weui-cell__hd">选择地区</view>
-                <view class="weui-cell__bd">
+                <view class="weui-cell__bd post_picker">
                     <picker bindchange="bindPickerProvinceChange" range="{{provinces}}">
                       <view class="picker {{selProvince=='请选择'?'hui':''}}">
                         {{selProvince}}
@@ -38,7 +38,7 @@
                     <view class="weui-label">薪资</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindSalaryBlur" type="number" value="{{ demand.salary }}" class="weui-input" placeholder="" />
+                    <input bindblur="bindSalaryBlur" type="number" value="{{ demand.salary }}" class="weui-input post_salary" placeholder="输入薪资" placeholder-class='register_salary'/>
                 </view>
                 <view class="weui-cell__ft">
                     <view class="weui-vcode-btn">元/天</view>
@@ -73,16 +73,18 @@
                 </view>
                 <view class="weui-cell__bd">
                     <picker id="project_begin_time" mode="date" value="{{demand.project_begin_time}}" start="2018-01-01" end="2050-12-01" bindchange="bindProjectBeginTimeChange">
-                        <view class="weui-input">{{demand.project_begin_time}}</view>
+                        <view class="weui-input post_time">{{demand.project_begin_time}}</view>
                     </picker>
                 </view>
             </view>
-            <view class="weui-cell">
+
+
+             <view class="weui-cell post_description">
                 <view class="weui-cell__bd">
-                    <textarea auto-height="true" maxlength="2000" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 9.3em" placeholder="职位描述" value="{{demand.description}}" />
+                    <textarea  maxlength="200" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述" value="{{demand.description}}" />
                     <view class="weui-textarea-counter"></view>
                 </view>
-            </view>
+            </view> 
         </view>
 
         
