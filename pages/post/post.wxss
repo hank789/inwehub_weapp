@@ -38,6 +38,16 @@ input.register_salary{
   font-size:28rpx;
   color:#808080;
 }
+.post_blue.weui-vcode-btn {
+  display:inline-block;
+  padding:0 .6em 0 .7em;
+  border-left:1px solid #e5e5e5;
+  line-height:2.58823529em;
+  font-size:28rpx;
+  color:#66DBF9;
+  white-space:nowrap;
+}
+
 
 .weui-select_in-select-after {
   padding-left:0;
@@ -107,4 +117,9 @@ input.register_salary{
   background-color:#fff;
   line-height:1.41176471;
   font-size:17px;
+}
+
+.button-hover[type=primary] {
+  color:rgba(255, 255, 255, 0.6);
+  background-color: #66DBF9;
 }

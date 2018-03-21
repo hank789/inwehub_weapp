@@ -13,10 +13,10 @@
     "pages/demandRooms/demandRooms"
   ],
   "window":{
-    "navigationBarTextStyle": "#fff",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "找顾问助手",
-    "navigationBarBackgroundColor": "#5dc890",
-    "backgroundColor": "#fbf9fe"
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff"
   },
   "tabBar": {
     "color": "#dddddd",

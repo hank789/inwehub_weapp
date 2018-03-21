@@ -41,7 +41,7 @@
                     <input bindblur="bindSalaryBlur" type="number" value="{{ demand.salary }}" class="weui-input post_salary" placeholder="输入薪资" placeholder-class='register_salary'/>
                 </view>
                 <view class="weui-cell__ft">
-                    <view class="weui-vcode-btn">元/天</view>
+                    <view class="weui-vcode-btn post_blue">元/天</view>
                 </view>
             </view>
 
