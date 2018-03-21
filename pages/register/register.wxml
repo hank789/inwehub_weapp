@@ -8,7 +8,7 @@
                     <view class="weui-label">姓名</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input focus="true" value="{{name}}" bindblur="bindNameBlur" class="weui-input" placeholder="请输入姓名" />
+                    <input focus="true" value="{{name}}" bindblur="bindNameBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入姓名" />
                 </view>
                 <!-- <view class="weui-cell__ft" wx:if="{{nameError}}">
                     <icon type="warn" size="23" color="#E64340"></icon>
@@ -19,7 +19,7 @@
                     <view class="weui-label">公司</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input value="{{ company }}" bindblur="bindCompanyBlur" class="weui-input" placeholder="请输入公司" />
+                    <input value="{{ company }}" bindblur="bindCompanyBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入公司" />
                 </view>
                 <!-- <view class="weui-cell__ft" wx:if="{{companyError}}">
                     <icon type="warn" size="23" color="#E64340"></icon>
@@ -30,7 +30,7 @@
                     <view class="weui-label">职位</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input value="{{ title }}" bindblur="bindTitleBlur" class="weui-input" placeholder="请输入职位" />
+                    <input value="{{ title }}" bindblur="bindTitleBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入职位" />
                 </view>
                 <!-- <view class="weui-cell__ft" wx:if="{{titleError}}">
                     <icon type="warn" size="23" color="#E64340"></icon>
@@ -41,7 +41,7 @@
                     <view class="weui-label">邮箱</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input value="{{ email }}" bindblur="bindEmailBlur" class="weui-input" placeholder="请输入邮箱" />
+                    <input value="{{ email }}" bindblur="bindEmailBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入邮箱" />
                 </view>
                 <!-- <view class="weui-cell__ft" wx:if="{{emailError}}">
                     <icon type="warn" size="23" color="#E64340"></icon>
@@ -52,7 +52,7 @@
                     <view class="weui-label">手机号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindPhoneBlur" value="{{ phone }}" type="number" class="weui-input" placeholder="请输入手机号" />
+                    <input bindblur="bindPhoneBlur" value="{{ phone }}" type="number" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入手机号" />
                 </view>
             </view>
             
@@ -61,7 +61,7 @@
                     <view class="weui-label">验证码</view>
                 </view>-->
                 <view class="weui-cell__bd ">
-                    <input value="{{ code }}" bindblur="bindCodeBlur" type="number" class="weui-input weui-right" placeholder="请输入验证码" />
+                    <input value="{{ code }}" bindblur="bindCodeBlur" type="number" class="weui-input weui-right" placeholder-class='register_placeholde'  placeholder="请输入验证码" />
                 </view>
                 <view class="weui-cell__ft">
                     <button bindtap="tapSendCode" disabled="{{disabledSendPhoneCode}}" class="weui-btn mini-btn register_code" type="primary" size="mini">{{sendCodeLabel}}</button>

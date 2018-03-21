@@ -4,13 +4,17 @@ page{
 }
 button{
   border-radius: 10px;
+  
+}
+.register_placeholde{
+  color: #C8C8C8;
 }
 .weui-input {
   min-height:88rpx;
   line-height:88rpx;
   font-size:28rpx;
   text-align: right;
-  color:#C8C8C8;
+  color:#444444;
 }
 /* .weui-label {
   word-wrap:break-word;
@@ -55,6 +59,9 @@ button[type=primary].register_submit{
   border-color:#66DBF9; 
   opacity: 1;
 }
+button.register_submit{
+  border-radius: 100px;
+}
 .weui-btn-area {
   margin:34rpx 32rpx 0 32rpx;
 }
@@ -71,4 +78,14 @@ button[type=primary].register_submit{
   padding:0 32rpx;
   margin-top:35rpx;
 }
+.weui-cell_input {
+  padding-bottom:0;
+  color:#808080;
+  font-size: 28rpx;
+}
+.weui-cell_warn,.weui-textarea-counter_warn {
+  color:#e64340;
+}
+
+
 
