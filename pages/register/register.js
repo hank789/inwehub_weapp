@@ -10,20 +10,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showTopTips: false,
-    errorMsg: '',
     name: '',
-    nameError: false,
     title: '',
-    titleError: false,
     company: '',
-    companyError: false,
     email: '',
-    emailError: false,
     phone: '',
-    phoneError: false,
     code: '',
-    codeError: false,
     disabledSendPhoneCode: false,
     sendCodeLabel: "获取验证码"
   },
@@ -121,18 +113,6 @@ Page({
       }
     });
   },
-  showTopTips: function (msg) {
-    var that = this;
-    this.setData({
-      showTopTips: true,
-      errorMsg: msg
-    });
-    setTimeout(function () {
-      that.setData({
-        showTopTips: false
-      });
-    }, 3000);
-  },
   bindNameBlur: function (e) {
     this.setData({
       name: e.detail.value
@@ -165,59 +145,53 @@ Page({
   },
   formSubmit: function (e) {
     if (this.data.name === '') {
-      this.setData({
-        nameError: true
-      });
+      wx.showModal({
+        title: '信息有误',
+        content: '请填写姓名',
+        showCancel: false
+      })
       return false;
     }
-    this.setData({
-      nameError: false
-    });
     if (this.data.company === '') {
-      this.setData({
-        companyError: true
-      });
+      wx.showModal({
+        title: '信息有误',
+        content: '请填写公司',
+        showCancel: false
+      })
       return false;
     }
-    this.setData({
-      companyError: false
-    });
     if (this.data.title === '') {
-      this.setData({
-        titleError: true
-      });
+      wx.showModal({
+        title: '信息有误',
+        content: '请填写职位',
+        showCancel: false
+      })
       return false;
     }
-    this.setData({
-      titleError: false
-    });
     if (this.data.email === '') {
-      this.setData({
-        emailError: true
-      });
+      wx.showModal({
+        title: '信息有误',
+        content: '请填写邮箱',
+        showCancel: false
+      })
       return false;
     }
-    this.setData({
-      emailError: false
-    });
     if (this.data.phone === '') {
-      this.setData({
-        phoneError: true
-      });
+      wx.showModal({
+        title: '信息有误',
+        content: '请填写手机号',
+        showCancel: false
+      })
       return false;
     }
-    this.setData({
-      phoneError: false
-    });
     if (this.data.code === '') {
-      this.setData({
-        codeError: true
-      });
+      wx.showModal({
+        title: '信息有误',
+        content: '请填写验证码',
+        showCancel: false
+      })
       return false;
     }
-    this.setData({
-      codeError: false
-    });
 
     var jsonData = {
       name: this.data.name,
