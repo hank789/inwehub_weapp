@@ -78,6 +78,18 @@ Page({
   onReachBottom: function () {
   
   },
+  navToMessages: function () {
+      console.log('navToMyHistory')
+      wx.navigateTo({
+          url: '../messages/messages'
+      });
+  },
+  navToMyHistory: function (event) {
+    console.log('navToMyHistory')
+      wx.navigateTo({
+          url: '../myHistory/myHistory'
+      });
+  },
 
   /**
    * 用户点击右上角分享
