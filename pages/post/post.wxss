@@ -104,12 +104,14 @@ input.register_salary{
   color: #C8C8C8;
 }
 .weui-cell.post_description{
- padding:20rpx 0rpx 0 25rpx;
+ padding:0rpx 0rpx 0 25rpx;
 } 
 .post_description .weui-cell__bd{
   border: 1px solid #DCDCDC;
   padding: 24rpx 30rpx;
   border-radius: 8rpx;
+  border-top:none;
+  border-right:none;
 }
 .weui-cells {
   position:inherit;
@@ -127,4 +129,13 @@ button[type=primary] {
 button.weui-btn.button-hover{
   background-color:#66DBF9;
 }
+.weui-cells__tips{
+  font-size: 24rpx;
+  color: #235280;
+  margin-top: 25rpx;
+}
+.weui-btn-area {
+  margin:2em 15px .3em;
+}
+
 

@@ -86,13 +86,10 @@
                 </view>
             </view> 
         </view>
-
-        
-        <view class="weui-cells__tips">简历的有效期为7天，超过7天该简历会自动关闭</view>
-
         <view class="weui-btn-area">
           <button formType="submit" class="weui-btn" type="primary">立即发布</button>
         </view>
+        <view class="weui-cells__tips">*项目发布后七天有效</view>
     </form>
   </view>
 </view>
