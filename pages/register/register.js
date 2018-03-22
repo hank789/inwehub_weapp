@@ -200,8 +200,7 @@ Page({
       title: this.data.title,
       company: this.data.company,
       email: this.data.email,
-      code: this.data.code,
-      openid: app.globalData.userOpenid
+      code: this.data.code
     };
     var requestUrl = '/auth/weapp/register';
     var that = this;
