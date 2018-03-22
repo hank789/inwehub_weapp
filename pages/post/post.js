@@ -9,6 +9,7 @@ var commonCityData = require('../../utils/city.js')
 Page({
   data:{
     showTopTips: false,
+    disabledSubmitButton: false,
     demand: {
       id: '',
       title: '',
@@ -213,6 +214,9 @@ Page({
       title: '提交中...',
       mask: true
     });
+    this.setData({
+      disabledSubmitButton: true
+    });
 
     var cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
     var provinceId = commonCityData.cityData[this.data.selProvinceIndex].id;
@@ -263,6 +267,9 @@ Page({
           duration: 2000
         });
       }
+      that.setData({
+        disabledSubmitButton: false
+      });
     });
   },
   initCityData:function(level, obj){
