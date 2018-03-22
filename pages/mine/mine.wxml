@@ -3,7 +3,7 @@
 	<view class="page__hd">
 	    <view class="userinfo">
 		    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-		    <text class="userinfo-nickname">{{ userInfo.name }}{{ userInfo.status?'已认证':'审核中' }}</text>
+		    <text class="userinfo-nickname">{{ userInfo.name }}</text>
 	    </view>
 	</view>
   <!-- 阴影列表  -->
