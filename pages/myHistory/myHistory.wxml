@@ -19,7 +19,7 @@
          <view class='demand_detail_info'>
            <image src='../../images/details_address@3x.png'></image>
            <view class='demand_address'>上海黄浦</view>
-           <view class='demand_news' wx:if="{{item.unread_number>0 && item.communicate_number === 0}}">新消息{{item.unread_number}}</view>
+           <view class='demand_news' wx:if="{{item.unread_number>0}}">新消息{{item.unread_number}}</view>
           <view class='demand_news gray' wx:elif="{{item.communicate_number > 0}}">已沟通</view>
           </view>
 
