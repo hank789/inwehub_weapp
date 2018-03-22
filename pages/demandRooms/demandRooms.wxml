@@ -15,7 +15,7 @@
               </view>
               <view class="secondary">
                 <text class="secondary-list">{{item.last_message.data.text}}</text>
-                <text class="job-Salary">{{item.unread_count}}</text>
+                <text class="job-Salary" wx:if="{{item.unread_count}}">{{item.unread_count}}</text>
               </view>
             </view>
           </view>

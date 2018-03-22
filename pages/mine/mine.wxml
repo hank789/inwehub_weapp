@@ -29,16 +29,16 @@
      </view>
   </view>
 
-  <view class='mine_c'>
-     <view class='mine_list mine_border'>
+  <view class='mine_c customService'>
+     <!-- <view class='mine_list mine_border'>
       <view class='mine_item'>
         <view class='mine_news'>我要吐槽</view>
       </view>
       <view class='mine_item'>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>  
-     </view>
-     <button class='mine_list'>
+     </view> -->
+     <button class='mine_list'  open-type="contact">
       <view class='mine_item'>
         <view class='mine_news'>联系客服</view>
       </view>
