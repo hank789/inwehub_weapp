@@ -47,6 +47,7 @@ page{
   align-items: center;
   background: #fff;
   border: none;
+  position: relative;
 }
 .mine_list image{
   width: 35rpx;
@@ -73,9 +74,81 @@ page{
   font-size: 28rpx;
   color: #444444;
 }
-.customService{
-  padding:0;
-  width:92%;
-  border:none;
 
+
+.mine_btn1{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  opacity: 0;
+}
+.mine_btn2{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  left:100rpx;
+  opacity: 0;
+}
+.mine_btn3{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  left:200rpx;
+  opacity: 0;
+}
+.mine_btn4{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  left:300rpx;
+  opacity: 0;
+}
+.mine_btn5{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  left:400rpx;
+  opacity: 0;
+}
+.mine_btn6{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  left:500rpx;
+  opacity: 0;
+}
+.mine_btn7{
+  width: 100rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  line-height: 80rpx;
+  border:1px solid #000;
+  left:600rpx;
+  opacity: 0;
 }

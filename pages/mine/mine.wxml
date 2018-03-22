@@ -38,14 +38,22 @@
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
    </view> -->
-     <contact-button class='mine_list'>
+   <contact-button class='mine_btn1'></contact-button>
+   <contact-button class='mine_btn2'></contact-button>
+   <contact-button class='mine_btn3'></contact-button>
+   <contact-button class='mine_btn4'></contact-button>
+   <contact-button class='mine_btn5'></contact-button>
+   <contact-button class='mine_btn6'></contact-button>
+   <contact-button class='mine_btn7'></contact-button>
+     <view class='mine_list'>
       <view class='mine_item'>
         <view class='mine_news'>联系客服</view>
       </view>
       <view class='mine_item'>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>  
-     </contact-button>
+     </view>
+
   </view>
 
 </view>
