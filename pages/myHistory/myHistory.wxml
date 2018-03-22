@@ -27,7 +27,6 @@
          </view>
         </view>
         <view class='demand_end'>已结束</view>
-        <view>
         <view class='demand'>
          <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5 急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
          <view class='demand_detail'>
@@ -44,3 +43,6 @@
            <!--  -->
          </view>
         </view>
+       <!--  -->
+     </view>
+  
