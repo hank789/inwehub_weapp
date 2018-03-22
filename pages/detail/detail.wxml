@@ -1,26 +1,24 @@
-<!--logs.wxml-->
 <view class="container">
 <!-- dr  -->
   <view class='project_detail'>
      <view class='project_detail_top'>
         <view class='project_detail_title ellipsis-2'>
-           急需两位5年经验以上PDP顾问急需两位5年经验以上PDP顾问
+           {{demand.title}}
         </view>
         <view class='project_detail_tags'>
-          <view class='tag'>2018-3-20开始</view>
-          <view class='tag'>需要3周</view>
-          <view class='tag'>高科技行业</view>
-          <view class='tag'>高科技行业</view>
+          <view class='tag'>{{demand.project_begin_time}}开始</view>
+          <view class='tag'>需要{{demand.project_cycle.text}}</view>
+          <view class='tag'>{{demand.industry.text}}</view>
         </view>
      </view>
      <view class='project_detail_bot'>
        <view class='project_detail_address'>
        <image src='../../images/details_address@3x.png'></image>
-        上海黄埔
+        {{demand.address.selProvince+demand.address.selCity+demand.address.selDistrict}}
        </view>
-       <view class='project_detail_salary'>3300<view class='gray'>RMB/天</view></view>
+       <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/天</view></view>
      </view>
-     <view class='project_end'>已结束</view>
+     <view wx:if="{{demand.status>=3}}" class='project_end'>已结束</view>
   </view>
   <!-- 具体描述 -->
   <view class='project_describe'>
@@ -30,7 +28,7 @@
        <view class='line'></view>
     </view>
     <view class='project_content'>  
-    岗位职责： 1.负责把控公司整体产品形象、视觉输出、各产品界面的形象设计及创意； 2.制定产品界面的风格及标准，包括界面控件、界面图标、交互设计; 3.根据相应的设计方法论，把控产品UI/UE设计规范和视觉风格； 4.规范产品在用户体验上的统一性和一致性，制定并推动落实产品的相关设计文档和规范； 5.能有效推动产品，研发，设计团队间协作，高质量完成产品的最终实现。 职位要求： 1.本科及以上学历，设计类相关专业，五年以上WEB网站设计/手机客户端UI/UE设计经验，有数据可视化的企业服务产品设计和团队管理经验优先； 2.具有深厚的美术功底和良好的创意构思能力，对色彩有深刻的把握力，风格独特思路新颖，对交互、视觉、用研均有深入沉淀与积累； 3.对互联网界面视觉规范和用户交互的审美需求有深刻的理解，能把控公司整体的UI形象； 4.对产品有自己的理解，完美主义注重细节； 5.具有前瞻性设计理念，了解并熟悉国内外企业服务产品优先。
+        <text>{{demand.description}}</text>
     </view>
   </view>
   <!-- 招募信息有效期  -->
@@ -39,7 +37,7 @@
   <view class='detail_info'>
     <view class='detail_info_time'>
       招募信息有效期
-      <view class='blue'>12：11：02</view>
+      <view class='blue'>{{demand.expired_at}}</view>
     </view>
     <view class='project_describe_title'>
         <view class='line'></view>
@@ -48,95 +46,13 @@
     </view>
     <view class='detail_info_private'>
       <image src='../../images/details_address@3x.png'></image>
-      王程
+      {{ demand.publisher_name }}
       <view class='interval'></view>
-      樱维信息
+      {{ demand.publisher_company }}
       <view class='interval'></view>
-      设计总监
+      {{ demand.publisher_title }}
     </view>
   </view>
-    <!--  -->
-
-
-
-
-	<!-- <view class="container-body space-content">
-	  <view class="space-top">
-  	  <view class="space-info">
-  	  	<view class="space-title">{{demand.title}}</view>
-
-  	  	<view class="space-list">
-  	  		<view class="space-item">
-  	  			<text class="text-left">薪资：</text>
-  	  			<text class="text-right">
-  	  				<text class="text-orange">{{demand.salary}}</text> 元/天
-  	  			</text>
-  	  		</view>
-  	  		<view class="space-item">
-  	  			<text class="text-left">行业：</text>
-  	  			<text class="text-right">{{demand.industry.text}}</text>
-  	  		</view>
-  	  		<view class="space-item">
-  	  			<text class="text-left">地点：</text>
-  	  			<text class="text-right">{{demand.address.selProvince+" "+demand.address.selCity+" "+demand.address.selDistrict}}</text>
-  	  		</view>
-            <view class="space-item">
-                <text class="text-left">项目周期：</text>
-                <text class="text-right">{{demand.project_cycle.text}}</text>
-            </view>
-            <view class="space-item">
-                <text class="text-left">项目开始日期：</text>
-                <text class="text-right">{{demand.project_begin_time}}</text>
-            </view>
-  	  	</view>
-  	  </view>
-	  </view> -->
-
-	  <!-- <view class="space-block">
-	    <view class="space-block-content">
-	        <view wx:for="{{demand.candidates}}" class="space-item">
-	            <image data-id="{{item.room_id}}" bindtap="navToChat" class="avatar" src="{{item.user_avatar}}" mode="aspectFill"></image>
-	        </view>
-	    </view> -->
-	  <!-- </view> -->
-
-      <!-- <view class="space-block">
-        <view class="space-block-title">发布者</view>
-        <view class="space-block-content">
-            <view class="space-list">
-                <view class="space-item">
-                    <text class="text-left">姓名：</text>
-                    <text class="text-right">{{ demand.publisher_name }}</text>
-                </view>
-                <view class="space-item">
-                    <text class="text-left">职位：</text>
-                    <text class="text-right">{{ demand.publisher_title }}</text>
-                </view>
-                <view class="space-item">
-                    <text class="text-left">公司：</text>
-                    <text class="text-right">{{ demand.publisher_company }}</text>
-                </view>
-                <view class="space-item">
-                    <text class="text-left">邮箱：</text>
-                    <text class="text-right">{{ demand.publisher_email }}</text>
-                </view>
-            </view>
-            <view class="space-passage"></view>
-        </view>
-      </view> -->
-
-	  <!-- <view class="space-block">
-	  	<view class="space-block-title">需求描述</view>
-	  	<view class="space-block-content">
-	  		<text class="space-passage">{{demand.description}}</text>
-	  	</view>
-  	  </view>
-	</view> -->
-
- 
-
-
-
   
 	<view class="detail-bottom">
 	    <view class="bottom-box">
@@ -148,7 +64,6 @@
                 <i class="iconfont icon-home"></i>
                 <view class="doc">足迹</view>
             </view>
-
 	        <button hover-class="none" plain="true" open-type="share" class="item docbutton">
                 <i class="iconfont icon-share"></i>
                 <view class="doc">分享</view>
@@ -156,6 +71,7 @@
 	        <block wx:if="{{demand.is_author}}">
 	            <view bindtap="navToRooms" class="item">
                     <i class="iconfont icon-message"></i>
+                    <view>({{demand.im_count}})</view>
                     <view class="doc">消息</view>
                 </view>
 	            <view class="sy-bottom btn_cart" bindtap="authCloseDemand">关闭</view>
