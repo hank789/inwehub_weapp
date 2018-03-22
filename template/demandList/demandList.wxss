@@ -9,6 +9,9 @@
   box-shadow: 0rem 0rem 0.186rem 0.053rem #ececee;
   border-radius: 8rpx;
 }
+.darkColors{
+  opacity: 0.5;
+}
 .demand_title{
   font-size: 32rpx;
   color:#444444; 
