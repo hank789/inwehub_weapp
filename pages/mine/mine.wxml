@@ -3,7 +3,7 @@
 	<view class="page__hd">
 	    <view class="userinfo">
 		    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-		    <text class="userinfo-nickname">{{ userInfo.name }}</text>
+		    <text class="userinfo-nickname">{{ userInfo.name }}{{ userInfo.status?'已认证':'审核中' }}</text>
 	    </view>
 	</view>
   <!-- 阴影列表  -->
@@ -14,7 +14,7 @@
         <view class='mine_news'>消息</view>
       </view>
       <view class='mine_item'>
-        <view class='mine_number'>99</view>
+        <view wx:if="{{userInfo.total_unread>0}}" class='mine_number'>{{userInfo.total_unread}}</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>  
      </view>
@@ -30,54 +30,22 @@
   </view>
 
   <view class='mine_c customService'>
-     <!-- <view class='mine_list mine_border'>
-      <view class='mine_item'>
-        <view class='mine_news'>我要吐槽</view>
-      </view>
-      <view class='mine_item'>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </view>  
-     </view> -->
-     <button class='mine_list'  open-type="contact">
+   <!-- <view class='mine_list mine_border'>
+    <view class='mine_item'>
+      <view class='mine_news'>我要吐槽</view>
+    </view>
+    <view class='mine_item'>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+   </view> -->
+     <contact-button class='mine_list'>
       <view class='mine_item'>
         <view class='mine_news'>联系客服</view>
       </view>
       <view class='mine_item'>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>  
-     </button>
+     </contact-button>
   </view>
-
-
-
-	<!-- <view class="page__bd">
-        <view class="weui-cells weui-cells_after-title">
-            <view bindtap="tapViewInfo" class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">认证身份</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
-                    <view style="display: inline-block;vertical-align:middle; font-size: 17px;">{{ userInfo.status?'已认证':'审核中' }}</view>
-                </view>
-            </view>
-            <view bindtap="tapMyHistory" class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">我的足迹</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
-                    <view style="display: inline-block;vertical-align:middle; font-size: 17px;"></view>
-                </view>
-            </view>
-            <view bindtap="tapMyMessages" class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">
-                    <view style="display: inline-block; vertical-align: middle">我的消息</view>
-                    <view wx:if="{{userInfo.total_unread > 0}}" class="weui-badge" style="margin-left: 5px;">{{ userInfo.total_unread }}</view>
-                </view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-            </view>
-            <button open-type="contact" class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">联系客服</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
-                    <view style="display: inline-block;vertical-align:middle; font-size: 17px;"></view>
-                </view>
-            </button>
-        </view>
-	</view> -->
 
 </view>
