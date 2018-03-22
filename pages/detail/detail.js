@@ -63,6 +63,11 @@ Page({
       url: '../chat/chat?id=' + e.currentTarget.dataset.id
     });
   },
+  navToRooms: function (e) {
+    wx.navigateTo({
+      url: '../demandRooms/demandRooms?id=' + this.data.demand_id
+    });
+  },
   navToHome: function (e) {
     wx.switchTab({
       url: '../index/index'
