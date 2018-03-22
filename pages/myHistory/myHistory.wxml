@@ -9,15 +9,18 @@
 </block> -->
 
  <!-- 有数据的样式  -->
-    <view>
-        <view class='demand'>
-         <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5 急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
+ <block wx:if="{{list.length > 0}}">
+    <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }}" bindtap="navToDetail">
+        <view wx:if="{{item.id === closedDemandId}}" class='demand_end'>已结束</view>
+        <view class="demand {{item.status>=3?'darkColors':''}}">
+         <view class="demand_title ellipsis-2 {{item.status>=3?'gray':''}}">{{item.title}}</view>
          <view class='demand_detail'>
          <!-- 已经结束的样式加。gray  -->
          <view class='demand_detail_info'>
            <image src='../../images/details_address@3x.png'></image>
            <view class='demand_address'>上海黄浦</view>
-           <view class='demand_news gray'>新消息3</view>
+           <view class='demand_news' wx:if="{{item.unread_number>0}}">新消息{{item.unread_number}}</view>
+          <view class='demand_news gray' wx:elif="{{item.communicate_number > 0}}">已沟通</view>
           </view>
 
            <view class='salary'>
@@ -26,23 +29,5 @@
            <!--  -->
          </view>
         </view>
-        <view class='demand_end'>已结束</view>
-        <view class='demand'>
-         <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5 急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
-         <view class='demand_detail'>
-         <!-- 已经结束的样式加。gray  -->
-         <view class='demand_detail_info'>
-           <image src='../../images/details_address@3x.png'></image>
-           <view class='demand_address'>上海黄浦</view>
-           <view class='demand_news gray'>新消息3</view>
-          </view>
-
-           <view class='salary'>
-             <view class='blue'>4000</view>RMB/天
-           </view>
-           <!--  -->
-         </view>
-        </view>
-       <!--  -->
      </view>
-  
+ </block>
