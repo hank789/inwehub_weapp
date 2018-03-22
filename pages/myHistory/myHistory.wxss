@@ -1,1 +1,24 @@
 @import "../../template/demandList/demandList.wxss";
+.demand_detail image{
+  width: 24rpx;
+  height: 29rpx;
+  margin-right: 10rpx;
+}
+.demand_detail .demand_address{
+  fonr-size: 26rpx;
+  color: #444444;
+}
+.demand_news.gray{
+  background: #C8C8C8;
+}
+.salary{
+  font-size: 26rpx;
+  color: #B4B4B6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.salary .blue{
+  font-size: 38rpx;
+  color: #66DBF9;
+}

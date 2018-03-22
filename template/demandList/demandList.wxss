@@ -1,56 +1,4 @@
-/* .item{
-  display: flex;
-  width: 100%;
-  background-color: #fff;
-}
-.item-img {
-  padding: 32rpx 28rpx;
-}
-.img{
-  width: 120rpx;
-  height: 120rpx;
-}
-.item-main{
-  flex: 1;
-  padding: 32rrpx 28rrpx 32rrpx 0;
-  border-bottom: 1rrpx solid #dcdcdc;
-  line-height: 1.4;
-}
 
-.job{
-  margin-bottom: 4rrpx;
-  padding-right: 80rrpx;
-  position: relative;
-}
-.job-position{
-  font-size: 32rrpx;
-  color: #222;
-}
-.job-Salary{
-  font-size: 30rrpx;
-  font-weight: 600;
-  color: #ff9483;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-}
-.company{
-  color: #666;
-  font-size: 26rrpx;
-  margin-bottom: 4rrpx;
-}
-.secondary{
-  font-size: 24rrpx;
-  color: #999;
-}
-.secondary-list{
-  margin-right: 8rrpx;
-}
-.date{
-  font-size: 24rrpx;
-  float: right;
-} */
 /*有数据的样式  */
 .demand{
   width: 84%;
@@ -70,6 +18,12 @@
   font-size: 26rpx;
   color: #808080;
   margin-top:18rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.demand_detail_info{
   display: flex;
   flex-direction: row;
   align-items: center;

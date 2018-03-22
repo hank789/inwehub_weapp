@@ -1,9 +1,46 @@
 <!--引入加载更多模版-->
-<import src="../../template/loading" />
-<import src="../../template/demandList/demandList.wxml" />
-<template is="demandList" data="{{ list,closedDemandId }}" />
-<view class="post-button" bindtap="navToPost">需求发布</view>
+<!-- <import src="../../template/loading" />
+<import src="../../template/demandList/demandList.wxml" /> -->
+<!-- <template is="demandList" data="{{ list,closedDemandId }}" /> -->
+<!-- <view class="post-button" bindtap="navToPost">需求发布</view> -->
 <!--加载更多模版-->
-<block wx:if="{{isLoading}}">
+<!-- <block wx:if="{{isLoading}}">
   <template is="loading" />
-</block>
+</block> -->
+
+ <!-- 有数据的样式  -->
+    <view>
+        <view class='demand'>
+         <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5 急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
+         <view class='demand_detail'>
+         <!-- 已经结束的样式加。gray  -->
+         <view class='demand_detail_info'>
+           <image src='../../images/details_address@3x.png'></image>
+           <view class='demand_address'>上海黄浦</view>
+           <view class='demand_news gray'>新消息3</view>
+          </view>
+
+           <view class='salary'>
+             <view class='blue'>4000</view>RMB/天
+           </view>
+           <!--  -->
+         </view>
+        </view>
+        <view class='demand_end'>已结束</view>
+        <view>
+        <view class='demand'>
+         <view class='demand_title ellipsis-2 gray'>急需两位5年经验以上PDP顾问急需两位5 急需两位5年经验以上 PDP顾问急需两位5PDP顾问急需两位5PDP顾问急需两位5</view>
+         <view class='demand_detail'>
+         <!-- 已经结束的样式加。gray  -->
+         <view class='demand_detail_info'>
+           <image src='../../images/details_address@3x.png'></image>
+           <view class='demand_address'>上海黄浦</view>
+           <view class='demand_news gray'>新消息3</view>
+          </view>
+
+           <view class='salary'>
+             <view class='blue'>4000</view>RMB/天
+           </view>
+           <!--  -->
+         </view>
+        </view>
