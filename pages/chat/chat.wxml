@@ -37,7 +37,7 @@
     <view id="bottom-element"></view>
 </scroll-view>
 <view class="input-panel">
-    <input type="text" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
+    <input type="text" adjust-position="false" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
     <view class="footadd" bindtap="chooseImage">
        <image src="../../images/plus.png"/>
     </view>

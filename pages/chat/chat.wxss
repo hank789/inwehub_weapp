@@ -9,7 +9,7 @@
 .chat-container {
     position: absolute;
     top: 0;
-    bottom: 50px;
+    bottom: 100rpx;
     right: 0;
     left: 0;
     text-align: center;
@@ -18,27 +18,27 @@
 .system-message {
     background: #BBB;
     color: white;
-    border-radius: 4px;
-    margin: 10px;
+    border-radius: 8rpx;
+    margin: 20rpx;
     text-align: center;
-    font-size: 12px;
-    padding: 2px 6px;
+    font-size: 24rpx;
+    padding: 4rpx 12rpx;
     width: auto;
     display: inline-block;
 }
 
 .message {
-    margin-bottom: 10px;
+    margin-bottom: 20rpx;
 }
 .user-message {
     display: flex;
-    margin: 10px;
+    margin: 20rpx;
 }
 
 .user-message .avatar {
-    width: 40px;
-    height: 40px;
-    margin-right: 5px;
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 10rpx;
     background: #DDD;
 }
 
@@ -60,8 +60,8 @@
 
 .user-message .text .nickname {
     color: #999;
-    font-size: 12px;
-    margin-left: 5px;
+    font-size: 24rpx;
+    margin-left: 10rpx;
 }
 
 .user-message.me {
@@ -69,7 +69,7 @@
 }
 
 .user-message.me .avatar {
-    margin-left: 5px;
+    margin-left: 10rpx;
     margin-right: 0;
 }
 
@@ -80,7 +80,6 @@
 .input-panel {
     background: #f3f3f3;
     border-top: 1px solid #DDD;
-    height: 40px;
     position: absolute;
     left: 0;
     right: 0;
@@ -90,22 +89,14 @@
 }
 
 .input-panel input {
+    font-size:28rpx;
     flex: 8;
     background: #f9f9f9;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #DDD;
-    margin: 4px;
-    border-radius: 2px;
-    padding: 0 4px;
-}
-
-.input-panel button {
-    flex: 2;
-    margin: 4px;
-    margin-left: 0;
-    height: 32px;
-    line-height: 32px;
+    height: 2rem;
+    border: 1rpx solid #DDD;
+    margin: 8rpx;
+    border-radius: 4rpx;
+    padding: 0 8rpx;
 }
 
 .triangle image {
