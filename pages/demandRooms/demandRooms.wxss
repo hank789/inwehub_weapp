@@ -11,6 +11,7 @@
    font-size: 32rpx;
    color: #444444;
    margin-bottom: 22rpx;
+   border-radius: 8rpx;
  }
  .chat{
    width: 100%;

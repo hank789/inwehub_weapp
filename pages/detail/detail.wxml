@@ -1,5 +1,32 @@
 <!--logs.wxml-->
 <view class="container">
+<!-- dr  -->
+  <view class='project_detail'>
+     <view class='project_detail_top'>
+        <view class='project_detail_title ellipsis-2'>
+           急需两位5年经验以上PDP顾问急需两位5年经验以上PDP顾问
+        </view>
+        <view class='project_detail_tags'>
+          <view class='tag'>2018-3-20开始</view>
+          <view class='tag'>需要3周</view>
+          <view class='tag'>高科技行业</view>
+          <view class='tag'>高科技行业</view>
+        </view>
+     </view>
+     <view class='project_detail_bot'>
+       <view class='project_detail_address'>
+       <image src='../../images/details_address@3x.png'></image>
+        上海黄埔
+       </view>
+       <view class='project_detail_salary'>3300<view class='gray'>RMB/天</view></view>
+     </view>
+     <view class='project_end'>已结束</view>
+  </view>
+  <!--  -->
+
+
+
+
 	<view class="container-body space-content">
 	  <view class="space-top">
   	  <view class="space-info">
@@ -72,6 +99,12 @@
 	  	</view>
   	  </view>
 	</view>
+
+ 
+
+
+
+  
 	<view class="detail-bottom">
 	    <view class="bottom-box">
 	        <view wx:if="{{demand.is_author}}" bindtap="navToHome" class="item">

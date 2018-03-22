@@ -149,3 +149,96 @@
 .detail-bottom .selec_active .iconfont {
   color: #ff4856;
 }
+
+/* 
+  dr 
+  详情的需求描述样式
+*/
+page{
+  background: #fff;
+}
+.project_detail{
+   width:84%;
+   overflow:hidden;
+   margin:auto;
+   margin-top:22rpx;
+   padding:24rpx 34rpx;
+   box-shadow:0rem 0rem 0.186rem 0.053rem #ececee;
+   border-radius: 8rpx;
+   margin-bottom: 33rpx;
+   position: relative;
+}
+.project_detail_top{
+  border-bottom: 1px solid #DCDCDC; 
+}
+.project_detail_title{
+  font-size: 32rpx;
+  color: #444444;
+  margin-bottom: 22rpx;
+}
+.project_detail_tags{
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 10rpx;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap； */
+}
+.project_detail_tags .tag{
+  float: left;
+  border: 1px solid #DCDCDC;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  color: #808080;
+  padding: 7rpx 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
+}
+.project_detail_bot{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24rpx;
+}
+.project_detail_address{
+  font-size: 26rpx;
+  color:#444444;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.project_detail_address image{
+  width:24rpx;
+  height:29rpx;
+}
+.project_detail_salary{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 38rpx;
+  color:#66DBF9;
+  font-weight: 500;
+}
+.project_detail_salary .gray{
+  font-size: 26rpx;
+  color:#B4B4B6;
+}
+.project_end{
+  position:absolute;
+  width:220rpx;
+  height:70rpx;
+  background:#111111;
+  font-size:28rpx;
+  color:#FFFFFF;
+  line-height:65rpx;
+  text-align:center;
+  opacity:0.7;
+  right:-55rpx;
+  bottom:20rpx;
+  transform:rotate(-45deg);
+}
