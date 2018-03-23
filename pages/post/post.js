@@ -56,7 +56,7 @@ Page({
     });
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
-      if (!app.globalData.appAccessToken) {
+      if (!userInfo.id) {
         wx.showModal({
           content: '您的认证信息还未完善，前往完善信息',
           showCancel: false,
