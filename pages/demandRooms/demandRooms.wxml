@@ -14,7 +14,7 @@
                 <text class="date">{{item.last_message.created_at}}</text>
               </view>
               <view class="secondary">
-                <text class="secondary-list">{{item.last_message.data.text}}</text>
+                <text class="secondary-list ellipsis">{{item.last_message.data.text}}</text>
                 <text class="job-Salary" wx:if="{{item.unread_count}}">{{item.unread_count}}</text>
               </view>
             </view>

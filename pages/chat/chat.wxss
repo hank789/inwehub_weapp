@@ -21,10 +21,11 @@
     border-radius: 8rpx;
     margin: 20rpx;
     text-align: left;
-    font-size: 24rpx;
-    padding: 4rpx 12rpx;
+    font-size:28rpx;
+    padding:15rpx 20rpx;
     width: auto;
     display: inline-block;
+    line-height: 48rpx;
 }
 
 .message {
@@ -39,7 +40,6 @@
     width: 80rpx;
     height: 80rpx;
     margin-right: 10rpx;
-    background: #DDD;
 }
 
 .user-message.me .text {
@@ -50,12 +50,16 @@
 }
 
 .user-message .text {
-    text-align: left;
     background:#d5eaf8;
     border-radius:10rpx;
     padding:20rpx;
-    max-width: 65%;
-    word-wrap: break-word;
+    max-width:65%;
+    word-wrap:break-word;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    font-size:28rpx;
 }
 
 .user-message .text .nickname {
