@@ -27,6 +27,9 @@
     display: inline-block;
     line-height: 48rpx;
 }
+.system-time{
+  padding: 0rpx 10rpx; 
+}
 
 .message {
     margin-bottom: 20rpx;

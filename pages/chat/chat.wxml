@@ -15,7 +15,7 @@
       <template is="loading" />
     </block>
     <view wx:for="{{messages}}" id="msg_{{item.id}}" class="message {{item.type}}">
-        <view wx:if="{{item.type == 'system'}}" class="system-message">
+        <view wx:if="{{item.type == 'system'}}" class="system-message system-time">
             {{item.data.text}}
         </view>
         <view wx:else class="user-message {{item.user_id == userInfo.id && 'me'}}">
