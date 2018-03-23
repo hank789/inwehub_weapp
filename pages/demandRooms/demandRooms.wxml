@@ -3,7 +3,7 @@
 <view class='title ellipsis-2'>{{ demand.title }}</view>
 <view class='chat'>聊天信息</view>
 <view class="weui-panel" wx:if="{{list.length > 0}}">
-    <view wx:for="{{list}}" wx:key="id" data-id="{{ item.room_id }}" bindtap="navToRoom">
+    <view wx:for="{{list}}" wx:key="id" data-id="{{item.room_id}}" bindtap="navToRoom">
           <view class="item">
             <view class="item-img">
               <image class="img" src="{{item.avatar}}"></image>

@@ -1,7 +1,7 @@
 <!--引入加载更多模版-->
 <import src="../../template/loading" />
 <view  wx:if="{{list.length > 0}}">
-    <view wx:for="{{list}}" wx:key="id" data-id="{{ item.room_id }} " bindtap="navToRoom">
+    <view wx:for="{{list}}" wx:key="id" data-id="{{ item.room_id }}" bindtap="navToRoom">
           <view class="item">
             <view class="item-img">
                <image class="img" src="{{item.avatar}}"></image>
