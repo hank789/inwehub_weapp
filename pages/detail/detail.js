@@ -143,5 +143,8 @@ Page({
       }
     });
     this.shareView.show()
+  },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
   }
 })

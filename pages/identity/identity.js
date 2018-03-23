@@ -31,5 +31,8 @@ Page({
     wx.navigateTo({
       url: '../post/post'
     })
+  },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
   }
 })

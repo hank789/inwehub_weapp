@@ -56,6 +56,9 @@ Page({
       url: '../detail/detail?id=' + event.currentTarget.dataset.id
     });
   },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+  },
   onReady() {
     var that = this;
     // 查询对象

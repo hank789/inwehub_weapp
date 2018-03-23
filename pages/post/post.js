@@ -142,6 +142,9 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+  },
   bindDescriptionBlur: function(e) {
     this.setData({
       'demand.description': e.detail.value

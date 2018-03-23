@@ -12,6 +12,7 @@ Page({
   },
   onPullDownRefresh: function () {
     // 下拉刷新
+    this.data.page = 1;
     this.loadList(1);
     wx.stopPullDownRefresh();
   },
