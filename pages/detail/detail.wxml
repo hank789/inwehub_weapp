@@ -16,7 +16,7 @@
        <image src='../../images/details_address@3x.png'></image>
         {{demand.address.selProvince  === '请选择' ? '' : demand.address.selProvince }}{{demand.address.selCity === '请选择' ? '' : demand.address.selCity}}{{demand.address.selDistrict ? demand.address.selDistrict : ''}}
        </view>
-       <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/天</view></view>
+       <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/{{demand.salary_type === 0 ? '天':'月'}}</view></view>
      </view>
      <view wx:if="{{demand.status>=3}}" class='project_end'>已结束</view>
   </view>

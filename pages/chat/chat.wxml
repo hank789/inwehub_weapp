@@ -27,7 +27,7 @@
        <image src='../../images/details_address@3x.png'></image>
         {{room.source.address.selProvince === '请选择' ? '' : room.source.address.selProvince}}{{room.source.address.selCity === '请选择' ? '' : room.source.address.selCity}}{{room.source.address.selDistrict  ? room.source.address.selDistrict : ''}}
        </view>
-       <view class='project_detail_salary'>{{room.source.salary}}<view class='gray'>RMB/天</view></view>
+       <view class='project_detail_salary'>{{room.source.salary}}<view class='gray'>RMB/{{room.source.salary_type === 0 ? '天': '月'}}</view></view>
      </view>
   </view>
 
