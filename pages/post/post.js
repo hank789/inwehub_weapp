@@ -196,7 +196,15 @@ Page({
       })
       return false;
     }
-    if (this.data.selProvince == "请选择" || this.data.selCity == "请选择") {
+    if (this.data.selProvince == "请选择") {
+      wx.showToast({
+        title: '请选择地区',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    if (this.data.selCity == "请选择" && !(this.data.selProvince == '海外' || this.data.selProvince == '台湾省' || this.data.selProvince == '香港特别行政区' || this.data.selProvince == '澳门特别行政区')) {
       wx.showToast({
         title: '请选择地区',
         icon: 'none',
@@ -236,8 +244,14 @@ Page({
       disabledSubmitButton: true
     });
 
-    var cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
+    var cityId = '';
     var provinceId = commonCityData.cityData[this.data.selProvinceIndex].id;
+    if (commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex]) {
+      cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
+    } else {
+      this.data.selCity = '';
+    }
+
     var districtId;
     if (this.data.selDistrict == "请选择" || !this.data.selDistrict){
       districtId = '';
@@ -270,7 +284,7 @@ Page({
       wx.hideLoading();
       if (res_data.code === 1000) {
         wx.redirectTo({
-          url: '../myHistory/myHistory',
+          url: '../detail/detail?id='+res_data.data.id,
           success: function (e) {
             wx.showToast({
               title: title,
