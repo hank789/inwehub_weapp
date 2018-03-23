@@ -234,6 +234,7 @@ Page({
     var districtId;
     if (this.data.selDistrict == "请选择" || !this.data.selDistrict){
       districtId = '';
+      this.data.selDistrict = '';
     } else {
       districtId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[this.data.selDistrictIndex].id;
     }

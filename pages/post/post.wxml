@@ -26,8 +26,8 @@
                       </view>
                     </picker>
                     <picker bindchange="bindPickerChange" range="{{districts}}">
-                      <view class="picker {{selDistrict=='请选择'?'hui':''}}">
-                        {{selDistrict}}
+                      <view class="picker {{(selDistrict=='请选择'||!selDistrict)?'hui':''}}">
+                        {{selDistrict?selDistrict:'请选择'}}
                       </view>
                     </picker>
                 </view>
