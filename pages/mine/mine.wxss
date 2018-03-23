@@ -61,11 +61,14 @@ page{
   align-items: center;
 }
 .mine_number{
+  width:40rpx;
+  height:40rpx;
   font-size: 22rpx;
   color: #FFFFFF;
   background: #E94262;
-  padding: 0 6rpx;
   border-radius: 50%;
+  text-align: center;
+  line-height: 40rpx;
 }
 .mine_border{
   border-bottom: 1rpx solid #DCDCDC;
