@@ -138,4 +138,10 @@ button.weui-btn.button-hover{
   margin:2em 15px .3em;
 }
 
+.weui-cell__bd {
+  -webkit-box-flex:1;
+  -webkit-flex:1;
+  flex:1;
+  margin-right:-1rpx;
+}
 
