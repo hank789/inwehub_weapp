@@ -15,6 +15,7 @@ Page({
       title: '',
       address: '',
       salary: '',
+      salary_type: 0,
       project_begin_time: '2018-01-01',
       description: '',
       industry: 0,
@@ -23,6 +24,7 @@ Page({
     errorMsg: '',
     author: {},
     industry_select: [],
+
     project_cycle_select: [
       {value:1,text:"小于1周"},
       {value:2,text:"1-2周"},
@@ -34,6 +36,11 @@ Page({
       {value:8,text:"不确定"},
       {value:9,text:"其他"}
     ],
+    salary_type: [
+        {value:1,text:"元/天"},
+        {value:2,text:"元/月"},
+    ],
+    salary_typeIndex: 0,
     projectCycleIndex: 0,
     industryIndex: 0,
     provinces:[],
@@ -167,15 +174,22 @@ Page({
       });
     }, 3000);
   },
+  bindDataCycleChange: function (e) {
+      console.log(e)
+      this.setData({
+        'demand.salary_type': e.detail.value
+      })
+  },
   bindIndustryChange: function (e) {
     console.log(e.detail.value)
+    console.log(this.data.industry_select[e.detail.value].value)
     this.setData({
       industryIndex: e.detail.value,
       'demand.industry': this.data.industry_select[e.detail.value].value
     })
   },
   bindProjectCycleChange: function (e) {
-    console.log(this.data.project_cycle_select[e.detail.value].value);
+    console.log('周期' + this.data.project_cycle_select[e.detail.value].value);
     this.setData({
       projectCycleIndex: e.detail.value,
       'demand.project_cycle':this.data.project_cycle_select[e.detail.value].value
