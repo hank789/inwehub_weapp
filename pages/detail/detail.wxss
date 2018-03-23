@@ -111,7 +111,7 @@ page{
    margin:auto;
    margin-top:22rpx;
    padding:24rpx 34rpx;
-   box-shadow:0rem 0rem 0.186rem 0.053rem #ececee;
+   box-shadow: 0rpx 0rpx 4rpx 4rpx #ECECEE;
    border-radius: 8rpx;
    margin-bottom: 33rpx;
    position: relative;
