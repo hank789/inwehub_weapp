@@ -20,7 +20,7 @@
     color: white;
     border-radius: 8rpx;
     margin: 20rpx;
-    text-align: center;
+    text-align: left;
     font-size: 24rpx;
     padding: 4rpx 12rpx;
     width: auto;

@@ -2,7 +2,12 @@
 <scroll-view class="chat-container" scroll-y bindscrolltoupper="upper" scroll-into-view="msg_{{lastMessageId}}" scroll-top="9999999999">
     <view wx:for="{{systemMessages}}" id="msg_{{item.id}}" class="message {{item.type}}">
         <view wx:if="{{item.type == 'system'}}" class="system-message">
-            {{item.data.text}}
+            <text>{{item.data.text}}</text>
+        </view>
+    </view>
+    <view bindtap="navToDetail" data-id="{{ room.source_id }}" class="message system">
+        <view class="system-message">
+            点击查看需求详情
         </view>
     </view>
     <!--加载更多模版-->
