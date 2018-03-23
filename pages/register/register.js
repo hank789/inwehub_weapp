@@ -148,7 +148,7 @@ Page({
     if (this.data.name === '') {
       wx.showToast({
         title: '请填写姓名',
-        icon: 'none',
+        icon: 'none' ,
         duration: 2000
       })
       return false;

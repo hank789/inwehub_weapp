@@ -2,13 +2,12 @@
    background: #FFFFFF;
  }
  .item{
-  width: 100%;
   height: 128rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 0rpx 32rpx 0 32rpx;
-  
+  margin: auto;
 } 
 .item-img{
   width: 88rpx;
@@ -43,6 +42,8 @@
   color: #C8C8C8;
 }
 .secondary-list{
+  width:96%;
+  word-wrap:break-word;
   font-size: 26rpx;
   color: #808080;
 }
