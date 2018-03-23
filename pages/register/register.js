@@ -210,7 +210,7 @@ Page({
       wx.hideLoading();
       if (res_data.code === 1000) {
         // 成功保存之后，执行其他逻辑.
-        app.globalData.appAccessToken = res_data.data.token;
+        app.globalData.userInfo.id = res_data.data.id;
         wx.showToast({
           title: "提交成功",
           icon: 'success',
