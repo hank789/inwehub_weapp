@@ -16,7 +16,8 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "项目招募助手",
     "navigationBarBackgroundColor": "#fff",
-    "backgroundColor": "#fff"
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#dddddd",
