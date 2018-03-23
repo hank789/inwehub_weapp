@@ -61,6 +61,21 @@
 .detail-bottom .item {
   flex: 1;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.detail-bottom .message {
+  /* display:inline-block;
+  width:40rpx;
+  height: 40rpx;
+  background: #E84368; */
+  font-size: 22rpx;
+  color: #FFFFFF;
+  /* border-radius: 50%; */
+  /* text-align: center;
+  line-height: 40rpx; */
 }
 
 .detail-bottom .item .doc {

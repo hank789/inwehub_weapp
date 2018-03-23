@@ -6,15 +6,15 @@
            {{demand.title}}
         </view>
         <view class='project_detail_tags'>
-          <view class='tag'>{{demand.project_begin_time}}开始</view>
-          <view class='tag'>需要{{demand.project_cycle.text}}</view>
-          <view class='tag'>{{demand.industry.text}}</view>
+          <view class='tag' wx:if="{{demand.project_begin_time}}">{{demand.project_begin_time}}开始</view>
+          <view class='tag' wx:if="{{demand.project_cycle.text}}">需要{{demand.project_cycle.text}}</view>
+          <view class='tag' wx:if="{{demand.industry.text}}">{{demand.industry.text}}</view>
         </view>
      </view>
      <view class='project_detail_bot'>
        <view class='project_detail_address'>
        <image src='../../images/details_address@3x.png'></image>
-        {{demand.address.selProvince+demand.address.selCity+demand.address.selDistrict}}
+        {{demand.address.selProvince}}{{demand.address.selCity === '请选择' ? '' : demand.address.selCity}}{{demand.address.selDistrict === '请选择' ? '' : demand.address.selDistrict}}
        </view>
        <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/天</view></view>
      </view>
@@ -45,12 +45,12 @@
         <view class='line'></view>
     </view>
     <view class='detail_info_private'>
-      <image src='../../images/details_address@3x.png'></image>
+      <image src='{{demand.publisher_avatar}}'></image>
       {{ demand.publisher_name }}
-      <view class='interval'></view>
+      <view class='interval' wx:if="{{demand.publisher_company}}"></view>
       {{ demand.publisher_company }}
-      <view class='interval'></view>
-      {{ demand.publisher_title }}
+      <view class='interval'  wx:if="{{demand.publisher_title}}"></view>
+      {{ demand.publisher_title ? demand.publisher_title : ''}}
     </view>
   </view>
   
@@ -71,8 +71,8 @@
 	        <block wx:if="{{demand.is_author}}">
 	            <view bindtap="navToRooms" class="item">
                     <i class="iconfont icon-message"></i>
-                    <view>({{demand.im_count}})</view>
-                    <view class="doc">消息</view>
+                    <!-- <view class='message'></view> -->
+                    <view class="doc">消息({{demand.im_count}})</view>
                 </view>
 	            <view class="sy-bottom btn_cart" bindtap="authCloseDemand">关闭</view>
 	            <view class="sy-bottom btn_order" bindtap="authEditDemand">修改</view>
