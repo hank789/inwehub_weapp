@@ -228,9 +228,9 @@ Page({
   sendSystemTime() {
     //获取当前时间
     var myDate = new Date();
-    var hours = myDate.getHours();       //获取当前小时数(0-23)
-    var minutes = myDate.getMinutes();     //获取当前分钟数(0-59)
-    var mydata = hours + ':' + minutes
+    var hours = myDate.getHours().toString();       //获取当前小时数(0-23)
+    var minutes = myDate.getMinutes().toString();     //获取当前分钟数(0-59)
+    var mydata = (hours[1]?hours:('0'+hours)) + ':' + (minutes[1]?minutes:('0'+minutes))
     //如果两次时间间隔大于3分钟
     if (minutes - this.data.minutes >= 3) {
       var length = this.data.messages.length;
