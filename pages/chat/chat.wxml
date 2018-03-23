@@ -1,15 +1,36 @@
 <import src="../../template/loading" />
 <scroll-view class="chat-container" scroll-y bindscrolltoupper="upper" scroll-into-view="msg_{{lastMessageId}}" scroll-top="9999999999">
-    <view wx:for="{{systemMessages}}" id="msg_{{item.id}}" class="message {{item.type}}">
+     <!-- <view wx:for="{{systemMessages}}" id="msg_{{item.id}}" class="message {{item.type}}">
         <view wx:if="{{item.type == 'system'}}" class="system-message">
             <text>{{item.data.text}}</text>
         </view>
-    </view>
-    <view bindtap="navToDetail" data-id="{{ room.source_id }}" class="message system">
+    </view> -->
+    <!-- <view bindtap="navToDetail" data-id="{{ room.source_id }}" class="message system">
         <view class="system-message">
             点击查看需求详情
         </view>
-    </view>
+    </view>  -->
+<view class='Occupy'></view>
+<view class='project_detail'>
+     <view class='project_detail_top'>
+        <view class='project_detail_title ellipsis-2'>
+          以上PDP顾问5年经验以上PDP顾问
+        </view>
+        <view class='project_detail_tags'>
+          <view class='tag'>2018-3-20开始</view>
+          <view class='tag'>需2-3周</view>
+          <view class='tag'>高科技</view>
+        </view>
+     </view>
+     <view class='project_detail_bot'>
+       <view class='project_detail_address'>
+       <image src='../../images/details_address@3x.png'></image>
+        {{demand.address.selProvince}}{{demand.address.selCity}}{{demand.address.selDistrict?demand.address.selDistrict:''}}
+       </view>
+       <view class='project_detail_salary'>232323<view class='gray'>RMB/天</view></view>
+     </view>
+  </view>
+
     <!--加载更多模版-->
     <block wx:if="{{isLoading}}">
       <template is="loading" />
