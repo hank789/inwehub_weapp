@@ -11,23 +11,23 @@
         </view>
     </view>  -->
 <view class='Occupy'></view>
-<view class='project_detail'>
+<view class='project_detail' bindtap="navToDetail" data-id="{{ room.source_id }}">
      <view class='project_detail_top'>
         <view class='project_detail_title ellipsis-2'>
-          以上PDP顾问5年经验以上PDP顾问
+          {{room.source.title}}
         </view>
         <view class='project_detail_tags'>
-          <view class='tag'>2018-3-20开始</view>
-          <view class='tag'>需2-3周</view>
-          <view class='tag'>高科技</view>
+          <view class='tag' wx:if="{{room.source.project_begin_time}}">{{room.source.project_begin_time}}开始</view>
+          <view class='tag' wx:if="{{room.source.project_cycle.text}}">周期{{room.source.project_cycle.text}}</view>
+          <view class='tag' wx:if="{{room.source.industry.text}}">{{room.source.industry.text}}</view>
         </view>
      </view>
      <view class='project_detail_bot'>
        <view class='project_detail_address'>
        <image src='../../images/details_address@3x.png'></image>
-        {{demand.address.selProvince}}{{demand.address.selCity}}{{demand.address.selDistrict?demand.address.selDistrict:''}}
+        {{room.source.address.selProvince === '请选择' ? '' : room.source.address.selProvince}}{{room.source.address.selCity === '请选择' ? '' : room.source.address.selCity}}{{room.source.address.selDistrict  ? room.source.address.selDistrict : ''}}
        </view>
-       <view class='project_detail_salary'>232323<view class='gray'>RMB/天</view></view>
+       <view class='project_detail_salary'>{{room.source.salary}}<view class='gray'>RMB/天</view></view>
      </view>
   </view>
 

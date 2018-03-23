@@ -36,6 +36,7 @@
 .job-position{
   font-size: 28rpx;
   color: #565656;
+  font-weight: 500;
 }
 .date{
   font-size: 24rpx;

@@ -8,7 +8,7 @@
    overflow:hidden;
    margin:auto;
    padding:30rpx 34rpx;
-   box-shadow: 0rpx 0rpx 4rpx 4rpx #ECECEE;
+   box-shadow: 0rpx 0rpx 8rpx 8rpx #ECECEE;
    border-radius: 8rpx;
    margin-bottom: 100rpx;
    position: relative;
@@ -21,6 +21,10 @@
   font-size: 32rpx;
   color: #444444;
   margin-bottom: 30rpx;
+  text-align: left;
+  font-weight: 500;
+  word-wrap:break-word;
+  word-break:break-all;
 }
 .project_detail_tags{
   width: 100%;

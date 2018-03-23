@@ -7,14 +7,14 @@
         </view>
         <view class='project_detail_tags'>
           <view class='tag' wx:if="{{demand.project_begin_time}}">{{demand.project_begin_time}}开始</view>
-          <view class='tag' wx:if="{{demand.project_cycle.text}}">需要{{demand.project_cycle.text}}</view>
+          <view class='tag' wx:if="{{demand.project_cycle.text}}">周期{{demand.project_cycle.text}}</view>
           <view class='tag' wx:if="{{demand.industry.text}}">{{demand.industry.text}}</view>
         </view>
      </view>
      <view class='project_detail_bot'>
        <view class='project_detail_address'>
        <image src='../../images/details_address@3x.png'></image>
-        {{demand.address.selProvince}}{{demand.address.selCity}}{{demand.address.selDistrict?demand.address.selDistrict:''}}
+        {{demand.address.selProvince  === '请选择' ? '' : demand.address.selProvince }}{{demand.address.selCity === '请选择' ? '' : demand.address.selCity}}{{demand.address.selDistrict ? demand.address.selDistrict : ''}}
        </view>
        <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/天</view></view>
      </view>

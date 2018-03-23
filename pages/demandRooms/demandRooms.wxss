@@ -7,11 +7,14 @@
    margin:auto;
    margin-top:22rpx;
    padding:24rpx 34rpx;
-   box-shadow: 0rpx 0rpx 4rpx 4rpx #ECECEE;
+   box-shadow: 0rpx 0rpx 8rpx 8rpx #ECECEE;
    font-size: 32rpx;
    color: #444444;
    margin-bottom: 22rpx;
    border-radius: 8rpx;
+   font-weight: 500;
+   word-wrap:break-word;
+   word-break:break-all;
  }
  .chat{
    width: 100%;
@@ -57,6 +60,7 @@
 .job-position{
   font-size: 28rpx;
   color: #565656;
+  font-weight: 500;
 }
 .date{
   font-size: 24rpx;
