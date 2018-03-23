@@ -21,6 +21,8 @@
   font-size: 32rpx;
   color: #444444;
   margin-bottom: 30rpx;
+  text-align: left;
+  font-weight: 500;
 }
 .project_detail_tags{
   width: 100%;
