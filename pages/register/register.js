@@ -146,50 +146,50 @@ Page({
   },
   formSubmit: function (e) {
     if (this.data.name === '') {
-      wx.showModal({
-        title: '信息有误',
-        content: '请填写姓名',
-        showCancel: false
+      wx.showToast({
+        title: '请填写姓名',
+        icon: 'none',
+        duration: 2000
       })
       return false;
     }
     if (this.data.company === '') {
-      wx.showModal({
-        title: '信息有误',
-        content: '请填写公司',
-        showCancel: false
+      wx.showToast({
+        title: '请填写公司',
+        icon: 'none',
+        duration: 2000
       })
       return false;
     }
     if (this.data.title === '') {
-      wx.showModal({
-        title: '信息有误',
-        content: '请填写职位',
-        showCancel: false
+      wx.showToast({
+        title: '请填写职位',
+        icon: 'none',
+        duration: 2000
       })
       return false;
     }
     if (this.data.email === '') {
-      wx.showModal({
-        title: '信息有误',
-        content: '请填写邮箱',
-        showCancel: false
+      wx.showToast({
+        title: '请填写邮箱',
+        icon: 'none',
+        duration: 2000
       })
       return false;
     }
     if (this.data.phone === '') {
-      wx.showModal({
-        title: '信息有误',
-        content: '请填写手机号',
-        showCancel: false
+      wx.showToast({
+        title: '请填写手机号',
+        icon: 'none',
+        duration: 2000
       })
       return false;
     }
     if (this.data.code === '') {
-      wx.showModal({
-        title: '信息有误',
-        content: '请填写验证码',
-        showCancel: false
+      wx.showToast({
+        title: '请填写验证码',
+        icon: 'none',
+        duration: 2000
       })
       return false;
     }
