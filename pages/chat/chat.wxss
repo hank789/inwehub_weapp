@@ -23,6 +23,8 @@
   margin-bottom: 30rpx;
   text-align: left;
   font-weight: 500;
+  word-wrap:break-word;
+  word-break:break-all;
 }
 .project_detail_tags{
   width: 100%;

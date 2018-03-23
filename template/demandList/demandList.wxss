@@ -16,6 +16,8 @@
   font-size: 32rpx;
   color:#444444; 
   font-weight: 500;
+  word-wrap:break-word;
+  word-break:break-all;
 }
 .demand_detail{
   width: 100%;

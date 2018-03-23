@@ -13,6 +13,8 @@
    margin-bottom: 22rpx;
    border-radius: 8rpx;
    font-weight: 500;
+   word-wrap:break-word;
+   word-break:break-all;
  }
  .chat{
    width: 100%;
