@@ -221,6 +221,13 @@ Page({
       return false;
     }
 
+    if (this.data.industryIndex === 0) {
+      this.data.demand.industry = this.data.industry_select[this.data.industryIndex].value;
+    }
+    if (this.data.projectCycleIndex === 0) {
+      this.data.demand.project_cycle = this.data.project_cycle_select[this.data.projectCycleIndex].value;
+    }
+
     wx.showLoading({
       title: '提交中...',
       mask: true
