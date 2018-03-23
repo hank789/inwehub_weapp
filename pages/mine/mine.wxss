@@ -22,7 +22,8 @@
     margin-top: 14rpx;
     color: #444444;
     font-size: 32rpx;
-    margin-bottom: 39rpx
+    margin-bottom: 39rpx;
+    font-weight:500;
 }
 /* author:dr  */
 page{
@@ -34,7 +35,7 @@ page{
   margin:auto;
   margin-top:22rpx;
   padding:0rpx 30rpx;
-  box-shadow:0rem 0rem 0.186rem 0.053rem #ececee;
+  box-shadow: 0rpx 0rpx 4rpx 4rpx #ECECEE;
   border-radius:8rpx;
   margin-bottom: 30px;
 }

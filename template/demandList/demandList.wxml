@@ -3,12 +3,12 @@
 <block wx:if="{{list.length > 0}}">
 <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }}" bindtap="navToDetail">
     <view wx:if="{{item.id === closedDemandId}}" class='demand_end'>已结束</view>
-    <view class="demand">
-     <view class="demand_title ellipsis-2 {{item.status>=3?'gray':''}}">{{item.title}}</view>
+    <view class="demand {{item.status>=3?'darkColors':''}}">
+     <view class="demand_title ellipsis-2">{{item.title}}</view>
      <view class="demand_detail">
      <view class='demand_detail_info'>
-       <view class="demand_see {{item.status>=3?'gray':''}}">查看{{item.view_number}}</view>
-       <view class="demand_Communicate {{item.status>=3?'gray':''}}">沟通{{item.communicate_number}}</view>
+       <view class="demand_see">查看{{item.view_number}}</view>
+       <view class="demand_Communicate">沟通{{item.communicate_number}}</view>
        <view wx:if="{{item.unread_number>0}}" class='demand_news'>新消息{{item.unread_number}}</view>
        </view>
      </view>
