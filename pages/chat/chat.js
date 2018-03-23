@@ -65,8 +65,8 @@ Page({
         });
         wx.setNavigationBarTitle({ title: that.data.room.r_name });
         that.amendMessage(createSystemMessage('薪资：'+ that.data.room.source.salary + '元/天\n行业：'+that.data.room.source.industry.text+
-          '\n地点：'+that.data.room.source.address.selProvince+that.data.room.source.address.selCity+that.data.room.source.address.selDistrict+
-        '\n周期'+that.data.room.source.project_cycle.text+'；\n项目开始时间：'+that.data.room.source.project_begin_time));
+          '\n地点：'+that.data.room.source.address.selProvince+that.data.room.source.address.selCity+(that.data.room.source.address.selDistrict?that.data.room.source.address.selDistrict:'')+
+        '\n周期：'+that.data.room.source.project_cycle.text+'；\n项目开始时间：'+that.data.room.source.project_begin_time));
         that.pushMessage(createSystemMessage('您正在与'+that.data.room.contact.name+'聊天'));
         that.loadMessages();
       } else {
