@@ -189,25 +189,36 @@ Page({
   },
   formSubmit: function(e) {
     if (this.data.demand.title === '') {
-      this.showTopTips('标题不能为空');
+      wx.showToast({
+        title: '标题不能为空',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
+    if (this.data.selProvince == "请选择" || this.data.selCity == "请选择") {
+      wx.showToast({
+        title: '请选择地区',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
     if (this.data.demand.salary === '') {
-      this.showTopTips('薪资不能为空');
+      wx.showToast({
+        title: '薪资不能为空',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
     if (this.data.demand.description === '') {
-      this.showTopTips('描述不能为空');
+      wx.showToast({
+        title: '描述不能为空',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
-    }
-
-    if (this.data.selProvince == "请选择"){
-      this.showTopTips('请选择地区');
-      return
-    }
-    if (this.data.selCity == "请选择"){
-      this.showTopTips('请选择地区');
-      return
     }
 
     wx.showLoading({
