@@ -56,14 +56,11 @@
   
 	<view class="detail-bottom">
 	    <view class="bottom-box">
-	        <view wx:if="{{demand.is_author}}" bindtap="navToHome" class="item">
+	        <view bindtap="navToHome" class="item">
 	            <i class="iconfont icon-home"></i>
 	            <view class="doc">首页</view>
 	        </view>
-	        <view wx:else bindtap="navToMyHistory" class="item">
-                <i class="iconfont icon-home"></i>
-                <view class="doc">足迹</view>
-            </view>
+
 	        <button hover-class="none" plain="true" open-type="share" class="item docbutton">
                 <i class="iconfont icon-share"></i>
                 <view class="doc">分享</view>

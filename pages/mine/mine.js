@@ -15,26 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    var that = this;
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      request.httpsPostRequest('/weapp/user/info', {openid: app.globalData.userOpenid }, function(res_data) {
-        if (res_data.code === 1000) {
-          that.setData({
-            userInfo: res_data.data
-          })
-          app.globalData.userInfo = res_data.data
-        } else {
-          wx.showToast({
-            title: res_data.message,
-            icon: 'loading',
-            duration: 2000
-          });
-        }
-      });
-    });
+
   },
 
   /**
@@ -48,7 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.loadData();
   },
 
   /**
@@ -77,6 +58,28 @@ Page({
    */
   onReachBottom: function () {
   
+  },
+  loadData: function () {
+    // 页面初始化 options为页面跳转所带来的参数
+    var that = this;
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function(userInfo){
+      //更新数据
+      request.httpsPostRequest('/weapp/user/info', { }, function(res_data) {
+        if (res_data.code === 1000) {
+          that.setData({
+            userInfo: res_data.data
+          })
+          app.globalData.userInfo = res_data.data
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'loading',
+            duration: 2000
+          });
+        }
+      });
+    });
   },
   navToMessages: function (e) {
     console.log('navToMyHistory')
