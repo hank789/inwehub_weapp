@@ -229,16 +229,17 @@ Page({
   sendSystemTime() {
     //获取当前时间
     var myDate = new Date();
+    var timestamp = Date.parse(myDate);
     var hours = myDate.getHours().toString();       //获取当前小时数(0-23)
     var minutes = myDate.getMinutes().toString();     //获取当前分钟数(0-59)
-    var mydata = (hours[1]?hours:('0'+hours)) + ':' + (minutes[1]?minutes:('0'+minutes))
+    var mydata = (hours[1]?hours:('0'+hours)) + ':' + (minutes[1]?minutes:('0'+minutes));
+    var length = this.data.messages.length;
     //如果两次时间间隔大于3分钟
-    if (minutes - this.data.minutes >= 3) {
-      var length = this.data.messages.length;
+    if (length === 0 || (timestamp - this.data.messages[length-1].created_at_timestamp >= 180)) {
       this.data.messages.push(createSystemMessage(mydata));
       this.setData({
         messages: this.data.messages,
-        lastMessageId: length > 0 && this.data.messages[length - 1].id
+        lastMessageId: length > 0 ? this.data.messages[length - 1].id : this.data.lastMessageId
       });
     }
     this.setData({

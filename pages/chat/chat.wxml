@@ -35,9 +35,12 @@
     <block wx:if="{{isLoading}}">
       <template is="loading" />
     </block>
-    <view wx:for="{{messages}}" id="msg_{{item.id}}" class="message {{item.type}}">
+    <view wx:for="{{messages}}" wx:for-index="idx" wx:for-item="item" id="msg_{{item.id}}" class="message {{item.type}}">
+        <view wx:if="{{idx == 0 || (messages[idx-1] && item.created_at_timestamp - messages[idx-1].created_at_timestamp >= 180)}}" class="system-message system-time">
+            {{item.created_at}}
+        </view>
         <view wx:if="{{item.type == 'system'}}" class="system-message system-time">
-            {{item.data.text}}
+           {{item.data.text}}
         </view>
         <view wx:else class="user-message {{item.user_id == userInfo.id && 'me'}}">
             <image class="avatar" src="{{item.avatar}}" mode="scaleToFill"></image>
