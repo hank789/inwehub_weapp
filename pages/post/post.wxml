@@ -42,8 +42,8 @@
                 </view>
                 <view class="weui-cell__ft">
                     <!-- <view class="weui-vcode-btn post_blue">元/天</view> -->
-                    <picker id="project_cycle" bindchange="bindDataCycleChange" range-key="text" value="{{salary_typeIndex}}" range="{{salary_type}}">
-                        <view class="weui-select weui-select_in-select-after">{{salary_type[demand.salary_type].text}}</view>
+                    <picker id="project_cycle"  bindchange="bindDataCycleChange" range-key="text" value="{{salary_typeIndex}}" range="{{salary_type}}">
+                        <view class="weui-select weui-select_in-select-after post_blue">{{salary_type[demand.salary_type].text}}</view>
                     </picker>
                 </view>
             </view>
