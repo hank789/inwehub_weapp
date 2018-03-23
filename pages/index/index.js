@@ -27,7 +27,13 @@ Page({
   },
   onShow:function(){
     // 页面显示
-     console.log(this.userInfo)
+    var that = this;
+    app.getUserInfo(function(userInfo){
+      //更新数据
+      that.setData({
+        userInfo:userInfo
+      });
+    });
   },
   onHide:function(){
     // 页面隐藏
