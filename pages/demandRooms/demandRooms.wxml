@@ -1,6 +1,8 @@
 <!--引入加载更多模版-->
 <import src="../../template/loading" />
-<view class='title ellipsis-2'>{{ demand.title }}</view>
+<view class='title'>
+ <view class='ellipsis-2'>{{ demand.title }}</view>
+</view>
 <view class='chat'>聊天信息</view>
 <view class="weui-panel" wx:if="{{list.length > 0}}">
     <view wx:for="{{list}}" wx:key="id" data-id="{{item.room_id}}" bindtap="navToRoom">
