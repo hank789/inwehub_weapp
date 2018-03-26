@@ -99,26 +99,42 @@ Page({
     });
   },
   authCloseDemand: function (e) {
-    request.httpsPostRequest('/weapp/demand/close', { id: this.data.demand_id }, function (res_data) {
-      if (res_data.code === 1000) {
-        wx.navigateTo({
-          url: '../myHistory/myHistory',
-          success: function (e) {
-            wx.showToast({
-              title: '需求已关闭',
-              icon: 'success',
-              duration: 2000
-            });
+     var that = this
+      wx.showModal({
+          title: '关闭',
+          content: '确定删关闭？',
+          confirmText: "确定",
+          cancelText: "取消",
+          success: function (res) {
+              console.log(res);
+              if (res.confirm) {
+                  console.log('用户点击确定')
+                  request.httpsPostRequest('/weapp/demand/close', { id: that.data.demand_id }, function (res_data) {
+                      if (res_data.code === 1000) {
+                          wx.navigateTo({
+                              url: '../myHistory/myHistory',
+                              success: function (e) {
+                                  wx.showToast({
+                                      title: '需求已关闭',
+                                      icon: 'success',
+                                      duration: 2000
+                                  });
+                              }
+                          });
+                      } else {
+                          wx.showToast({
+                              title: res_data.message,
+                              icon: 'success',
+                              duration: 2000
+                          });
+                      }
+                  });
+              //
+              }else{
+                  console.log('用户点击取消作')
+              }
           }
-        });
-      } else {
-        wx.showToast({
-          title: res_data.message,
-          icon: 'success',
-          duration: 2000
-        });
-      }
-    });
+      });
   },
   onShareAppMessage: function() {
     return{
