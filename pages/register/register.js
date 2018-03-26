@@ -199,7 +199,8 @@ Page({
       title: this.data.title,
       company: this.data.company,
       email: this.data.email,
-      code: this.data.code
+      code: this.data.code,
+      formId: e.detail.formId
     };
     var requestUrl = '/auth/weapp/register';
     var that = this;

@@ -269,6 +269,25 @@ Page({
       });
     }
   },
+  formSubmit(e) {
+    if (e.detail.value.input_message) {
+      this.setData({ inputContent: '' });
+      this.whisperFinishedTyping();
+      var that = this
+      request.httpsPostRequest('/im/message-store', { text:e.detail.value.input_message,contact_id:this.data.room.contact.id, room_id: this.data.room_id, formId: e.detail.formId }, function (res_data) {
+        if (res_data.code === 1000) {
+          that.sendSystemTime();
+          that.pushMessage(res_data.data);
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      });
+    }
+  },
   chooseImage: function() {
     //上传图片相关
     var that = this;

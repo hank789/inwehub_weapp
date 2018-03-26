@@ -24,7 +24,7 @@
      </view>
      <view class='project_detail_bot'>
        <view class='project_detail_address'>
-       <image src='../../images/details_address@3x.png'></image>
+       <image src='../../images/details_address@2x.png'></image>
         {{room.source.address.selProvince}}{{room.source.address.selCity ? room.source.address.selCity:''}}{{room.source.address.selDistrict  ? room.source.address.selDistrict : ''}}
        </view>
        <view class='project_detail_salary'>{{room.source.salary}}<view class='gray'>RMB/{{room.source.salary_type === 0 ? '天': '月'}}</view></view>
@@ -66,8 +66,14 @@
     <view id="bottom-element"></view>
 </scroll-view>
 <view class="input-panel">
-    <input type="text" adjust-position="false" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
-    <view class="footadd" bindtap="chooseImage">
-       <image src="../../images/plus.png"/>
-    </view>
+    <form bindsubmit="formSubmit" report-submit="true">
+        <input name="input_message" type="text" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
+        <view class="footadd" bindtap="chooseImage">
+           <image src="../../images/plus.png"/>
+        </view>
+        <view class="footsubmit">
+            <image src="../../images/send.png"/>
+            <button formType="submit">发送</button>
+        </view>
+    </form>
 </view>

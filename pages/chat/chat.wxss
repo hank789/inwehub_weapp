@@ -210,6 +210,25 @@
   width: 50rpx;
   height: 50rpx;
 }
+.footsubmit {
+  width: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footsubmit image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.footsubmit button {
+  position: absolute;
+  width: 50px;
+  height: 60px;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+}
 
   @keyframes blink {
     0% {

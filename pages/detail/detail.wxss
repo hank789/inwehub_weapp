@@ -82,6 +82,9 @@
 .detail-bottom .item .doc {
   font-size: 24rpx;
 }
+.detail-bottom .item .doc .message-num {
+    color: #e64340;
+}
 
 .detail-bottom .docbutton {
   font-size: 24rpx;
