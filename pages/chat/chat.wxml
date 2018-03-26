@@ -11,7 +11,7 @@
         </view>
     </view>  -->
 <view class='Occupy'></view>
-<view class='project_detail' bindtap="navToDetail" data-id="{{ room.source_id }}">
+<view wx:if="{{room.source_id}}" class='project_detail' bindtap="navToDetail" data-id="{{ room.source_id }}">
      <view class='project_detail_top'>
         <view class='project_detail_title ellipsis-2'>
           {{room.source.title}}

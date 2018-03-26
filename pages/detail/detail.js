@@ -31,7 +31,8 @@ Page({
       request.httpsPostRequest('/weapp/demand/detail', { id: options.id }, function (res_data) {
         if (res_data.code === 1000) {
           that.setData({
-            demand: res_data.data
+            demand: res_data.data,
+            isLoading: false
           });
           
         } else {

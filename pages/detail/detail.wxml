@@ -1,5 +1,6 @@
 <view class="container">
 <!-- dr  -->
+<view wx:if="{{!isLoading}}">
   <view class='project_detail'>
      <view class='project_detail_top'>
         <view class='project_detail_title ellipsis-2'>
@@ -79,4 +80,5 @@
 		</view>
 	</view>
 	<component-share id="component-share-demand" option="{{ shareOption }}"></component-share>
+	</view>
 </view>
