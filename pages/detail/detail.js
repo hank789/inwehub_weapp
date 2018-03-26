@@ -99,26 +99,39 @@ Page({
     });
   },
   authCloseDemand: function (e) {
-    request.httpsPostRequest('/weapp/demand/close', { id: this.data.demand_id }, function (res_data) {
-      if (res_data.code === 1000) {
-        wx.navigateTo({
-          url: '../myHistory/myHistory',
-          success: function (e) {
-            wx.showToast({
-              title: '需求已关闭',
-              icon: 'success',
-              duration: 2000
-            });
-          }
-        });
-      } else {
-        wx.showToast({
-          title: res_data.message,
-          icon: 'success',
-          duration: 2000
-        });
+    var that = this
+    wx.showModal({
+      title: '需求关闭',
+      content: '确认关闭此需求？',
+      showCancel: true,
+      success: function(res) {
+        if (res.confirm) {
+          request.httpsPostRequest('/weapp/demand/close', { id: that.data.demand_id }, function (res_data) {
+            if (res_data.code === 1000) {
+              wx.navigateTo({
+                url: '../myHistory/myHistory',
+                success: function (e) {
+                  wx.showToast({
+                    title: '需求已关闭',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
+              });
+            } else {
+              wx.showToast({
+                title: res_data.message,
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     });
+
   },
   onShareAppMessage: function() {
     return{

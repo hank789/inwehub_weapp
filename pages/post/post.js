@@ -221,14 +221,7 @@ Page({
       })
       return
     }
-    if (this.data.selCity == "请选择" && !(this.data.selProvince == '海外' || this.data.selProvince == '台湾省' || this.data.selProvince == '香港特别行政区' || this.data.selProvince == '澳门特别行政区')) {
-      wx.showToast({
-        title: '请选择地区',
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
+
     if (this.data.demand.salary === '') {
       wx.showToast({
         title: '薪资不能为空',
@@ -263,10 +256,10 @@ Page({
 
     var cityId = '';
     var provinceId = commonCityData.cityData[this.data.selProvinceIndex].id;
-    if (commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex]) {
-      cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
-    } else {
+    if (this.data.selCity == "请选择" || !this.data.selCity){
       this.data.selCity = '';
+    } else if (commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex]) {
+      cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
     }
 
     var districtId;
