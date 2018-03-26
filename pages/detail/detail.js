@@ -103,9 +103,12 @@ Page({
     wx.showModal({
       title: '需求关闭',
       content: '确认关闭此需求？',
-      showCancel: true,
-      success: function(res) {
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
         if (res.confirm) {
+          console.log('用户点击确定')
           request.httpsPostRequest('/weapp/demand/close', { id: that.data.demand_id }, function (res_data) {
             if (res_data.code === 1000) {
               wx.navigateTo({
@@ -126,12 +129,12 @@ Page({
               });
             }
           });
-        } else if (res.cancel) {
-          console.log('用户点击取消')
+          //
+        }else{
+          console.log('用户点击取消作')
         }
       }
     });
-
   },
   onShareAppMessage: function() {
     return{

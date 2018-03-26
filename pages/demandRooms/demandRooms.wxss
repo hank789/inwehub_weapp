@@ -2,7 +2,7 @@
    background: #FFFFFF;
  }
  .title{
-   width:84%;
+    width:84%;
    overflow:hidden;
    margin:auto;
    margin-top:22rpx;
@@ -14,7 +14,7 @@
    border-radius: 8rpx;
    font-weight: 500;
    word-wrap:break-word;
-   word-break:break-all;
+   word-break:break-all; 
  }
  .chat{
    width: 100%;
