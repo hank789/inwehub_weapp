@@ -19,7 +19,8 @@ Page({
       project_begin_time: '2018-01-01',
       description: '',
       industry: 0,
-      project_cycle: 0
+      project_cycle: 0,
+      formId: ''
     },
     errorMsg: '',
     author: {},
@@ -288,6 +289,7 @@ Page({
       selDistrictIndex: this.data.selDistrictIndex
     };
 
+    this.data.demand.formId = e.detail.formId;
     var that = this;
     request.httpsPostRequest(requestUrl, this.data.demand, function (res_data) {
       console.log(res_data);
