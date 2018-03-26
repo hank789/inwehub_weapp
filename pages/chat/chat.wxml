@@ -67,7 +67,7 @@
 </scroll-view>
 <view class="input-panel">
     <form bindsubmit="formSubmit" report-submit="true">
-        <input name="input_message" type="text" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true"></input>
+        <input name="input_message" type="text" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-hold="true"></input>
         <view class="footadd" bindtap="chooseImage">
            <image src="../../images/chat_add@3x.png"/>
         </view>
