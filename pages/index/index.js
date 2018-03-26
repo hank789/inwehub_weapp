@@ -42,7 +42,7 @@ Page({
   },
   navToPost: function () {
     wx.navigateTo({
-      url: '../post/post'
+      url: '../post/post?id=0'
     });
   },
   onPullDownRefresh: function () {

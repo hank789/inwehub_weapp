@@ -85,7 +85,7 @@ Page({
           that.setData({
             industry_select: tag_data.data.tags
           })
-          if (that.data.demand.id) {
+          if (that.data.demand.id>0) {
             request.httpsPostRequest('/weapp/demand/detail', { id: that.data.demand.id }, function (res_data) {
               if (res_data.code === 1000) {
                 var tagLength = tag_data.data.tags.length;
