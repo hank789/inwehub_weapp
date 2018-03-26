@@ -23,3 +23,6 @@
 <block wx:if="{{isLoading}}">
   <template is="loading" />
 </block>
+<block wx:elif="{{list.length<=0}}">
+<view class="container">暂无消息</view>
+</block>
