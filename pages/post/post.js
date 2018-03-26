@@ -19,7 +19,8 @@ Page({
       project_begin_time: '2018-01-01',
       description: '',
       industry: 0,
-      project_cycle: 0
+      project_cycle: 0,
+      formId: ''
     },
     errorMsg: '',
     author: {},
@@ -85,7 +86,7 @@ Page({
           that.setData({
             industry_select: tag_data.data.tags
           })
-          if (that.data.demand.id) {
+          if (that.data.demand.id>0) {
             request.httpsPostRequest('/weapp/demand/detail', { id: that.data.demand.id }, function (res_data) {
               if (res_data.code === 1000) {
                 var tagLength = tag_data.data.tags.length;
@@ -221,14 +222,7 @@ Page({
       })
       return
     }
-    if (this.data.selCity == "请选择" && !(this.data.selProvince == '海外' || this.data.selProvince == '台湾省' || this.data.selProvince == '香港特别行政区' || this.data.selProvince == '澳门特别行政区')) {
-      wx.showToast({
-        title: '请选择地区',
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
+
     if (this.data.demand.salary === '') {
       wx.showToast({
         title: '薪资不能为空',
@@ -237,9 +231,9 @@ Page({
       })
       return false;
     }
-    if (this.data.demand.description === '') {
+    if (this.data.demand.description.length <= 50) {
       wx.showToast({
-        title: '描述不能为空',
+        title: '您的职位描述太简单了',
         icon: 'none',
         duration: 2000
       })
@@ -263,10 +257,10 @@ Page({
 
     var cityId = '';
     var provinceId = commonCityData.cityData[this.data.selProvinceIndex].id;
-    if (commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex]) {
-      cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
-    } else {
+    if (this.data.selCity == "请选择" || !this.data.selCity){
       this.data.selCity = '';
+    } else if (commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex]) {
+      cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
     }
 
     var districtId;
@@ -295,6 +289,7 @@ Page({
       selDistrictIndex: this.data.selDistrictIndex
     };
 
+    this.data.demand.formId = e.detail.formId;
     var that = this;
     request.httpsPostRequest(requestUrl, this.data.demand, function (res_data) {
       console.log(res_data);

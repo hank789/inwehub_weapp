@@ -1,14 +1,14 @@
 <view class="page">
   <view class="page__bd">
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
-    <form bindsubmit="formSubmit">
+    <form bindsubmit="formSubmit" report-submit="true">
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
                 <!-- <view class="weui-cell__hd">
                     <view class="weui-label">标题</view>
                 </view> -->
                 <view class="weui-cell__bd">
-                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title'   placeholder="输入标题（40字）"/>
+                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title' maxlength="40"   placeholder="输入标题（40字）"/>
                 </view>
             </view>
 
@@ -21,8 +21,8 @@
                       </view>
                     </picker>
                     <picker bindchange="bindPickerCityChange" range="{{citys}}">
-                      <view class="picker {{selCity=='请选择'?'hui':''}}">
-                        {{selCity}}
+                      <view class="picker {{(selCity=='请选择'||!selCity)?'hui':''}}">
+                        {{selCity?selCity:'请选择'}}
                       </view>
                     </picker>
                     <picker bindchange="bindPickerChange" range="{{districts}}">
