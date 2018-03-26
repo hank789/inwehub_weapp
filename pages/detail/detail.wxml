@@ -68,7 +68,7 @@
 	        <block wx:if="{{demand.is_author}}">
 	            <view bindtap="navToRooms" class="item">
                     <i class="iconfont icon-message"></i>
-                    <view class="doc">消息<view class="message-num" wx:if="{{demand.im_count>0}}">{{ '(' + demand.im_count + ')'}}</view></view>
+                    <view class="doc">消息<text class="message-num" wx:if="{{demand.im_count>0}}">{{ '(' + demand.im_count + ')'}}</text></view>
                 </view>
 	            <view wx:if="{{demand.status==1}}" class="sy-bottom btn_cart" bindtap="authCloseDemand">关闭</view>
 	            <view class="sy-bottom btn_order" bindtap="authEditDemand">修改</view>
