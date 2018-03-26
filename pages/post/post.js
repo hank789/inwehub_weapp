@@ -273,7 +273,7 @@ Page({
 
     var requestUrl = '/weapp/demand/store';
     var title = '发布成功';
-    if (this.data.demand.id) {
+    if (this.data.demand.id>0) {
       requestUrl = '/weapp/demand/update';
       title = '修改成功';
     }
