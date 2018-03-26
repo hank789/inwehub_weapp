@@ -5,7 +5,7 @@ var app = getApp();
 //查询用户信息
 var request = require("../../utils/request.js");
 var commonCityData = require('../../utils/city.js')
-
+var util = require('../../utils/util.js')
 Page({
   data:{
     showTopTips: false,
@@ -16,7 +16,7 @@ Page({
       address: '',
       salary: '',
       salary_type: 0,
-      project_begin_time: '2018-01-01',
+      project_begin_time: util.formatTime(new Date(),false),
       description: '',
       industry: 0,
       project_cycle: 0,
