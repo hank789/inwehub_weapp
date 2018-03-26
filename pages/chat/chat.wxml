@@ -68,12 +68,12 @@
 <view class="input-panel">
     <form bindsubmit="formSubmit" report-submit="true">
         <input name="input_message" type="text" bindinput="whisperTyping" bindblur="whisperFinishedTyping" value="{{inputContent}}" confirm-type="send" confirm-hold="true" bindconfirm="sendMessage"></input>
-    </form>
-    <view class="footadd" bindtap="chooseImage">
+        <view class="footadd" bindtap="chooseImage">
            <image src="../../images/chat_add@3x.png"/>
         </view>
         <view class="footsubmit">
             <image src="../../images/chat_submit@3x.png"/>
             <button formType="submit">发送</button>
         </view>
+    </form>     
 </view>

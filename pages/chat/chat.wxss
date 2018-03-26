@@ -168,7 +168,6 @@
 }
 
 .input-panel {
-    padding: 0 1%; 
     background: #f3f3f3;
     border-top: 1px solid #DDD;
     position: absolute;
@@ -182,9 +181,10 @@
     align-items: center;
 }
 .input-panel form {
-  width: 80%;
+  width: 100%;
 }
 .input-panel input {
+    width:76%;
     font-size:28rpx;
     flex: 8;
     background: #f9f9f9;
@@ -203,6 +203,16 @@
   padding: 10rpx;
   border: 1px solid #ccc;
   border-radius: 50rpx;
+}
+.footsubmit{
+ position: absolute;
+ right: 8rpx;
+ top: 17rpx;
+}
+.footadd {
+ position: absolute;
+ right: 80rpx;
+ top: 17rpx;
 }
 .footsubmit,.footadd {
   width:60rpx;
