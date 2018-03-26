@@ -8,7 +8,7 @@
    overflow:hidden;
    margin:auto;
    padding:30rpx 34rpx;
-   box-shadow: 0rpx 0rpx 8rpx 8rpx #ECECEE;
+   box-shadow: 0rpx 0rpx 8rpx 4rpx #F4F6F8;
    border-radius: 8rpx;
    margin-bottom: 100rpx;
    position: relative;

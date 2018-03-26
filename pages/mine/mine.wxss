@@ -35,7 +35,7 @@ page{
   margin:auto;
   margin-top:22rpx;
   padding:0rpx 30rpx;
-  box-shadow: 0rpx 0rpx 8rpx 8rpx #ECECEE;
+  box-shadow: 0rpx 0rpx 8rpx 4rpx #F4F6F8;
   border-radius:8rpx;
   margin-bottom: 30px;
 }
