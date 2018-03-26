@@ -207,12 +207,12 @@
 .footsubmit{
  position: absolute;
  right: 8rpx;
- top: 17rpx;
+ top: 8rpx;
 }
 .footadd {
  position: absolute;
  right: 80rpx;
- top: 17rpx;
+ top: 8rpx;
 }
 .footsubmit,.footadd {
   width:60rpx;
