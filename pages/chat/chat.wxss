@@ -176,8 +176,13 @@
     bottom: 0;
     overflow: hidden;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
-
+.input-panel form {
+  width: 80%;
+}
 .input-panel input {
     font-size:28rpx;
     flex: 8;
@@ -193,32 +198,23 @@
     width:20rpx;
     height:80rpx;
 }
-.footadd {
-  width: 80rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .addbroder {
   padding: 10rpx;
   border: 1px solid #ccc;
   border-radius: 50rpx;
 }
-
-.footadd image {
-  width: 50rpx;
-  height: 50rpx;
+.footsubmit,.footadd {
+  width:60rpx;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:60rpx;
+  background:#03aef9;
+  border-radius:50%;
 }
-.footsubmit {
-  width: 80rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.footsubmit image {
-  width: 50rpx;
-  height: 50rpx;
+.footsubmit image,.footadd image {
+  width: 40rpx;
+  height: 40rpx;
 }
 .footsubmit button {
   position: absolute;
