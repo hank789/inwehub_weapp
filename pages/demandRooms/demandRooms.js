@@ -1,5 +1,5 @@
-//logs.js
 var request = require("../../utils/request.js");
+var app = getApp();
 Page({
   data: {
     demand_id: 0,
