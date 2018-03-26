@@ -13,8 +13,8 @@
      </view>
      <view class='project_detail_bot'>
        <view class='project_detail_address'>
-       <image src='../../images/details_address@3x.png'></image>
-        {{demand.address.selProvince  === '请选择' ? '' : demand.address.selProvince }}{{demand.address.selCity === '请选择' ? '' : demand.address.selCity}}{{demand.address.selDistrict ? demand.address.selDistrict : ''}}
+       <image src='../../images/details_address@2x.png'></image>
+        {{demand.address.selProvince  === '请选择' ? '' : demand.address.selProvince }}{{demand.address.selCity ? demand.address.selCity : ''}}{{demand.address.selDistrict ? demand.address.selDistrict : ''}}
        </view>
        <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/{{demand.salary_type === 0 ? '天':'月'}}</view></view>
      </view>

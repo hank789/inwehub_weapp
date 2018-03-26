@@ -17,8 +17,8 @@
          <view class='demand_detail'>
          <!-- 已经结束的样式加。gray  -->
          <view class='demand_detail_info'>
-           <image src='../../images/details_address@3x.png'></image>
-           <view class='demand_address'>{{item.address.selProvince}}{{item.address.selCity}}{{item.address.selDistrict?item.address.selDistrict:''}}</view>
+           <image src='../../images/details_address@2x.png'></image>
+           <view class='demand_address'>{{item.address.selProvince}}{{item.address.selCity?item.address.selCity:''}}{{item.address.selDistrict?item.address.selDistrict:''}}</view>
            <view class='demand_news' wx:if="{{item.unread_number>0}}">新消息{{item.unread_number}}</view>
           <view class='demand_news gray' wx:elif="{{item.communicate_number > 0}}">已沟通</view>
           </view>
