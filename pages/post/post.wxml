@@ -8,7 +8,7 @@
                     <view class="weui-label">标题</view>
                 </view> -->
                 <view class="weui-cell__bd">
-                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title'   placeholder="输入标题（40字）"/>
+                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title' maxlength="40"   placeholder="输入标题（40字）"/>
                 </view>
             </view>
 
