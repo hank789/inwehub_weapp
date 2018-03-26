@@ -60,27 +60,6 @@ Page({
     wx.stopPullDownRefresh();
   },
   onReady() {
-    var that = this;
-    // 查询对象
-    request.httpsPostRequest('/im/getRoom', { room_id: this.data.room_id }, function (res_data) {
-      if (res_data.code === 1000) {
-        that.setData({
-          room: res_data.data
-        });
-        wx.setNavigationBarTitle({ title: that.data.room.r_name });
-        that.amendMessage(createSystemMessage('薪资：'+ that.data.room.source.salary + '元/天\n行业：'+that.data.room.source.industry.text+
-          '\n地点：'+that.data.room.source.address.selProvince+that.data.room.source.address.selCity+(that.data.room.source.address.selDistrict?that.data.room.source.address.selDistrict:'')+
-        '\n周期：'+that.data.room.source.project_cycle.text+'\n项目开始时间：'+that.data.room.source.project_begin_time));
-        that.pushMessage(createSystemMessage('您正在与'+that.data.room.contact.name+'聊天'));
-        that.loadMessages();
-      } else {
-        wx.showToast({
-          title: res_data.message,
-          icon: 'success',
-          duration: 2000
-        });
-      }
-    });
 
   },
 
@@ -99,6 +78,26 @@ Page({
   },
   connect() {
     var that = this;
+    // 查询对象
+    request.httpsPostRequest('/im/getRoom', { room_id: this.data.room_id }, function (res_data) {
+      if (res_data.code === 1000) {
+        that.setData({
+          room: res_data.data
+        });
+        wx.setNavigationBarTitle({ title: that.data.room.r_name });
+        that.amendMessage(createSystemMessage('薪资：'+ that.data.room.source.salary + '元/天\n行业：'+that.data.room.source.industry.text+
+          '\n地点：'+that.data.room.source.address.selProvince+that.data.room.source.address.selCity+(that.data.room.source.address.selDistrict?that.data.room.source.address.selDistrict:'')+
+          '\n周期：'+that.data.room.source.project_cycle.text+'\n项目开始时间：'+that.data.room.source.project_begin_time));
+        that.pushMessage(createSystemMessage('您正在与'+that.data.room.contact.name+'聊天'));
+        that.loadMessages();
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
     EchoIo.options.auth.headers['Authorization'] = 'Bearer ' + app.globalData.appAccessToken
     // 监听通知事件
     EchoIo.private('room.'+ this.data.room_id +'.user.' + app.globalData.userInfo.id)
