@@ -37,7 +37,7 @@
   <view class='detail_info'>
     <view class='detail_info_time'>
       招募信息有效期
-      <view class='blue'>{{demand.expired_at}}</view>
+      <view class='blue'>{{demand.status >=3 ? '已结束' : demand.expired_at}}</view>
     </view>
     <view class='project_describe_title'>
         <view class='line'></view>
