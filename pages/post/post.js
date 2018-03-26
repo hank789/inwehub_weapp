@@ -230,9 +230,9 @@ Page({
       })
       return false;
     }
-    if (this.data.demand.description === '') {
+    if (this.data.demand.description.length <= 50) {
       wx.showToast({
-        title: '描述不能为空',
+        title: '您的职位描述太简单了',
         icon: 'none',
         duration: 2000
       })

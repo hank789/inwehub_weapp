@@ -111,7 +111,7 @@ Page({
           console.log('用户点击确定')
           request.httpsPostRequest('/weapp/demand/close', { id: that.data.demand_id }, function (res_data) {
             if (res_data.code === 1000) {
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '../myHistory/myHistory',
                 success: function (e) {
                   wx.showToast({
