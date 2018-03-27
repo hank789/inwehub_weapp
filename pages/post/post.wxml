@@ -84,7 +84,7 @@
 
              <view class="weui-cell post_description">
                 <view class="weui-cell__bd">
-                    <textarea  maxlength="3000" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述" value="{{demand.description}}" />
+                    <textarea auto-height="true" maxlength="3000" bindinput="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述" value="{{demand.description}}" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view> 
