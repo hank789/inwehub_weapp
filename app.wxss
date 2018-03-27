@@ -64,3 +64,4 @@ page {
     margin: 15px auto 0 auto;
     padding: 0
 }
+.weui-cells:after{bottom:0;border-bottom:none;}
