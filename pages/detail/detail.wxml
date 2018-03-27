@@ -1,93 +1,77 @@
-<!--logs.wxml-->
 <view class="container">
-	<view class="container-body space-content">
-	  <view class="space-top">
-  	  <view class="space-info">
-  	  	<view class="space-title">{{demand.title}}</view>
-
-  	  	<view class="space-list">
-  	  		<view class="space-item">
-  	  			<text class="text-left">薪资：</text>
-  	  			<text class="text-right">
-  	  				<text class="text-orange">{{demand.salary}}</text> 元/天
-  	  			</text>
-  	  		</view>
-  	  		<view class="space-item">
-  	  			<text class="text-left">行业：</text>
-  	  			<text class="text-right">{{demand.industry.text}}</text>
-  	  		</view>
-  	  		<view class="space-item">
-  	  			<text class="text-left">地点：</text>
-  	  			<text class="text-right">{{demand.address.selProvince+" "+demand.address.selCity+" "+demand.address.selDistrict}}</text>
-  	  		</view>
-            <view class="space-item">
-                <text class="text-left">项目周期：</text>
-                <text class="text-right">{{demand.project_cycle.text}}</text>
-            </view>
-            <view class="space-item">
-                <text class="text-left">项目开始日期：</text>
-                <text class="text-right">{{demand.project_begin_time}}</text>
-            </view>
-  	  	</view>
-  	  </view>
-	  </view>
-
-	  <view class="space-block">
-	    <view class="space-block-content">
-	        <view wx:for="{{demand.candidates}}" class="space-item">
-	            <image data-id="{{item.room_id}}" bindtap="navToChat" class="avatar" src="{{item.user_avatar}}" mode="aspectFill"></image>
-	        </view>
-	    </view>
-	  </view>
-
-      <view class="space-block">
-        <view class="space-block-title">发布者</view>
-        <view class="space-block-content">
-            <view class="space-list">
-                <view class="space-item">
-                    <text class="text-left">姓名：</text>
-                    <text class="text-right">{{ demand.publisher_name }}</text>
-                </view>
-                <view class="space-item">
-                    <text class="text-left">职位：</text>
-                    <text class="text-right">{{ demand.publisher_title }}</text>
-                </view>
-                <view class="space-item">
-                    <text class="text-left">公司：</text>
-                    <text class="text-right">{{ demand.publisher_company }}</text>
-                </view>
-                <view class="space-item">
-                    <text class="text-left">邮箱：</text>
-                    <text class="text-right">{{ demand.publisher_email }}</text>
-                </view>
-            </view>
-            <view class="space-passage"></view>
+<!-- dr  -->
+<view wx:if="{{!isLoading}}">
+  <view class='project_detail'>
+     <view class='project_detail_top'>
+        <view class='project_detail_title ellipsis-2'>
+           {{demand.title}}
         </view>
-      </view>
-
-	  <view class="space-block">
-	  	<view class="space-block-title">需求描述</view>
-	  	<view class="space-block-content">
-	  		<text class="space-passage">{{demand.description}}</text>
-	  	</view>
-  	  </view>
-	</view>
+        <view class='project_detail_tags'>
+          <view class='tag' wx:if="{{demand.project_begin_time}}">{{demand.project_begin_time}}开始</view>
+          <view class='tag' wx:if="{{demand.project_cycle.text}}">周期{{demand.project_cycle.text}}</view>
+          <view class='tag' wx:if="{{demand.industry.text}}">{{demand.industry.text}}</view>
+        </view>
+     </view>
+     <view class='project_detail_bot'>
+       <view class='project_detail_address'>
+       <image src='../../images/details_address@2x.png'></image>
+        {{demand.address.selProvince  === '请选择' ? '' : demand.address.selProvince }}{{demand.address.selCity ? demand.address.selCity : ''}}{{demand.address.selDistrict ? demand.address.selDistrict : ''}}
+       </view>
+       <view class='project_detail_salary'>{{demand.salary}}<view class='gray'>RMB/{{demand.salary_type === 0 ? '天':'月'}}</view></view>
+     </view>
+     <view wx:if="{{demand.status>=3}}" class='project_end'>已结束</view>
+  </view>
+  <!-- 具体描述 -->
+  <view class='project_describe'>
+    <view class='project_describe_title'>
+        <view class='line'></view>
+        具体描述
+       <view class='line'></view>
+    </view>
+    <view class='project_content'>  
+        <text>{{demand.description}}</text>
+    </view>
+  </view>
+  <!-- 招募信息有效期  -->
+  
+  <!--  -->
+  <view class='detail_info'>
+    <view class='detail_info_time'>
+      招募信息有效期
+      <view class='blue'>{{demand.status >=3 ? '已结束' : demand.expired_at}}</view>
+    </view>
+    <view class='project_describe_title'>
+        <view class='line'></view>
+        发布者信息
+        <view class='line'></view>
+    </view>
+    <view class='detail_info_private'>
+      <image src='{{demand.publisher_avatar}}'></image>
+      {{ demand.publisher_name }}
+      <view class='interval' wx:if="{{demand.publisher_company}}"></view>
+      {{ demand.publisher_company }}
+      <view class='interval'  wx:if="{{demand.publisher_title}}"></view>
+      {{ demand.publisher_title ? demand.publisher_title : ''}}
+    </view>
+  </view>
+  
 	<view class="detail-bottom">
 	    <view class="bottom-box">
 	        <view bindtap="navToHome" class="item">
 	            <i class="iconfont icon-home"></i>
 	            <view class="doc">首页</view>
 	        </view>
-	        <view bindtap="saveToShare" class="item">
-	            <i class="iconfont icon-next"></i>
-	            <view class="doc">转发</view>
-	        </view>
+
 	        <button hover-class="none" plain="true" open-type="share" class="item docbutton">
                 <i class="iconfont icon-share"></i>
                 <view class="doc">分享</view>
 	        </button>
 	        <block wx:if="{{demand.is_author}}">
-	            <view class="sy-bottom btn_cart" bindtap="authCloseDemand">关闭</view>
+	            <view bindtap="navToRooms" class="item">
+                    <i class="iconfont icon-message"></i>
+                    <view class="doc">消息<text class="message-num" wx:if="{{demand.im_count>0}}">{{ '(' + demand.im_count + ')'}}</text></view>
+                </view>
+	            <view wx:if="{{demand.status==1}}" class="sy-bottom btn_cart" bindtap="authCloseDemand">关闭</view>
 	            <view class="sy-bottom btn_order" bindtap="authEditDemand">修改</view>
 	        </block>
 	        <block wx:if="{{!demand.is_author}}">
@@ -96,4 +80,5 @@
 		</view>
 	</view>
 	<component-share id="component-share-demand" option="{{ shareOption }}"></component-share>
+	</view>
 </view>

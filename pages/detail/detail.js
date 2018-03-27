@@ -31,7 +31,8 @@ Page({
       request.httpsPostRequest('/weapp/demand/detail', { id: options.id }, function (res_data) {
         if (res_data.code === 1000) {
           that.setData({
-            demand: res_data.data
+            demand: res_data.data,
+            isLoading: false
           });
           
         } else {
@@ -63,9 +64,19 @@ Page({
       url: '../chat/chat?id=' + e.currentTarget.dataset.id
     });
   },
+  navToRooms: function (e) {
+    wx.navigateTo({
+      url: '../demandRooms/demandRooms?id=' + this.data.demand_id
+    });
+  },
   navToHome: function (e) {
     wx.switchTab({
       url: '../index/index'
+    });
+  },
+  navToMyHistory: function (e) {
+    wx.navigateTo({
+      url: '../myHistory/myHistory'
     });
   },
   goContact: function (e) {
@@ -89,24 +100,40 @@ Page({
     });
   },
   authCloseDemand: function (e) {
-    request.httpsPostRequest('/weapp/demand/close', { id: this.data.demand_id }, function (res_data) {
-      if (res_data.code === 1000) {
-        wx.navigateTo({
-          url: '../myDemand/myDemand',
-          success: function (e) {
-            wx.showToast({
-              title: '需求已关闭',
-              icon: 'success',
-              duration: 2000
-            });
-          }
-        });
-      } else {
-        wx.showToast({
-          title: res_data.message,
-          icon: 'success',
-          duration: 2000
-        });
+    var that = this
+    wx.showModal({
+      title: '需求关闭',
+      content: '确认关闭此需求？',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('用户点击确定')
+          request.httpsPostRequest('/weapp/demand/close', { id: that.data.demand_id }, function (res_data) {
+            if (res_data.code === 1000) {
+              wx.redirectTo({
+                url: '../myHistory/myHistory',
+                success: function (e) {
+                  wx.showToast({
+                    title: '需求已关闭',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
+              });
+            } else {
+              wx.showToast({
+                title: res_data.message,
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          });
+          //
+        }else{
+          console.log('用户点击取消作')
+        }
       }
     });
   },
@@ -133,5 +160,8 @@ Page({
       }
     });
     this.shareView.show()
+  },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
   }
 })

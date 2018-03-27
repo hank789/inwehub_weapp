@@ -1,3 +1,84 @@
+/*  */
+.Occupy{
+  width: 100%;
+  height: 30rpx;
+}
+.project_detail{
+   width:84%;
+   overflow:hidden;
+   margin:auto;
+   padding:30rpx 34rpx;
+   box-shadow: 0rpx 0rpx 8rpx 4rpx #F4F6F8;
+   border-radius: 8rpx;
+   margin-bottom: 10rpx;
+   position: relative;
+   background: #fff;
+}
+.project_detail_top{
+  border-bottom: 1px solid #DCDCDC; 
+}
+.project_detail_title{
+  font-size: 32rpx;
+  color: #444444;
+  margin-bottom: 30rpx;
+  text-align: left;
+  font-weight: 500;
+  word-wrap:break-word;
+  word-break:break-all;
+}
+.project_detail_tags{
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap； */
+}
+.project_detail_tags .tag{
+  float: left;
+  border: 1px solid #DCDCDC;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  color: #808080;
+  padding: 7rpx 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
+}
+.project_detail_bot{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.project_detail_address{
+  font-size: 26rpx;
+  color:#444444;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.project_detail_address image{
+  width:24rpx;
+  height:29rpx;
+}
+.project_detail_salary{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 38rpx;
+  color:#66DBF9;
+  font-weight: 500;
+}
+.project_detail_salary .gray{
+  font-size: 26rpx;
+  color:#B4B4B6;
+}
+/*  */
 .container {
   height: 100%;
   width: 100%;
@@ -9,7 +90,7 @@
 .chat-container {
     position: absolute;
     top: 0;
-    bottom: 50px;
+    bottom: 100rpx;
     right: 0;
     left: 0;
     text-align: center;
@@ -18,28 +99,32 @@
 .system-message {
     background: #BBB;
     color: white;
-    border-radius: 4px;
-    margin: 10px;
-    text-align: center;
-    font-size: 12px;
-    padding: 2px 6px;
+    border-radius: 8rpx;
+    margin: 20rpx;
+    text-align: left;
+    font-size:28rpx;
+    padding:15rpx 20rpx;
     width: auto;
     display: inline-block;
+    line-height: 48rpx;
+}
+.system-time{
+  padding: 0rpx 10rpx; 
 }
 
 .message {
-    margin-bottom: 10px;
+    margin-bottom: 20rpx;
 }
 .user-message {
     display: flex;
-    margin: 10px;
+    margin: 20rpx;
 }
 
 .user-message .avatar {
-    width: 40px;
-    height: 40px;
-    margin-right: 5px;
-    background: #DDD;
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 10rpx;
+    border-radius: 16rpx;
 }
 
 .user-message.me .text {
@@ -50,18 +135,22 @@
 }
 
 .user-message .text {
-    text-align: left;
     background:#d5eaf8;
     border-radius:10rpx;
     padding:20rpx;
-    max-width: 65%;
-    word-wrap: break-word;
+    max-width:65%;
+    word-wrap:break-word;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    font-size:28rpx;
 }
 
 .user-message .text .nickname {
     color: #999;
-    font-size: 12px;
-    margin-left: 5px;
+    font-size: 24rpx;
+    margin-left: 10rpx;
 }
 
 .user-message.me {
@@ -69,8 +158,9 @@
 }
 
 .user-message.me .avatar {
-    margin-left: 5px;
+    margin-left: 10rpx;
     margin-right: 0;
+    border-radius: 10rpx;
 }
 
 .user-message.me .nickname {
@@ -80,54 +170,71 @@
 .input-panel {
     background: #f3f3f3;
     border-top: 1px solid #DDD;
-    height: 40px;
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     overflow: hidden;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
-
+.input-panel form {
+  width: 100%;
+}
 .input-panel input {
+    width:76%;
+    font-size:28rpx;
     flex: 8;
     background: #f9f9f9;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #DDD;
-    margin: 4px;
-    border-radius: 2px;
-    padding: 0 4px;
-}
-
-.input-panel button {
-    flex: 2;
-    margin: 4px;
-    margin-left: 0;
-    height: 32px;
-    line-height: 32px;
+    height: 2rem;
+    border: 1rpx solid #DDD;
+    margin: 8rpx;
+    border-radius: 4rpx;
+    padding: 0 8rpx;
 }
 
 .triangle image {
     width:20rpx;
     height:80rpx;
 }
-.footadd {
-  width: 80rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .addbroder {
   padding: 10rpx;
   border: 1px solid #ccc;
   border-radius: 50rpx;
 }
-
-.footadd image {
-  width: 50rpx;
-  height: 50rpx;
+.footsubmit{
+ position: absolute;
+ right: 8rpx;
+ top: 8rpx;
+}
+.footadd {
+ position: absolute;
+ right: 80rpx;
+ top: 8rpx;
+}
+.footsubmit,.footadd {
+  width:60rpx;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:60rpx;
+  background:#03aef9;
+  border-radius:50%;
+}
+.footsubmit image,.footadd image {
+  width: 100%;
+  height: 100%;
+}
+.footsubmit button {
+  position:absolute;
+  width:80rpx;
+  height:100%;
+  top:0;
+  right:0;
+  z-index:2;
+  opacity:0;
 }
 
   @keyframes blink {

@@ -1,0 +1,32 @@
+<!--引入加载更多模版-->
+<import src="../../template/loading" />
+<block wx:if="{{isLoading}}">
+  <template is="loading" />
+</block>
+<block wx:elif="{{list.length<=0}}">
+<view class="container">暂无消息</view>
+</block>
+
+ <!-- 有数据的样式  -->
+ <block wx:if="{{list.length > 0}}">
+    <view wx:for="{{list}}" wx:key="id" data-id="{{ item.id }}" bindtap="navToDetail">
+        <view wx:if="{{item.id === closedDemandId}}" class='demand_end'>已结束</view>
+        <view class="demand {{item.status>=3?'darkColors':''}}">
+         <view class="demand_title ellipsis-2">{{item.title}}</view>
+         <view class='demand_detail'>
+         <!-- 已经结束的样式加。gray  -->
+         <view class='demand_detail_info'>
+           <image src='../../images/details_address@2x.png'></image>
+           <view class='demand_address'>{{item.address.selProvince}}{{item.address.selCity?item.address.selCity:''}}{{item.address.selDistrict?item.address.selDistrict:''}}</view>
+           <view class='demand_news' wx:if="{{item.unread_number>0}}">新消息{{item.unread_number}}</view>
+          <view class='demand_news gray' wx:elif="{{item.communicate_number > 0}}">已沟通</view>
+          </view>
+
+           <view class='salary'>
+             <view class='blue'>{{item.salary}}</view>RMB/{{item.salary_type === 0 ? '天': '月'}}
+           </view>
+           <!--  -->
+         </view>
+        </view>
+     </view>
+ </block>

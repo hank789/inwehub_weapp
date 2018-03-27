@@ -1,4 +1,4 @@
-function formatTime(date) {
+function formatTime(date, formatHour = true) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()
@@ -8,7 +8,11 @@ function formatTime(date) {
   var second = date.getSeconds()
 
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  var formatDate = [year, month, day].map(formatNumber).join('-')
+  if (formatHour) {
+    formatDate = formatDate + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+  return formatDate
 }
 
 function formatNumber(n) {

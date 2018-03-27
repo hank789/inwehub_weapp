@@ -5,23 +5,27 @@ var app = getApp();
 //查询用户信息
 var request = require("../../utils/request.js");
 var commonCityData = require('../../utils/city.js')
-
+var util = require('../../utils/util.js')
 Page({
   data:{
     showTopTips: false,
+    disabledSubmitButton: false,
     demand: {
       id: '',
       title: '',
       address: '',
       salary: '',
-      project_begin_time: '2018-01-01',
+      salary_type: 0,
+      project_begin_time: util.formatTime(new Date(),false),
       description: '',
       industry: 0,
-      project_cycle: 0
+      project_cycle: 0,
+      formId: ''
     },
     errorMsg: '',
     author: {},
     industry_select: [],
+
     project_cycle_select: [
       {value:1,text:"小于1周"},
       {value:2,text:"1-2周"},
@@ -30,9 +34,13 @@ Page({
       {value:5,text:"2-4月"},
       {value:6,text:"4-6月"},
       {value:7,text:"半年以上"},
-      {value:8,text:"不确定"},
-      {value:9,text:"其他"}
+      {value:8,text:"不确定"}
     ],
+    salary_type: [
+        {value:1,text:"元/天"},
+        {value:2,text:"元/月"}
+    ],
+    salary_typeIndex: 0,
     projectCycleIndex: 0,
     industryIndex: 0,
     provinces:[],
@@ -55,7 +63,7 @@ Page({
     });
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
-      if (!app.globalData.appAccessToken) {
+      if (!userInfo.id) {
         wx.showModal({
           content: '您的认证信息还未完善，前往完善信息',
           showCancel: false,
@@ -77,7 +85,7 @@ Page({
           that.setData({
             industry_select: tag_data.data.tags
           })
-          if (that.data.demand.id) {
+          if (that.data.demand.id>0) {
             request.httpsPostRequest('/weapp/demand/detail', { id: that.data.demand.id }, function (res_data) {
               if (res_data.code === 1000) {
                 var tagLength = tag_data.data.tags.length;
@@ -102,6 +110,7 @@ Page({
                   'demand.project_cycle' : res_data.data.project_cycle.value
                 });
                 that.setDBSaveAddressId(res_data.data.address);
+                wx.setNavigationBarTitle({ title: '编辑需求' });
               } else {
                 wx.showToast({
                   title: res_data.message,
@@ -132,6 +141,9 @@ Page({
   },
   onUnload:function(){
     // 页面关闭
+  },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
   },
   bindDescriptionBlur: function(e) {
     this.setData({
@@ -165,15 +177,22 @@ Page({
       });
     }, 3000);
   },
+  bindDataCycleChange: function (e) {
+      console.log(e)
+      this.setData({
+        'demand.salary_type': e.detail.value
+      })
+  },
   bindIndustryChange: function (e) {
     console.log(e.detail.value)
+    console.log(this.data.industry_select[e.detail.value].value)
     this.setData({
       industryIndex: e.detail.value,
       'demand.industry': this.data.industry_select[e.detail.value].value
     })
   },
   bindProjectCycleChange: function (e) {
-    console.log(this.data.project_cycle_select[e.detail.value].value);
+    console.log('周期' + this.data.project_cycle_select[e.detail.value].value);
     this.setData({
       projectCycleIndex: e.detail.value,
       'demand.project_cycle':this.data.project_cycle_select[e.detail.value].value
@@ -187,44 +206,73 @@ Page({
   },
   formSubmit: function(e) {
     if (this.data.demand.title === '') {
-      this.showTopTips('标题不能为空');
+      wx.showToast({
+        title: '标题不能为空',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
+    if (this.data.selProvince == "请选择") {
+      wx.showToast({
+        title: '请选择地区',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+
     if (this.data.demand.salary === '') {
-      this.showTopTips('薪资不能为空');
+      wx.showToast({
+        title: '薪资不能为空',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
-    if (this.data.demand.description === '') {
-      this.showTopTips('描述不能为空');
+    if (this.data.demand.description.length <= 50) {
+      wx.showToast({
+        title: '您的职位描述太简单了',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
 
-    if (this.data.selProvince == "请选择"){
-      this.showTopTips('请选择地区');
-      return
+    if (this.data.industryIndex === 0) {
+      this.data.demand.industry = this.data.industry_select[this.data.industryIndex].value;
     }
-    if (this.data.selCity == "请选择"){
-      this.showTopTips('请选择地区');
-      return
+    if (this.data.projectCycleIndex === 0) {
+      this.data.demand.project_cycle = this.data.project_cycle_select[this.data.projectCycleIndex].value;
     }
 
     wx.showLoading({
       title: '提交中...',
       mask: true
     });
+    this.setData({
+      disabledSubmitButton: true
+    });
 
-    var cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
+    var cityId = '';
     var provinceId = commonCityData.cityData[this.data.selProvinceIndex].id;
+    if (this.data.selCity == "请选择" || !this.data.selCity){
+      this.data.selCity = '';
+    } else if (commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex]) {
+      cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
+    }
+
     var districtId;
     if (this.data.selDistrict == "请选择" || !this.data.selDistrict){
       districtId = '';
+      this.data.selDistrict = '';
     } else {
       districtId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[this.data.selDistrictIndex].id;
     }
 
     var requestUrl = '/weapp/demand/store';
     var title = '发布成功';
-    if (this.data.demand.id) {
+    if (this.data.demand.id>0) {
       requestUrl = '/weapp/demand/update';
       title = '修改成功';
     }
@@ -240,13 +288,14 @@ Page({
       selDistrictIndex: this.data.selDistrictIndex
     };
 
+    this.data.demand.formId = e.detail.formId;
     var that = this;
     request.httpsPostRequest(requestUrl, this.data.demand, function (res_data) {
       console.log(res_data);
       wx.hideLoading();
       if (res_data.code === 1000) {
         wx.redirectTo({
-          url: '../myDemand/myDemand',
+          url: '../detail/detail?id='+res_data.data.id,
           success: function (e) {
             wx.showToast({
               title: title,
@@ -262,6 +311,9 @@ Page({
           duration: 2000
         });
       }
+      that.setData({
+        disabledSubmitButton: false
+      });
     });
   },
   initCityData:function(level, obj){

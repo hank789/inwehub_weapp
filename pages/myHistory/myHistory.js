@@ -1,6 +1,7 @@
 //获取应用实例
 var app = getApp();
 var request = require("../../utils/request.js");
+
 Page({
   data:{
     closedDemandId: 0,
@@ -11,8 +12,9 @@ Page({
     isMore: true
   },
   onLoad:function(options){
-    // 页面显示
-    var that = this;
+    // 页面初始化 options为页面跳转所带来的参数
+    var that = this
+    //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
@@ -26,13 +28,6 @@ Page({
   },
   onShow:function(){
     // 页面显示
-    var that = this;
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      });
-    });
   },
   onHide:function(){
     // 页面隐藏
@@ -42,11 +37,10 @@ Page({
   },
   navToPost: function () {
     wx.navigateTo({
-      url: '../post/post?id=0'
+      url: '../post/post'
     });
   },
   onPullDownRefresh: function () {
-    console.log('pull')
     // 下拉刷新
     this.data.page = 1;
     this.loadList(1);
@@ -61,18 +55,6 @@ Page({
       this.loadList(this.data.page + 1);
     }
   },
-  navToMessages: function () {
-      console.log('navToMyHistory')
-      wx.navigateTo({
-          url: '../messages/messages'
-      });
-  },
-  navToMyHistory: function (event) {
-      console.log('navToMyHistory')
-      wx.navigateTo({
-          url: '../myHistory/myHistory'
-      });
-  },
   navToDetail: function (event) {
     wx.navigateTo({
       url: '../detail/detail?id=' + event.currentTarget.dataset.id
@@ -80,9 +62,9 @@ Page({
   },
   // 申请成为招募者
   navToRegister: function (event) {
-      wx.navigateTo({
-         url: '../register/register'
-      });
+    wx.navigateTo({
+      url: '../register/register'
+    });
   },
   navToDemandRooms: function (event) {
     wx.navigateTo({
@@ -91,7 +73,7 @@ Page({
   },
   loadList: function (page) {
     var that = this;
-    request.httpsPostRequest('/weapp/demand/list', { page: this.data.page, type: 'mine' }, function(res_data) {
+    request.httpsPostRequest('/weapp/demand/list', { page: this.data.page, type: 'all' }, function(res_data) {
       console.log(res_data);
       if (res_data.code === 1000) {
         var isMore = that.data.isMore;

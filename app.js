@@ -38,7 +38,6 @@ App({
                   if (res.data.code === 1000) {
                     that.globalData.appAccessToken = res.data.data.token;
                     that.globalData.userInfo = res.data.data.userInfo
-                    that.globalData.userOpenid = res.data.data.openid
                     typeof cb == "function" && cb(that.globalData.userInfo)
                   } else {
                     wx.showToast({
@@ -60,7 +59,6 @@ App({
   },
   globalData:{
     userInfo: null,
-    userOpenid: null,
     appAccessToken: null,
     host: 'https://api.ywhub.com/api',
     sockHost: 'wss://read.ywhub.com'

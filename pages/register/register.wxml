@@ -1,82 +1,75 @@
 <view class="page">
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
-    <form bindsubmit="formSubmit">
+    <form bindsubmit="formSubmit" report-submit="true">
         <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input {{ nameError ? 'weui-cell_warn' : '' }}">
+            <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">姓名</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input focus="true" value="{{name}}" bindblur="bindNameBlur" class="weui-input" placeholder="请输入姓名" />
-                </view>
-                <view class="weui-cell__ft" wx:if="{{nameError}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
+                    <input focus="true" value="{{name}}" bindblur="bindNameBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入姓名" />
                 </view>
             </view>
-            <view class="weui-cell weui-cell_input {{ companyError ? 'weui-cell_warn' : '' }}">
+            <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">公司</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input value="{{ company }}" bindblur="bindCompanyBlur" class="weui-input" placeholder="请输入公司" />
-                </view>
-                <view class="weui-cell__ft" wx:if="{{companyError}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
+                    <input value="{{ company }}" bindblur="bindCompanyBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入公司" />
                 </view>
             </view>
-            <view class="weui-cell weui-cell_input {{ titleError ? 'weui-cell_warn' : '' }}">
+            <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">职位</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input value="{{ title }}" bindblur="bindTitleBlur" class="weui-input" placeholder="请输入职位" />
-                </view>
-                <view class="weui-cell__ft" wx:if="{{titleError}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
+                    <input value="{{ title }}" bindblur="bindTitleBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入职位" />
                 </view>
             </view>
-            <view class="weui-cell weui-cell_input {{ emailError ? 'weui-cell_warn' : '' }}">
+            <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">邮箱</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input value="{{ email }}" bindblur="bindEmailBlur" class="weui-input" placeholder="请输入邮箱" />
-                </view>
-                <view class="weui-cell__ft" wx:if="{{emailError}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
+                    <input value="{{ email }}" bindblur="bindEmailBlur" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入邮箱" />
                 </view>
             </view>
-            <view class="weui-cell weui-cell_input {{ phoneError ? 'weui-cell_warn' : '' }}">
+            <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">手机号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input bindblur="bindPhoneBlur" value="{{ phone }}" type="number" class="weui-input" placeholder="请输入手机号" />
-                </view>
-                <view class="weui-cell__ft">
-                    <button bindtap="tapSendCode" disabled="{{disabledSendPhoneCode}}" class="weui-btn mini-btn" type="primary" size="mini">{{sendCodeLabel}}</button>
+                    <input bindblur="bindPhoneBlur" value="{{ phone }}" type="number" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入手机号" />
                 </view>
             </view>
             
-            <view class="weui-cell weui-cell_input weui-cell_vcode {{ codeError ? 'weui-cell_warn' : '' }}">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">验证码</view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__bd ">
+                    <input value="{{ code }}" bindblur="bindCodeBlur" type="number" class="weui-input weui-right" placeholder-class='register_placeholde'  placeholder="请输入验证码" />
                 </view>
-                <view class="weui-cell__bd">
-                    <input value="{{ code }}" bindblur="bindCodeBlur" type="number" class="weui-input" placeholder="请输入验证码" />
-                </view>
-                <view class="weui-cell__ft" wx:if="{{codeError}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
+                <view class="weui-cell__ft">
+                    <button bindtap="tapSendCode" disabled="{{disabledSendPhoneCode}}" class="weui-btn mini-btn register_code" type="primary" size="mini">{{sendCodeLabel}}</button>
                 </view>
             </view>
         </view>
         <view class="weui-cells__tips"></view>
-        
+        <!-- 规则  -->
+         <checkbox-group bindchange="bindAgreeChange">
+            <label class="weui-agree" for="weuiAgree">
+                <view class="weui-agree__text">
+                    <checkbox class="weui-agree__checkbox" id="weuiAgree"                            value="agree" checked="{{isAgree}}" />
+                    <view class="weui-agree__checkbox-icon">
+                      <icon class="weui-agree__checkbox-icon-check"                                     type="success_no_circle" size="9" wx:if="{{isAgree}}                          "></icon>
+                    </view>
+                    阅读并同意<navigator url="" class="weui-agree__link">《相关条款》</navigator>
+                </view>
+            </label>
+        </checkbox-group>
+        <!--  -->
         <view class="weui-btn-area">
-          <button formType="submit" class="weui-btn" type="primary">提交认证</button>
+          <button formType="submit" class="weui-btn register_submit" type="primary">提交认证</button>
         </view>
     </form>
-
+     <view class='register_text'>*信息提交后不可修改，如有需要请联系客服小哈微信hiinwe</view>
   </view>
 </view>

@@ -10,20 +10,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showTopTips: false,
-    errorMsg: '',
     name: '',
-    nameError: false,
     title: '',
-    titleError: false,
     company: '',
-    companyError: false,
     email: '',
-    emailError: false,
     phone: '',
-    phoneError: false,
     code: '',
-    codeError: false,
     disabledSendPhoneCode: false,
     sendCodeLabel: "获取验证码"
   },
@@ -67,9 +59,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
   },
-
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -105,7 +96,6 @@ Page({
     this.setData({
       disabledSendPhoneCode: true
     })
-    util.countDown(this, total_second);
     var requestUrl = '/auth/sendPhoneCode';
     var that = this;
 
@@ -118,20 +108,10 @@ Page({
           icon: 'none',
           duration: 2000
         });
+      } else {
+        util.countDown(that, total_second);
       }
     });
-  },
-  showTopTips: function (msg) {
-    var that = this;
-    this.setData({
-      showTopTips: true,
-      errorMsg: msg
-    });
-    setTimeout(function () {
-      that.setData({
-        showTopTips: false
-      });
-    }, 3000);
   },
   bindNameBlur: function (e) {
     this.setData({
@@ -165,59 +145,53 @@ Page({
   },
   formSubmit: function (e) {
     if (this.data.name === '') {
-      this.setData({
-        nameError: true
-      });
+      wx.showToast({
+        title: '请填写姓名',
+        icon: 'none' ,
+        duration: 2000
+      })
       return false;
     }
-    this.setData({
-      nameError: false
-    });
     if (this.data.company === '') {
-      this.setData({
-        companyError: true
-      });
+      wx.showToast({
+        title: '请填写公司',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
-    this.setData({
-      companyError: false
-    });
     if (this.data.title === '') {
-      this.setData({
-        titleError: true
-      });
+      wx.showToast({
+        title: '请填写职位',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
-    this.setData({
-      titleError: false
-    });
     if (this.data.email === '') {
-      this.setData({
-        emailError: true
-      });
+      wx.showToast({
+        title: '请填写邮箱',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
-    this.setData({
-      emailError: false
-    });
     if (this.data.phone === '') {
-      this.setData({
-        phoneError: true
-      });
+      wx.showToast({
+        title: '请填写手机号',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
-    this.setData({
-      phoneError: false
-    });
     if (this.data.code === '') {
-      this.setData({
-        codeError: true
-      });
+      wx.showToast({
+        title: '请填写验证码',
+        icon: 'none',
+        duration: 2000
+      })
       return false;
     }
-    this.setData({
-      codeError: false
-    });
 
     var jsonData = {
       name: this.data.name,
@@ -226,7 +200,7 @@ Page({
       company: this.data.company,
       email: this.data.email,
       code: this.data.code,
-      openid: app.globalData.userOpenid
+      formId: e.detail.formId
     };
     var requestUrl = '/auth/weapp/register';
     var that = this;
@@ -236,7 +210,7 @@ Page({
       wx.hideLoading();
       if (res_data.code === 1000) {
         // 成功保存之后，执行其他逻辑.
-        app.globalData.appAccessToken = res_data.data.token;
+        app.globalData.userInfo.id = res_data.data.id;
         wx.showToast({
           title: "提交成功",
           icon: 'success',

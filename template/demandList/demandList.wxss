@@ -1,53 +1,130 @@
-.item{
-  display: flex;
-  width: 100%;
-  background-color: #fff;
-}
-.item-img {
-  padding: 32rpx 28rpx;
-}
-.img{
-  width: 120rpx;
-  height: 120rpx;
-}
-.item-main{
-  flex: 1;
-  padding: 32rpx 28rpx 32rpx 0;
-  border-bottom: 1rpx solid #dcdcdc;
-  line-height: 1.4;
-}
 
-.job{
-  margin-bottom: 4rpx;
-  padding-right: 80rpx;
-  position: relative;
+/*有数据的样式  */
+.demand{
+  width: 84%;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 22rpx;
+  padding: 24rpx 34rpx;
+  box-shadow: 0rpx 0rpx 4rpx 4rpx #ECECEE;
+  border-radius: 8rpx; 
 }
-.job-position{
+.darkColors{
+  opacity: 0.5;
+}
+.demand_title{
   font-size: 32rpx;
-  color: #222;
+  color:#444444; 
+  font-weight: 500;
+  word-wrap:break-word;
+  word-break:break-all;
 }
-.job-Salary{
-  font-size: 30rpx;
-  font-weight: 600;
-  color: #ff9483;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-}
-.company{
-  color: #666;
+.demand_detail{
+  width: 100%;
   font-size: 26rpx;
-  margin-bottom: 4rpx;
+  color: #808080;
+  margin-top:18rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
-.secondary{
+.demand_detail_info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.demand_Communicate{
+  margin-left:18rpx;
+}
+.demand_news{
+  width: 106rpx;
+  height: 32rpx;
+  border-radius: 8rpx;
+  background: #F03C69;
+  text-align: center;
+  line-height: 32rpx;
   font-size: 24rpx;
-  color: #999;
+  color: #fff;
+  margin-left:26rpx;
 }
-.secondary-list{
-  margin-right: 8rpx;
+.demand_end{
+  font-size: 26rpx;
+  color: #808080;
+  margin-left: 4%;
+  margin-top: 24rpx;
 }
-.date{
+.demand_title.gray{
+  color: #A1A2A1;
+}
+.demand_see.gray,.demand_Communicate.gray{
+  color: #DADBDA;
+}
+/* 当数据为空时 */
+page{
+  background: #fff;
+  padding-bottom:130rpx; 
+}
+.noData{
+  width: 420rpx;
+  /* height: 300rpx; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.noData image{
+  width: 240rpx;
+  height: 180rpx;
+  margin-left:80rpx;
+}
+.noData_text{
   font-size: 24rpx;
-  float: right;
+  color:#444444;
+  margin-top: 44rpx;
+  margin-bottom: 25rpx;
+}
+.noData_graph{
+  width: 0; 
+  height: 0; 
+  border-left: 18rpx solid transparent;
+  border-right: 18rpx solid transparent;
+  border-top: 14px solid #66DBF9;
+}
+.noData_apply{
+  width: 348rpx;
+  height: 88rpx;
+  background: #66DBF9;
+  border-radius: 100rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 88rpx;
+}
+/*发起招募按钮 */
+.start_recruit{
+  width: 686rpx;
+  height: 88rpx;
+  font-weight:500;
+  background: #66DBF9;
+  border-radius: 100rpx;
+  font-size: 32rpx;
+  color: #fff;
+  text-align: center;
+  line-height:88rpx;
+  position: fixed;
+  bottom: 22rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.start_recruit.gray{
+   background: #DCDCDC;
+   color: #B4B4B6;
 }

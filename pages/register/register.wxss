@@ -1,1 +1,91 @@
 /* pages/register/register.wxss */
+page{
+  background: #fff;
+}
+button{
+  border-radius: 10px;
+  
+}
+.register_placeholde{
+  color: #C8C8C8;
+}
+.weui-input {
+  min-height:88rpx;
+  line-height:88rpx;
+  font-size:28rpx;
+  text-align: right;
+  color:#444444;
+}
+/* .weui-label {
+  word-wrap:break-word;
+  word-break:break-all;
+  font-size:28rpx;
+  color:#808080;
+} */
+.weui-right{
+  text-align: left;
+}
+.weui-btn {
+  margin-right:15rpx;
+  margin-top: 2rpx;
+}
+.weui-cell__ft{
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+  button[type=primary].register_code{
+  background: #fff;
+  color:#66DBF9; 
+  border:1rpx solid #66DBF9;
+  border-color: #66DBF9;
+  border-radius: 10px;
+}  
+
+button[disabled][type=primary] {
+background-color:#DCDCDC;
+border: none;
+border-radius: 10px;
+
+}
+button[disabled] {
+color:#B4B4B6;
+
+}
+button[type=primary].register_submit{
+  background-color: #66DBF9;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  border-color:#66DBF9; 
+  opacity: 1;
+}
+button.register_submit{
+  border-radius: 100px;
+}
+.weui-btn-area {
+  margin:34rpx 32rpx 0 32rpx;
+}
+.register_text{
+  font-size: 24rpx;
+  color: #235280;
+  text-align: center;
+  margin-top: 25rpx;
+}
+
+.weui-agree {
+  padding:0 32rpx;
+  font-size:13px;
+  padding:0 32rpx;
+  margin-top:35rpx;
+}
+.weui-cell_input {
+  padding-bottom:0;
+  color:#808080;
+  font-size: 28rpx;
+}
+.weui-cell_warn,.weui-textarea-counter_warn {
+  color:#e64340;
+}
+
+
+

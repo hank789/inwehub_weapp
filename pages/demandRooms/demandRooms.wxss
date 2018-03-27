@@ -1,0 +1,84 @@
+ page{
+   background: #FFFFFF;
+ }
+ .title{
+    width:84%;
+   overflow:hidden;
+   margin:auto;
+   margin-top:22rpx;
+   padding:24rpx 34rpx;
+   box-shadow: 0rpx 0rpx 8rpx 4rpx #F4F6F8;
+   font-size: 32rpx;
+   color: #444444;
+   margin-bottom: 22rpx;
+   border-radius: 8rpx;
+   font-weight: 500;
+   word-wrap:break-word;
+   word-break:break-all; 
+ }
+ .chat{
+   width: 100%;
+   height: 42rpx;
+   background: #F6F7F9;
+   font-size: 24rpx;
+   color: #808080;
+   padding:0rpx 34rpx;
+   line-height: 42rpx;
+ }
+ .item{
+  height: 128rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0rpx 32rpx 0 32rpx;
+  
+} 
+.item-img{
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+.item-img .img{
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+.item-main{
+  border-bottom: 1px solid #DCDCDC;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 13rpx;
+  width: 588rpx;
+}
+.secondary,.job{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.job-position{
+  font-size: 28rpx;
+  color: #565656;
+  font-weight: 500;
+}
+.date{
+  font-size: 24rpx;
+  color: #C8C8C8;
+}
+.secondary-list{
+  width:96%;
+  word-wrap:break-word;
+  font-size: 26rpx;
+  color: #808080;
+}
+.job-Salary{
+  width: 40rpx;
+  height: 40rpx;
+  font-size:22rpx;
+  color:#FFFFFF;
+  text-align: center;
+  line-height: 40rpx;
+  background:#E84368;
+  border-radius:50%;
+}

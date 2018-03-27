@@ -48,33 +48,23 @@ Page({
       that.setData({
         userInfo: userInfo
       });
+      that.connect()
     });
   },
-  onReady() {
-    var that = this;
-    // 查询对象
-    request.httpsPostRequest('/im/getRoom', { room_id: this.data.room_id }, function (res_data) {
-      if (res_data.code === 1000) {
-        that.setData({
-          room: res_data.data
-        });
-        wx.setNavigationBarTitle({ title: that.data.room.r_name });
-        that.amendMessage(createSystemMessage('薪资：'+ that.data.room.source.salary + '元/天；行业：'+that.data.room.source.industry.text+'；地点：'+that.data.room.source.address));
-        that.pushMessage(createSystemMessage('您正在与'+that.data.room.contact.name+'聊天'));
-        that.loadMessages();
-      } else {
-        wx.showToast({
-          title: res_data.message,
-          icon: 'success',
-          duration: 2000
-        });
-      }
+  navToDetail: function (event) {
+    wx.navigateTo({
+      url: '../detail/detail?id=' + event.currentTarget.dataset.id
     });
+  },
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+  },
+  onReady() {
 
   },
 
   onShow() {
-    this.connect();
+
   },
 
   onHide() {
@@ -88,6 +78,26 @@ Page({
   },
   connect() {
     var that = this;
+    // 查询对象
+    request.httpsPostRequest('/im/getRoom', { room_id: this.data.room_id }, function (res_data) {
+      if (res_data.code === 1000) {
+        that.setData({
+          room: res_data.data
+        });
+        wx.setNavigationBarTitle({ title: that.data.room.r_name });
+        that.amendMessage(createSystemMessage('薪资：'+ that.data.room.source.salary + '元/天\n行业：'+that.data.room.source.industry.text+
+          '\n地点：'+that.data.room.source.address.selProvince+that.data.room.source.address.selCity+(that.data.room.source.address.selDistrict?that.data.room.source.address.selDistrict:'')+
+          '\n周期：'+that.data.room.source.project_cycle.text+'\n项目开始时间：'+that.data.room.source.project_begin_time));
+        that.pushMessage(createSystemMessage('您正在与'+that.data.room.contact.name+'聊天'));
+        that.loadMessages();
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
     EchoIo.options.auth.headers['Authorization'] = 'Bearer ' + app.globalData.appAccessToken
     // 监听通知事件
     EchoIo.private('room.'+ this.data.room_id +'.user.' + app.globalData.userInfo.id)
@@ -166,7 +176,7 @@ Page({
     this.setData({
       messages: this.data.messages,
       systemMessages: this.data.systemMessages,
-      lastMessageId: length > 0 && this.data.messages[length - 1].id
+      lastMessageId: length > 0 ? this.data.messages[length - 1].id : 0
     });
   },
 
@@ -221,16 +231,17 @@ Page({
   sendSystemTime() {
     //获取当前时间
     var myDate = new Date();
-    var hours = myDate.getHours();       //获取当前小时数(0-23)
-    var minutes = myDate.getMinutes();     //获取当前分钟数(0-59)
-    var mydata = hours + ':' + minutes
+    var timestamp = Date.parse(myDate);
+    var hours = myDate.getHours().toString();       //获取当前小时数(0-23)
+    var minutes = myDate.getMinutes().toString();     //获取当前分钟数(0-59)
+    var mydata = (hours[1]?hours:('0'+hours)) + ':' + (minutes[1]?minutes:('0'+minutes));
+    var length = this.data.messages.length;
     //如果两次时间间隔大于3分钟
-    if (minutes - this.data.minutes >= 3) {
-      var length = this.data.messages.length;
+    if (length === 0 || (timestamp - this.data.messages[length-1].created_at_timestamp >= 180)) {
       this.data.messages.push(createSystemMessage(mydata));
       this.setData({
         messages: this.data.messages,
-        lastMessageId: length > 0 && this.data.messages[length - 1].id
+        lastMessageId: length > 0 ? this.data.messages[length - 1].id : this.data.lastMessageId
       });
     }
     this.setData({
@@ -244,6 +255,25 @@ Page({
       this.whisperFinishedTyping();
       var that = this
       request.httpsPostRequest('/im/message-store', { text:e.detail.value,contact_id:this.data.room.contact.id, room_id: this.data.room_id }, function (res_data) {
+        if (res_data.code === 1000) {
+          that.sendSystemTime();
+          that.pushMessage(res_data.data);
+        } else {
+          wx.showToast({
+            title: res_data.message,
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      });
+    }
+  },
+  formSubmit(e) {
+    if (e.detail.value.input_message) {
+      this.setData({ inputContent: '' });
+      this.whisperFinishedTyping();
+      var that = this
+      request.httpsPostRequest('/im/message-store', { text:e.detail.value.input_message,contact_id:this.data.room.contact.id, room_id: this.data.room_id, formId: e.detail.formId }, function (res_data) {
         if (res_data.code === 1000) {
           that.sendSystemTime();
           that.pushMessage(res_data.data);
