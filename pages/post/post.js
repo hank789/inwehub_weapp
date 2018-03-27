@@ -38,7 +38,7 @@ Page({
     ],
     salary_type: [
         {value:1,text:"元/天"},
-        {value:2,text:"元/月"},
+        {value:2,text:"元/月"}
     ],
     salary_typeIndex: 0,
     projectCycleIndex: 0,
