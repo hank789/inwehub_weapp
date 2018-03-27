@@ -34,8 +34,7 @@ Page({
       {value:5,text:"2-4月"},
       {value:6,text:"4-6月"},
       {value:7,text:"半年以上"},
-      {value:8,text:"不确定"},
-      {value:9,text:"其他"}
+      {value:8,text:"不确定"}
     ],
     salary_type: [
         {value:1,text:"元/天"},
