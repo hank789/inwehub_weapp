@@ -25,14 +25,16 @@ Page({
     // 页面渲染完成
   },
   onShow:function(){
-    // 页面显示
-    var that = this;
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
+    if (this.isLoading === false) {
+      // 页面显示
+      var that = this;
+      app.getUserInfo(function(userInfo){
+        //更新数据
+        that.setData({
+          userInfo:userInfo
+        });
       });
-    });
+    }
   },
   onHide:function(){
     // 页面隐藏
