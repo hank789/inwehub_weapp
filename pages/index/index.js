@@ -25,7 +25,7 @@ Page({
     // 页面渲染完成
   },
   onShow:function(){
-    if (this.isLoading === false) {
+    if (this.data.isLoading === false) {
       // 页面显示
       var that = this;
       app.getUserInfo(function(userInfo){
