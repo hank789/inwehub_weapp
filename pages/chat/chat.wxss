@@ -134,6 +134,10 @@
     padding:20rpx;
 }
 
+.user-message.other .text {
+    text-align: left;
+}
+
 .user-message .text {
     background:#d5eaf8;
     border-radius:10rpx;
