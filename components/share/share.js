@@ -26,7 +26,27 @@ Component({
   data: {
     // 弹窗显示控制
     isShow:false,
-    x: 0
+    x: 0,
+    screenWidth: 0,
+    windowWidth: 0,
+    windowHeight: 0,
+    contentHeight: 0,
+    footer: '',
+    offset: 0,
+    lineHeight: 30
+  },
+  ready: function () {
+    let that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenWidth: res.screenWidth,
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight,
+          offset: 15
+        });
+      }
+    });
   },
 
   /**
@@ -38,15 +58,24 @@ Component({
      * 公有方法
      */
 
-    canvasIdErrorCallback(e) {
-      console.log(e)
+    drawSquare: function (ctx, height) {
+      ctx.rect(0, 50, this.data.windowWidth, height);
+      ctx.setFillStyle("#f5f6fd");
+      ctx.fill()
     },
-    moveStart(e) {
-      this.x = e.touches[0].clientY
+
+    drawFont: function (ctx, content, height) {
+      ctx.setFontSize(16);
+      ctx.setFillStyle("#484a3d");
+      ctx.fillText(content, this.data.offset, height);
     },
-    moveEnd(e) {
-      let changedX = e.changedTouches[0].clientX - this.x
-      if (Math.abs(changedX) > 80) this.isShow = false;
+
+    drawLine: function (ctx, height) {
+      ctx.beginPath();
+      ctx.moveTo(this.data.offset, height);
+      ctx.lineTo(this.data.windowWidth - this.data.offset, height);
+      ctx.stroke('#eee');
+      ctx.closePath();
     },
     save() {
       try {
@@ -70,7 +99,6 @@ Component({
       })
     },
     canvasToTmp(canvasId) {
-      console.log(canvasId)
       wx.canvasToTempFilePath({
         canvasId: canvasId,
         success: function(res) {
@@ -95,49 +123,64 @@ Component({
         const from = this.data.option.from
         const content = "  " + this.data.option.content.trim()
         const params = this.data.option.params
+
+        let i = 0;
+        let lineNum = 1;
+        let thinkStr = '';
+        let thinkList = [];
+        for (let item of content) {
+          if (item === '\n') {
+            thinkList.push(thinkStr);
+            thinkList.push('a');
+            i = 0;
+            thinkStr = '';
+            lineNum += 1;
+          } else if (i === 22) {
+            thinkList.push(thinkStr);
+            i = 1;
+            thinkStr = item;
+            lineNum += 1;
+          } else {
+            thinkStr += item;
+            i += 1;
+          }
+        }
+        thinkList.push(thinkStr);
+
         // 获取canvas对象
         const ctx = wx.createCanvasContext("canvasShare",this);
-        // 绘制背景
-        ctx.rect(0, 0, 250, 333)
-        ctx.setFillStyle('#ffffff')
-        ctx.fill()
-        // 基础设置
-        ctx.setFillStyle('#000000')
-        let lineHeight = 15
-        let y = 10;
-        // 绘制标题
-        ctx.setFontSize(12);
-        for (let i = 0; i < title.length / 15 && i < 2; i++) {
-          y += lineHeight;
-          ctx.fillText(title.substr(i * 15, 15), 10, y);
+        let contentHeight = lineNum * this.data.lineHeight + 180;
+        this.drawSquare(ctx, contentHeight);
+        this.setData({ contentHeight: contentHeight });
+        let height = 100;
+        for (let item of thinkList) {
+          if (item !== 'a') {
+            this.drawFont(ctx, item, height);
+            height += this.data.lineHeight;
+          }
         }
-        // 绘制来源 标签
-        ctx.setFontSize(10);
-        if (from != "") {
-          console.log(from)
-          ctx.setFillStyle('#888888')
-          y += 8
-          y += lineHeight;
-          ctx.fillText(from.substr(0, 15), 10, y);
-        }
-        // 绘制content
-        ctx.setFillStyle('#000000')
-        y += 8
-        for (let i = 0; i < content.length / 18 && i < 7; i++) {
-          y += lineHeight;
-          ctx.fillText(content.substr(i * 18, 18), 10, y);
-        }
-        // 绘制左下角引导语
-        ctx.setFontSize(12);
-        y += lineHeight + 8
-        ctx.fillText("长按识别顾问助手", 10, y + lineHeight * 2 + 5);
-        ctx.fillText("查看完整内容", 10, y + lineHeight * 3 + 5);
+        this.drawLine(ctx, lineNum * this.data.lineHeight + 120);
+        this.drawFont(ctx, this.data.footer, lineNum * this.data.lineHeight + 156);
+        let that = this;
         // 绘制右下角小程序码
         request.httpsPostRequest('/weapp/user/getQrCode', { object_id: this.data.option.object_id,object_type: this.data.option.object_type }, function (res_data) {
           if (res_data.code === 1000) {
             console.log(res_data.data);
-            ctx.drawImage(res_data.data.qrcode, 110, y, 80, 80);
+            ctx.drawImage(res_data.data.qrcode, that.data.windowWidth - that.data.offset - 50, lineNum * that.data.lineHeight + 125, 50, 50);
             ctx.draw();
+            wx.canvasToTempFilePath({
+              canvasId: 'canvasShare',
+              success: function(res) {
+                console.log(res.tempFilePath)
+                wx.previewImage({
+                  current: res.tempFilePath, // 当前显示图片的http链接
+                  urls: [res.tempFilePath]
+                })
+              },
+              fail: function(res) {
+                console.log(res)
+              }
+            },that)
           } else {
             wx.showToast({
               title: res_data.message,

@@ -47,8 +47,6 @@ Page({
   },
   onReady:function(){
     // 页面渲染完成
-    //获得share组件
-    this.shareView = this.selectComponent("#component-share-demand");
   },
   onShow:function(){
     // 页面显示
@@ -144,12 +142,13 @@ Page({
     }
   },
   showShareMenu: function (e) {
-    console.log(1);
     wx.showShareMenu({
       withShareTicket: true
     })
   },
   saveToShare: function (e) {
+    //获得share组件
+    this.shareView = this.selectComponent("#component-share-demand");
     this.setData({
       shareOption: {
         object_id: this.data.demand_id,
@@ -159,7 +158,25 @@ Page({
         from: this.data.demand.publisher_name,
       }
     });
+    console.log(this.shareView)
     this.shareView.show()
+  },
+  getShareBigImage: function (e) {
+    request.httpsPostRequest('/weapp/demand/getShareImage', { id: this.data.demand_id, type: 1 }, function (res_data) {
+      if (res_data.code === 1000) {
+        wx.previewImage({
+          current: res_data.data.url, // 当前显示图片的http链接
+          urls: [res_data.data.url]
+        })
+
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
   },
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();

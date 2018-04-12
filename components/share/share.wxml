@@ -1,6 +1,5 @@
 <view class="share-c" style="display: {{isShow ? 'block' : 'none'}} ;">
     <view class="share" style="display: {{isShow ? 'block' : 'none'}} ;">
-      <canvas disable-scroll="true" style="width: 200px; height: 290px;" canvas-id="canvasShare" binderror="canvasIdErrorCallback"></canvas>
-      <button type="warn" bindtap="save">保存图片</button>
+      <canvas disable-scroll="true" style="width:{{screenWidth}}px;height:{{contentHeight}}px" canvas-id="canvasShare" binderror="canvasIdErrorCallback"></canvas>
     </view>
 </view>

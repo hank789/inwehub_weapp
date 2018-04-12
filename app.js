@@ -13,6 +13,17 @@ App({
         success: function (res_login) {
           wx.getUserInfo({
             withCredentials: true,
+            fail: function () {
+              // 用户拒绝授权,打开设置页面
+              wx.openSetting({
+                success: function (data) {
+                  console.log("openSetting: success");
+                },
+                fail: function (data) {
+                  console.log("openSetting: fail");
+                }
+              });
+            },
             success: function (res_user) {
               var requestUrl = "/weapp/user/wxinfo";
               var jsonData = {
