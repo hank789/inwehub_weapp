@@ -112,6 +112,7 @@ input.register_salary{
   border-radius: 8rpx;
   border-top:none;
   border-right:none;
+  border-left:none;
 }
 .weui-cells {
   position:inherit;
