@@ -42,7 +42,7 @@
         <view wx:if="{{item.type == 'system'}}" class="system-message system-time">
            {{item.data.text}}
         </view>
-        <view wx:else class="user-message {{item.user_id == userInfo.id && 'me'}}">
+        <view wx:else class="user-message {{item.user_id == userInfo.id ? 'me':'other'}}">
             <image class="avatar" src="{{item.avatar}}" mode="scaleToFill"></image>
             <view class="triangle">
                 <image src="{{ item.user_id == userInfo.id ? '../../images/triangleRight.png':'../../images/triangleLeft.png'}}"></image>
