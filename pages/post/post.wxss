@@ -29,8 +29,20 @@ page{
   text-align:right;
   margin-right:20rpx;
 }
+.post_salary_right.weui-input{
+  text-align:left;
+  margin-left:20rpx;
+}
 input.register_salary{
  text-align: right;
+}
+.register_salary_right{
+ font-size: 28rpx;
+ color: #C8C8C8;
+ text-align: left;
+}
+input.register_salary_right{
+ text-align: left;
 }
 .weui-label {
   word-wrap:break-word;

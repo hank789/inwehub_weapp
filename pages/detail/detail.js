@@ -9,6 +9,7 @@ Page({
     isLoading: true,//是否显示加载数据提示
     demand: {},
     demand_id: 0,
+    shareTip: 0,
     shareOption: {
       object_id: 0,
       object_type: 1,
@@ -25,7 +26,8 @@ Page({
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
-        demand_id: options.id
+        demand_id: options.id,
+        shareTip: options.share?options.share:0
       });
       // 查询对象
       request.httpsPostRequest('/weapp/demand/detail', { id: options.id }, function (res_data) {
@@ -34,6 +36,17 @@ Page({
             demand: res_data.data,
             isLoading: false
           });
+          if (that.data.shareTip) {
+            wx.showModal({
+              content: '分享你的招募，让更多的朋友看到~',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+
+                }
+              }
+            });
+          }
           
         } else {
           wx.showToast({
