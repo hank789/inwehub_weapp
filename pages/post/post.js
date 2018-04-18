@@ -15,6 +15,7 @@ Page({
       title: '',
       address: '',
       salary: '',
+      salary_upper: '',
       salary_type: 0,
       project_begin_time: util.formatTime(new Date(),false),
       description: '',
@@ -34,6 +35,7 @@ Page({
       {value:5,text:"2-4月"},
       {value:6,text:"4-6月"},
       {value:7,text:"半年以上"},
+      {value:9,text:"长期或入职"},
       {value:8,text:"不确定"}
     ],
     salary_type: [
@@ -104,6 +106,7 @@ Page({
                   'demand.title': res_data.data.title,
                   'demand.address': res_data.data.address,
                   'demand.salary' : res_data.data.salary,
+                  'demand.salary_upper' : res_data.data.salary_upper,
                   'demand.project_begin_time' : res_data.data.project_begin_time,
                   'demand.description' : res_data.data.description,
                   'demand.industry' : res_data.data.industry.value,
@@ -165,6 +168,11 @@ Page({
       'demand.salary': e.detail.value
     })
   },
+  bindSalaryUpperBlur: function (e) {
+    this.setData({
+      'demand.salary_upper': e.detail.value
+    })
+  },
   showTopTips: function (msg) {
     var that = this;
     this.setData({
@@ -222,9 +230,17 @@ Page({
       return
     }
 
-    if (this.data.demand.salary === '') {
+    if (this.data.demand.salary === '' || this.data.demand.salary_upper === '') {
       wx.showToast({
         title: '薪资不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    if (this.data.demand.salary > this.data.demand.salary_upper) {
+      wx.showToast({
+        title: '薪资范围有误',
         icon: 'none',
         duration: 2000
       })
@@ -295,7 +311,7 @@ Page({
       wx.hideLoading();
       if (res_data.code === 1000) {
         wx.redirectTo({
-          url: '../detail/detail?id='+res_data.data.id,
+          url: '../detail/detail?id='+res_data.data.id+'&share=1',
           success: function (e) {
             wx.showToast({
               title: title,

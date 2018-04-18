@@ -23,7 +23,7 @@
           </view>
 
            <view class='salary'>
-             <view class='blue'>{{item.salary}}</view>RMB/{{item.salary_type === 0 ? '天': '月'}}
+             <view class='blue'>{{item.salary}}<block wx:if="{{item.salary_upper>item.salary}}">~{{item.salary_upper}}</block></view>元/{{item.salary_type === 0 ? '天': '月'}}
            </view>
            <!--  -->
          </view>
