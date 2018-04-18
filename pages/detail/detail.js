@@ -22,15 +22,20 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var that = this
+    var scene = decodeURIComponent(options.scene)
+    var demand_id = options.id;
+    if (scene) {
+      demand_id = scene.split("=")[1];
+    }
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
-        demand_id: options.id,
+        demand_id: demand_id,
         shareTip: options.share?options.share:0
       });
       // 查询对象
-      request.httpsPostRequest('/weapp/demand/detail', { id: options.id }, function (res_data) {
+      request.httpsPostRequest('/weapp/demand/detail', { id: demand_id }, function (res_data) {
         if (res_data.code === 1000) {
           that.setData({
             demand: res_data.data,
