@@ -24,7 +24,7 @@ Page({
     var that = this
     var scene = decodeURIComponent(options.scene)
     var demand_id = options.id;
-    if (scene) {
+    if (scene !== 'undefined') {
       demand_id = scene.split("=")[1];
     }
     //调用应用实例的方法获取全局数据
