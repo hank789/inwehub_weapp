@@ -8,7 +8,7 @@
         </view>
         <view class='project_detail_tags'>
           <view class='tag' wx:if="{{demand.project_begin_time}}">{{demand.project_begin_time}}开始</view>
-          <view class='tag' wx:if="{{demand.project_cycle.text}}">周期{{demand.project_cycle.text}}</view>
+          <view class='tag' wx:if="{{demand.project_cycle.text}}">{{demand.project_cycle.text}}</view>
           <view class='tag' wx:if="{{demand.industry.text}}">{{demand.industry.text}}</view>
         </view>
      </view>
@@ -66,6 +66,10 @@
                 <i class="iconfont icon-share"></i>
                 <view class="doc">分享</view>
 	        </button>
+	        <view bindtap="getShareBigImage" class="item">
+                <i class="iconfont icon-pengyouquan"></i>
+                <view class="doc">朋友圈</view>
+            </view>
 	        <block wx:if="{{demand.is_author}}">
 	            <view bindtap="navToRooms" class="item">
                     <i class="iconfont icon-message"></i>
