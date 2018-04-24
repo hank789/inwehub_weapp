@@ -62,11 +62,11 @@
 	            <view class="doc">首页</view>
 	        </view>
 
-	        <button hover-class="none" plain="true" open-type="share" class="item docbutton">
+	        <button wx:if="{{demand.status!=3}}" hover-class="none" plain="true" open-type="share" class="item docbutton">
                 <i class="iconfont icon-share"></i>
                 <view class="doc">分享</view>
 	        </button>
-	        <view bindtap="getShareBigImage" class="item">
+	        <view wx:if="{{demand.status!=3}}" bindtap="getShareBigImage" class="item">
                 <i class="iconfont icon-pengyouquan"></i>
                 <view class="doc">朋友圈</view>
             </view>
