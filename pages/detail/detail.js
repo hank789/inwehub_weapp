@@ -153,6 +153,44 @@ Page({
       }
     });
   },
+  authReopenDemand: function (e) {
+    var that = this
+    wx.showModal({
+      title: '需求重新发布',
+      content: '确认重新发布此需求？',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('用户点击确定')
+          request.httpsPostRequest('/weapp/demand/reopen', { id: that.data.demand_id }, function (res_data) {
+            if (res_data.code === 1000) {
+              wx.redirectTo({
+                url: '../detail/detail?id='+that.data.demand_id+'&share=1',
+                success: function (e) {
+                  wx.showToast({
+                    title: '发布成功',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
+              });
+            } else {
+              wx.showToast({
+                title: res_data.message,
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          });
+          //
+        }else{
+          console.log('用户点击取消作')
+        }
+      }
+    });
+  },
   onShareAppMessage: function() {
     return{
       title:this.data.demand.title,
