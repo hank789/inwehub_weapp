@@ -43,7 +43,7 @@ Page({
           });
           if (that.data.shareTip) {
             wx.showModal({
-              content: '分享你的招募，让更多的朋友看到~',
+              content: '点击左下角分享你的招募吧，让更多的朋友看到~',
               showCancel: false,
               success: function (res) {
                 if (res.confirm) {
