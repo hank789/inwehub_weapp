@@ -255,10 +255,6 @@
     }
   }
 
-  .display-hidden {
-    display: none;
-  }
-
   .typing {
     color: #717577;
     margin-bottom: 0.5rem;
