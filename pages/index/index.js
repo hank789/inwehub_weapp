@@ -42,9 +42,20 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
-  navToPost: function () {
-    wx.navigateTo({
-      url: '../post/post?id=0'
+  formSubmitToPost: function (e) {
+    request.httpsPostRequest('/weapp/user/saveFormId', { formId: e.detail.formId }, function(res_data) {
+      console.log(res_data);
+      if (res_data.code === 1000) {
+        wx.navigateTo({
+          url: '../post/post?id=0'
+        });
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'loading',
+          duration: 2000
+        });
+      }
     });
   },
   onPullDownRefresh: function () {
@@ -81,10 +92,21 @@ Page({
     });
   },
   // 申请成为招募者
-  navToRegister: function (event) {
-      wx.navigateTo({
-         url: '../register/register'
-      });
+  formSubmitToRegister: function (e) {
+    request.httpsPostRequest('/weapp/user/saveFormId', { formId: e.detail.formId }, function(res_data) {
+      console.log(res_data);
+      if (res_data.code === 1000) {
+        wx.navigateTo({
+          url: '../register/register'
+        });
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'loading',
+          duration: 2000
+        });
+      }
+    });
   },
   navToDemandRooms: function (event) {
     wx.navigateTo({

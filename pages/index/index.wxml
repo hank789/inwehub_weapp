@@ -13,14 +13,18 @@
             <view class='noData_graph'></view>
         </block>
         <block wx:else>
+            <form bindsubmit="formSubmitToRegister" report-submit="true">
             <view class='noData_text'>成为发布者后，即可发布项目招募</view>
-            <view class='noData_apply' bindtap="navToRegister">申请成为发起者</view>
+            <button formType="submit" class='noData_apply'>申请成为发起者</button>
+            </form>
         </block>
 
     </view>
 </block>
 <!-- 发起招募按钮bindtap="navToMessages" bindtap="navToPost" gray => 灰色按钮-->
-<view wx:if="{{userInfo.mobile}}" class='start_recruit'   bindtap="navToPost">发起项目招募</view>
+<form bindsubmit="formSubmitToPost" report-submit="true">
+<button formType="submit" class="start_recruit" wx:if="{{userInfo.mobile}}">发起项目招募</button>
+</form>
 <!--加载更多模版-->
 <block wx:if="{{isLoading}}">
   <template is="loading" />
