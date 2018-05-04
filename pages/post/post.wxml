@@ -3,6 +3,7 @@
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
     <form bindsubmit="formSubmit" report-submit="true">
         <view class="weui-cells weui-cells_after-title">
+        <view class="{{ hiddenInput ? 'display-hidden':'' }}">
           <view class="weui-cell weui-cell_input">
                 <!-- <view class="weui-cell__hd">
                     <view class="weui-label">标题</view>
@@ -84,11 +85,11 @@
                     </picker>
                 </view>
             </view>
-
+            </view>
 
              <view class="weui-cell post_description">
                 <view class="weui-cell__bd">
-                    <textarea auto-height="true" maxlength="3000" bindblur="bindDescriptionBlur" bindconfirm="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述" value="{{demand.description}}" />
+                    <textarea auto-height="true" maxlength="3000" bindfocus="focusDescription" bindblur="bindDescriptionBlur" bindconfirm="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述" value="{{demand.description}}" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view> 

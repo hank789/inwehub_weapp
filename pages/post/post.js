@@ -10,8 +10,9 @@ Page({
   data:{
     showTopTips: false,
     disabledSubmitButton: false,
+    hiddenInput: false,
     demand: {
-      id: '',
+      id: 0,
       title: '',
       address: '',
       salary: '',
@@ -65,7 +66,7 @@ Page({
     });
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
-      if (!userInfo.id) {
+      if (!userInfo.mobile) {
         wx.showModal({
           content: '您的认证信息还未完善，前往完善信息',
           showCancel: false,
@@ -150,7 +151,13 @@ Page({
   },
   bindDescriptionBlur: function(e) {
     this.setData({
-      'demand.description': e.detail.value
+      'demand.description': e.detail.value,
+      hiddenInput: false
+    })
+  },
+  focusDescription: function (e) {
+    this.setData({
+      hiddenInput: (this.data.demand.id<=0?true:false)
     })
   },
   bindTitleBlur: function (e) {

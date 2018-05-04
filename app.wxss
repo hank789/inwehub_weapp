@@ -64,3 +64,6 @@ page {
     padding: 0
 }
 .weui-cells:after{bottom:0;border-bottom:none;}
+.display-hidden {
+    display: none;
+}

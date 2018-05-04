@@ -8,7 +8,7 @@
     <view class='noData'>
         <image  src='../../images/feed_publish@2x.png'></image>
         <!--进行切换的文字  =>  开始发布你的项目招募/成为发起者后，即可发布项目招募 -->
-        <block wx:if="{{userInfo.id>0}}">
+        <block wx:if="{{userInfo.mobile}}">
             <view class='noData_text'>开始发布你的项目招募吧~</view>
             <view class='noData_graph'></view>
         </block>
@@ -20,7 +20,7 @@
     </view>
 </block>
 <!-- 发起招募按钮bindtap="navToMessages" bindtap="navToPost" gray => 灰色按钮-->
-<view wx:if="{{userInfo.id>0}}" class='start_recruit'   bindtap="navToPost">发起项目招募</view>
+<view wx:if="{{userInfo.mobile}}" class='start_recruit'   bindtap="navToPost">发起项目招募</view>
 <!--加载更多模版-->
 <block wx:if="{{isLoading}}">
   <template is="loading" />
