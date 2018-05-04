@@ -4,7 +4,11 @@
   <template is="loading" />
 </block>
 <block wx:elif="{{list.length<=0}}">
-<view class="container">暂无消息</view>
+<view class="weui-msg">
+    <view class="weui-msg__text-area">
+        <view class="weui-msg__title">暂无足迹</view>
+    </view>
+</view>
 </block>
 
  <!-- 有数据的样式  -->
