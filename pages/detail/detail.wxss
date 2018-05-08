@@ -266,3 +266,17 @@ page{
   background: #DCDCDC;
   margin: 0 20rpx;
 }
+
+.subscribe-bottom {
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.subscribe-bottom .subscribe-bottom-text {
+    font-size: 30rpx;
+}

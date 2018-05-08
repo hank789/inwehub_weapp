@@ -54,7 +54,10 @@
       {{ demand.publisher_title ? demand.publisher_title : ''}}
     </view>
   </view>
-  
+
+  <view class="subscribe-bottom">
+    <text class="subscribe-bottom-text">订阅相关信息</text>
+  </view>
 	<view class="detail-bottom">
 	    <view class="bottom-box">
 	        <view bindtap="navToHome" class="item">

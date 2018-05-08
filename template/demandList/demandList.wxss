@@ -80,9 +80,9 @@ page{
   align-items: center;
 }
 .noData image{
-  width: 240rpx;
-  height: 180rpx;
-  margin-left:80rpx;
+  width: 524rpx;
+  height: 838rpx;
+  margin-bottom: 60rpx;
 }
 .noData_text{
   font-size: 24rpx;

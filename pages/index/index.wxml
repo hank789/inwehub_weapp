@@ -6,16 +6,12 @@
 <block wx:if="{{!isLoading && list.length <= 0}}">
     <!--无数据 或者 无权限时的样式 -->
     <view class='noData'>
-        <image  src='../../images/feed_publish@2x.png'></image>
+        <image  src='../../images/description@3x.png'></image>
         <!--进行切换的文字  =>  开始发布你的项目招募/成为发起者后，即可发布项目招募 -->
-        <block wx:if="{{userInfo.mobile}}">
-            <view class='noData_text'>开始发布你的项目招募吧~</view>
-            <view class='noData_graph'></view>
-        </block>
-        <block wx:else>
+        <block wx:if="{{!userInfo.mobile}}">
             <form bindsubmit="formSubmitToRegister" report-submit="true">
-            <view class='noData_text'>成为发布者后，即可发布项目招募</view>
-            <button formType="submit" class='noData_apply'>申请成为发起者</button>
+
+            <button formType="submit" class='start_recruit'>成为发起者即可发布项目</button>
             </form>
         </block>
 
