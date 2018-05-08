@@ -55,8 +55,8 @@
     </view>
   </view>
 
-  <view class="subscribe-bottom">
-    <text class="subscribe-bottom-text">订阅相关信息</text>
+  <view class="subscribe-bottom" bindtap="navShowSubscribeModal">
+    <i class="iconfont icon-subscribe"></i>
   </view>
 	<view class="detail-bottom">
 	    <view class="bottom-box">
@@ -87,6 +87,43 @@
             </block>
 		</view>
 	</view>
-	<component-share id="component-share-demand" option="{{ shareOption }}"></component-share>
-	</view>
+
+		<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+		<form bindsubmit="formSubmitEmail" report-submit="true">
+        <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+            <!--对话框标题-->
+            <view class="dialog-title">
+              填写订阅信息
+            </view>
+            <!--对话框输入部分-->
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">姓名</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input value="{{userInfo.name}}" name="username" focus="true" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入姓名" />
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">邮箱</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input value="{{userInfo.email}}" name="email" class="weui-input" placeholder-class='register_placeholde' placeholder="请输入邮箱" />
+                    </view>
+                </view>
+            </view>
+
+            <view class="weui-btn-area">
+              <button formType="submit" class="submit_button">
+                      提交信息
+              </button>
+
+            </view>
+
+        </view>
+        </form>
+   </view>
+
 </view>
