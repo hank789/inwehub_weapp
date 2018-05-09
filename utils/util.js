@@ -42,7 +42,12 @@ function countDown(that, second) {
   }, 1000)
 }
 
+function validEmail(value) {
+  return /^[a-zA-Z0-9.!＃$%&&＃39;*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)
+}
+
 module.exports = {
   formatTime: formatTime,
-  countDown: countDown
+  countDown: countDown,
+  validEmail: validEmail
 }

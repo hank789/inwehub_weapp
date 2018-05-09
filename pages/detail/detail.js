@@ -3,13 +3,17 @@
 var app = getApp();
 //查询用户信息
 var request = require("../../utils/request.js");
-
+var util = require('../../utils/util.js');
 Page({
   data:{
+    userInfo:{},
     isLoading: true,//是否显示加载数据提示
     demand: {},
     demand_id: 0,
     shareTip: 0,
+    animationData:"",
+    showModalStatus:false,
+    subscribeItems: [],
     shareOption: {
       object_id: 0,
       object_type: 1,
@@ -31,6 +35,7 @@ Page({
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
+        userInfo: userInfo,
         demand_id: demand_id,
         shareTip: options.share?options.share:0
       });
@@ -241,5 +246,124 @@ Page({
   },
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();
+  },
+  subscribeRequest: function () {
+    var that = this;
+    request.httpsPostRequest('/weapp/demand/subscribe', { id: this.data.demand_id, name: this.data.userInfo.name, email: this.data.userInfo.email, items: this.data.subscribeItems }, function (res_data) {
+      that.hideModal()
+      if (res_data.code === 1000) {
+        wx.showToast({
+          title: '订阅成功',
+          icon: 'success',
+          duration: 2000
+        });
+
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
+  },
+  navShowSubscribeModal: function () {
+    var that = this
+    wx.showActionSheet({
+      itemList: [
+        '未来有与此类似的工作，请通知我',
+        '未来有此公司的新职位，请通知我',
+        '未来此发布者有新招募，请通知我'],
+      success: function(res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex)
+          that.data.subscribeItems = [res.tapIndex]
+          if (that.data.userInfo.email) {
+            that.subscribeRequest()
+          } else {
+            that.showAddEmailModal()
+          }
+        }
+      }
+    });
+  },
+  formSubmitEmail: function (e) {
+    request.httpsPostRequest('/weapp/user/saveFormId', { formId: e.detail.formId }, function(res_data) {
+      console.log(res_data);
+    });
+    if (e.detail.value.email === '') {
+      wx.showToast({
+        title: '邮箱不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    if (util.validEmail(e.detail.value.email) === false) {
+      wx.showToast({
+        title: '邮箱格式不正确',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    if (e.detail.value.username === '') {
+      wx.showToast({
+        title: '姓名不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    this.data.userInfo.email = e.detail.value.email;
+    this.data.userInfo.name = e.detail.value.username;
+    this.subscribeRequest();
+  },
+  showModal: function () {
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  showAddEmailModal:function(){
+    if(this.data.showModalStatus){
+      this.hideModal();
+    }else{
+      this.showModal();
+    }
+  },
+  hideModal: function () {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   }
 })
