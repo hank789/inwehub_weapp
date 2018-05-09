@@ -55,7 +55,7 @@
     </view>
   </view>
 
-  <view class="subscribe-bottom" bindtap="navShowSubscribeModal">
+  <view wx:if="{{!demand.is_author}}" class="subscribe-bottom" bindtap="navShowSubscribeModal">
     <i class="iconfont icon-subscribe"></i>
   </view>
 	<view class="detail-bottom">

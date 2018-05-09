@@ -3,7 +3,7 @@
 var app = getApp();
 //查询用户信息
 var request = require("../../utils/request.js");
-
+var util = require('../../utils/util.js');
 Page({
   data:{
     userInfo:{},
@@ -13,6 +13,7 @@ Page({
     shareTip: 0,
     animationData:"",
     showModalStatus:false,
+    subscribeItems: [],
     shareOption: {
       object_id: 0,
       object_type: 1,
@@ -246,40 +247,45 @@ Page({
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();
   },
-  navShowSubscribeModal: function () {
-    if (this.data.userInfo.email) {
-      this.hideModal()
-      var that = this
-      wx.showActionSheet({
-        itemList: [
-          '未来有与此类似的工作，请通知我',
-          '未来有此公司的新职位，请通知我',
-          '未来此发布者有新招募，请通知我'],
-        success: function(res) {
-          if (!res.cancel) {
-            console.log(res.tapIndex)
-            request.httpsPostRequest('/weapp/demand/subscribe', { id: that.data.demand_id, name: that.data.userInfo.name, email: that.data.userInfo.email, items: [res.tapIndex] }, function (res_data) {
-              if (res_data.code === 1000) {
-                wx.showToast({
-                  title: '订阅成功',
-                  icon: 'success',
-                  duration: 2000
-                });
+  subscribeRequest: function () {
+    var that = this;
+    request.httpsPostRequest('/weapp/demand/subscribe', { id: this.data.demand_id, name: this.data.userInfo.name, email: this.data.userInfo.email, items: this.data.subscribeItems }, function (res_data) {
+      that.hideModal()
+      if (res_data.code === 1000) {
+        wx.showToast({
+          title: '订阅成功',
+          icon: 'success',
+          duration: 2000
+        });
 
-              } else {
-                wx.showToast({
-                  title: res_data.message,
-                  icon: 'success',
-                  duration: 2000
-                });
-              }
-            });
+      } else {
+        wx.showToast({
+          title: res_data.message,
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
+  },
+  navShowSubscribeModal: function () {
+    var that = this
+    wx.showActionSheet({
+      itemList: [
+        '未来有与此类似的工作，请通知我',
+        '未来有此公司的新职位，请通知我',
+        '未来此发布者有新招募，请通知我'],
+      success: function(res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex)
+          that.data.subscribeItems = [res.tapIndex]
+          if (that.data.userInfo.email) {
+            that.subscribeRequest()
+          } else {
+            that.showAddEmailModal()
           }
         }
-      });
-    } else {
-      this.showAddEmailModal()
-    }
+      }
+    });
   },
   formSubmitEmail: function (e) {
     request.httpsPostRequest('/weapp/user/saveFormId', { formId: e.detail.formId }, function(res_data) {
@@ -288,6 +294,14 @@ Page({
     if (e.detail.value.email === '') {
       wx.showToast({
         title: '邮箱不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    if (util.validEmail(e.detail.value.email) === false) {
+      wx.showToast({
+        title: '邮箱格式不正确',
         icon: 'none',
         duration: 2000
       })
@@ -303,7 +317,7 @@ Page({
     }
     this.data.userInfo.email = e.detail.value.email;
     this.data.userInfo.name = e.detail.value.username;
-    this.navShowSubscribeModal();
+    this.subscribeRequest();
   },
   showModal: function () {
     // 显示遮罩层
