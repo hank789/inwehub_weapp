@@ -3,13 +3,13 @@
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{ errorMsg }}</view>
     <form bindsubmit="formSubmit" report-submit="true">
         <view class="weui-cells weui-cells_after-title">
-        <view class="{{ hiddenInput ? 'display-hidden':'' }}">
+
           <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
                     <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title' maxlength="40"   placeholder="直观有效的标题提高招募被打开率（40字）"/>
                 </view>
             </view>
-
+            <view class="{{ hiddenInput ? 'display-hidden':'' }}">
             <view class="weui-cell weui-cell_input addr-details">
                 <view class="weui-cell__hd">选择地区</view>
                 <view class="weui-cell__bd post_picker">
