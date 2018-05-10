@@ -120,11 +120,12 @@ input.register_salary_right{
 } 
 .post_description .weui-cell__bd{
   border: 1px solid #DCDCDC;
-  padding: 24rpx 30rpx;
+  padding: 24rpx 0rpx;
   border-radius: 8rpx;
   border-top:none;
   border-right:none;
   border-left:none;
+  font-size:28rpx;
 }
 .weui-cells {
   position:inherit;
