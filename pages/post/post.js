@@ -157,7 +157,7 @@ Page({
   },
   focusDescription: function (e) {
     this.setData({
-      hiddenInput: (this.data.demand.id<=0?true:false)
+      hiddenInput: true
     })
   },
   bindTitleBlur: function (e) {
@@ -253,7 +253,7 @@ Page({
       })
       return false;
     }
-    if (this.data.demand.description.length <= 50) {
+    if (e.detail.value.demand_description.length <= 50) {
       wx.showToast({
         title: '您的职位描述太简单了',
         icon: 'none',
@@ -261,6 +261,7 @@ Page({
       })
       return false;
     }
+    this.data.demand.description = e.detail.value.demand_description;
 
     if (this.data.industryIndex === 0) {
       this.data.demand.industry = this.data.industry_select[this.data.industryIndex].value;

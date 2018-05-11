@@ -86,7 +86,7 @@
 
              <view class="weui-cell post_description">
                 <view class="weui-cell__bd">
-                    <textarea auto-height="true" maxlength="3000" bindfocus="focusDescription" bindblur="bindDescriptionBlur" bindconfirm="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述将决定您的招募转化率及沟通效率" value="{{demand.description}}" />
+                    <textarea auto-height="true" maxlength="3000" name="demand_description" bindfocus="focusDescription" bindblur="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述将决定您的招募转化率及沟通效率" value="{{demand.description}}" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view> 
