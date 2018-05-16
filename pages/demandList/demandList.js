@@ -82,6 +82,7 @@ Page({
         var nextPage = page + 1;
         if (page === 1) {
           that.data.list = res_data.data.data;
+          wx.setNavigationBarTitle({ title: res_data.data.authorName + '的发布' });
         } else {
           that.data.list = that.data.list.concat(res_data.data.data);
         }
