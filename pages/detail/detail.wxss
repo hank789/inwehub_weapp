@@ -336,3 +336,30 @@ page{
   line-height:88rpx;
   margin: auto;
 }
+
+.component-fabuzhe {
+  margin-top:26rpx;
+  text-align: center; }
+  .component-fabuzhe .avatarWrapper image {
+    width: 52rpx;
+    height: 52rpx;
+    border-radius: 50%; }
+  .component-fabuzhe .line2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 8rpx;
+    color: #444444;
+    font-size: 26rpx;
+    line-height: 37rpx; }
+    .component-fabuzhe .line2 .line-wall {
+      margin: 0 8rpx;
+      height: 25rpx;
+      width: 3rpx;
+      position: relative;
+      background-color: #dcdcdc;
+      top: 6rpx; }
+  .component-fabuzhe .line3 {
+    margin-top: 16rpx;
+    font-size: 26rpx;
+    color: #66DBF9;
+    line-height: 37rpx; }
