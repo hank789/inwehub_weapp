@@ -95,6 +95,11 @@ Page({
       url: '../index/index'
     });
   },
+  navToAuthorHistory: function (e) {
+    wx.navigateTo({
+      url: '../demandList/demandList?id=' + this.data.demand.publisher_user_id
+    });
+  },
   navToMyHistory: function (e) {
     wx.navigateTo({
       url: '../myHistory/myHistory'

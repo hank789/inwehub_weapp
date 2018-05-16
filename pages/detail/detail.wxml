@@ -45,13 +45,10 @@
         发布者信息
         <view class='line'></view>
     </view>
-    <view class='detail_info_private'>
-      <image src='{{demand.publisher_avatar}}'></image>
-      {{ demand.publisher_name }}
-      <view class='interval' wx:if="{{demand.publisher_company}}"></view>
-      {{ demand.publisher_company }}
-      <view class='interval'  wx:if="{{demand.publisher_title}}"></view>
-      {{ demand.publisher_title ? demand.publisher_title : ''}}
+    <view class="component-fabuzhe">
+      <view class="avatarWrapper"><image src="{{demand.publisher_avatar}}"/></view>
+      <view class="line2">{{ demand.publisher_name }}<view class="line-wall" wx:if="{{demand.publisher_company}}"></view>{{ demand.publisher_company }}<view class="line-wall" wx:if="{{demand.publisher_title}}"></view>{{ demand.publisher_title ? demand.publisher_title : ''}}</view>
+      <view class="line3">查看Ta的发布({{demand.publisher_demand_count}})</view>
     </view>
   </view>
 
