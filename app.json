@@ -10,7 +10,8 @@
     "pages/myHistory/myHistory",
     "pages/chat/chat",
     "pages/messages/messages",
-    "pages/demandRooms/demandRooms"
+    "pages/demandRooms/demandRooms",
+    "pages/demandList/demandList"
   ],
   "window":{
     "navigationBarTextStyle": "black",

@@ -52,6 +52,7 @@
       {{ demand.publisher_company }}
       <view class='interval'  wx:if="{{demand.publisher_title}}"></view>
       {{ demand.publisher_title ? demand.publisher_title : ''}}
+      <view bindtap="navToAuthorHistory">查看Ta的发布({{demand.publisher_demand_count}})</view>
     </view>
   </view>
 
