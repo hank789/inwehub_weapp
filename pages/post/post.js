@@ -104,6 +104,7 @@ Page({
                   selProvince: res_data.data.address.selProvince,
                   selCity: res_data.data.address.selCity,
                   selDistrict: res_data.data.address.selDistrict,
+                  'demand.salary_type': res_data.data.salary_type,
                   'demand.title': res_data.data.title,
                   'demand.address': res_data.data.address,
                   'demand.salary' : res_data.data.salary,
