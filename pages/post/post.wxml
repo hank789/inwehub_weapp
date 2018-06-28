@@ -95,7 +95,7 @@
         </view>
         <view>
           <view class="weui-cells__tips seven">*发布后七天有效</view>
-          <navigator class="weui-cells__tips recruit">加速招募了解一下？</navigator>
+          <navigator class="weui-cells__tips recruit" url="../recruitHelp/recruitHelp">加速招募了解一下？</navigator>
         </view>
     </form>
   </view>
