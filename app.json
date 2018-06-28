@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/detail/detail",
     "pages/mine/mine",
@@ -11,9 +11,10 @@
     "pages/chat/chat",
     "pages/messages/messages",
     "pages/demandRooms/demandRooms",
-    "pages/demandList/demandList"
+    "pages/demandList/demandList",
+    "pages/recruitHelp/recruitHelp"
   ],
-  "window":{
+  "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "项目招募助手",
     "navigationBarBackgroundColor": "#fff",
@@ -37,7 +38,7 @@
         "text": "我的",
         "iconPath": "images/my@2x.png",
         "selectedIconPath": "images/my_selected@2x.png"
-     }
+      }
     ]
   },
   "networkTimeout": {

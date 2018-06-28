@@ -1,0 +1,9 @@
+<view class='page'>
+  <view class='popup'>
+    <view class='popupBox'>
+      <view class='close' bindtap='close'><image src='../../images/close@2x.png'></image></view>
+      <view>截图保存后扫描 添加小哈微信</view>
+      <view class='code'><image src='../../images/haCode@2x.png'></image></view>
+    </view>
+  </view>
+</view>

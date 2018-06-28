@@ -1,0 +1,17 @@
+<view class='helpinfo'>
+  <view class='title'>一．如何发布职位</view>
+  <view class='content'>1.发布招募信息，富有创意的内容和标题能有效的吸引求职者。</view>
+  <view class='content'>2.如职位描述较多，可先在电脑上编辑后，通过微信转发至手机上粘贴进小程序。</view>
+  <view class='content'>3.发布后，需分享到微信群或者朋友圈中才能生效，他们是您发布信息的首批受众和传播者。</view>
+
+  <view class='title'>二．管理与使用</view>
+  <view class='content'>1.如对方感兴趣，会点击对话框与您进行初步沟通。您也能看到打开了对话框后“欲言又止”，此时可主动出击与对方沟通。</view>
+  <view class='content'>2.求职者在详情页，可查看你的全部发布，更可订阅你的未来发布。</view>
+  <view class='content'>3.您可以随时监控每条信息的查看与沟通数据，或者修改编辑。</view>
+
+  <view class='title'>三．扩大或加速传播</view>
+  <view class='content'>1.可委托身边好友协助转发传播。</view>
+  <view class='content'>2.点击 <text style='color:#66DBF9;' bindtap='showEwm'>hiinwe</text> 添加小哈微信 ，验证请说明来意。 我们乐意帮您在平台关系网中协助传播转发。</view>
+</view>
+<!-- 弹窗组件 -->
+<p-popup wx:if="{{show}}" bind:showEwm="showEwm"></p-popup>

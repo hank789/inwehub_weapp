@@ -1,1 +1,56 @@
 @import "../../template/demandList/demandList.wxss";
+.top {
+  padding: 0 48rpx;
+   margin-top: 80rpx; 
+}
+.top image {
+  width: 105rpx;
+  height: 80rpx;
+  margin: 0 auto 31rpx;  
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+.top .text {
+  font-size: 30rpx;
+  color: #444;
+  text-align: center;
+  margin-bottom: 103rpx;
+}
+.content {
+  padding: 0 32rpx;
+}
+.box {
+  font-size: 26rpx;
+  padding: 34rpx 30rpx;
+  border:1px dashed rgba(220,220,220,1);
+  border-radius: 18rpx;
+}
+.boxTop {
+  text-align: center;
+  padding-bottom: 43rpx;
+  border-bottom:1px dashed rgba(220,220,220,1);
+}
+.title {
+  color: #444;
+}
+.titleInfo {
+  font-size: 20rpx;
+  color: #B4B4B6;
+}
+.add {
+  color: #808080;
+  padding:0 20rpx;
+  overflow: hidden;
+  justify-content: center;
+}
+.take {
+  color: #808080;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+.boxBottom {
+  text-align: center;
+  padding-top: 33rpx;
+}

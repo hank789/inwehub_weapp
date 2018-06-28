@@ -158,4 +158,13 @@ button.weui-btn.button-hover{
   flex:1;
   margin-right:-1rpx;
 }
-
+.seven {
+  display: inline-block;
+}
+.recruit {
+  font-size: 28rpx;
+  color: #66DBF9;
+  margin-top: 22rpx;
+  display: inline-block;
+  float: right;
+}

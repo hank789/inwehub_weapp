@@ -1,5 +1,7 @@
 {
+  "navigationBarTitleText":"招募帮助",
   "usingComponents": {
     "p-popup": "/components/popup/popup"
   }
+  
 }

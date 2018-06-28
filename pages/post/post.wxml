@@ -93,7 +93,10 @@
         <view class="weui-btn-area">
           <button disabled="{{disabledSubmitButton}}" formType="submit" class="weui-btn" type="primary">立即发布</button>
         </view>
-        <view class="weui-cells__tips">*项目发布后七天内有效，发布完后需分享到群或朋友圈才有效</view>
+        <view>
+          <view class="weui-cells__tips seven">*发布后七天有效</view>
+          <navigator class="weui-cells__tips recruit">加速招募了解一下？</navigator>
+        </view>
     </form>
   </view>
 </view>

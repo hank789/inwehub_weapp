@@ -8,7 +8,8 @@ Page({
     list: [],
     page: 1,
     isLoading: true,//是否显示加载数据提示
-    isMore: true
+    isMore: true,
+    show: false
   },
   onLoad:function(options){
     // 页面显示
@@ -144,5 +145,10 @@ Page({
         });
       }
     });
+  },
+  showEwm:function() {
+    this.setData({
+      show : !this.data.show
+    })
   }
 })

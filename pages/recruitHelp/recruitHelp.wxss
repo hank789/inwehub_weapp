@@ -1,0 +1,17 @@
+/* pages/recruitHelp/recruitHelp.wxss */
+page{
+  background: #fff;
+}
+.helpinfo {
+  padding: 24rpx 33rpx 0 31rpx;
+}
+.helpinfo .title {
+  font-size: 28rpx;
+  color: #444;
+  margin: 47rpx 0 0;
+}
+.helpinfo .content {
+  font-size: 26rpx;
+  color: #808080;
+  margin-bottom: 4rpx;
+}
