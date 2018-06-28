@@ -64,7 +64,7 @@ App({
   globalData:{
     userInfo: null,
     appAccessToken: null,
-    host: 'https://api.ywhub.com/api',
-    sockHost: 'wss://read.ywhub.com'
+    host: 'https://api.inwehub.com/api',
+    sockHost: 'wss://read.inwehub.com'
   }
 })
