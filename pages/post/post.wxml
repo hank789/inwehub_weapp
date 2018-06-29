@@ -6,7 +6,7 @@
 
           <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title' maxlength="40"   placeholder="直观有效的标题提高招募被打开率（40字）"/>
+                    <input bindblur="bindTitleBlur" value="{{ demand.title }}" class="weui-input" placeholder-class='register_title' maxlength="40"   placeholder="标题（40字内）"/>
                 </view>
             </view>
             <view class="{{ hiddenInput ? 'display-hidden':'' }}">
@@ -85,7 +85,7 @@
 
              <view class="weui-cell post_description">
                 <view class="weui-cell__bd">
-                    <textarea auto-height="true" maxlength="3000" name="demand_description" bindfocus="focusDescription" bindblur="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述将决定您的招募转化率及沟通效率" value="{{demand.description}}" />
+                    <textarea auto-height="true" maxlength="3000" name="demand_description" bindfocus="focusDescription" bindblur="bindDescriptionBlur" class="weui-textarea" style="height: 4em" placeholder-class='register_placeholde'   placeholder="职位描述" value="{{demand.description}}" />
                     <view class="weui-textarea-counter"></view>
                 </view>
             </view> 
